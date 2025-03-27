@@ -1,15 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter, Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import Navigation from "@/components/navigation";
+import { Provider } from "react-redux";
+import store from "@/state/redux";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const satoshi = localFont({
+  src: "../public/fonts/satoshi.ttf",
+  variable: "--font-satoshi",
+});
+const grotesk = localFont({
+  src: "../public/fonts/bdo-grotesk.ttf",
+  variable: "--font-satoshi",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +39,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${poppins.variable} ${satoshi.variable} ${grotesk.variable} ${inter.variable} antialiased`}
       >
-        {children}
+        <Provider store={store}>
+          <Navigation />
+          <main>{children}</main>
+        </Provider>
       </body>
     </html>
   );
