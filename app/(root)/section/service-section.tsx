@@ -1,10 +1,12 @@
-import { motion } from "framer-motion";
+"use client";
 
-export default function Services({
-  setCursorType,
-}: {
-  setCursorType: (type: string) => void;
-}) {
+import { motion } from "framer-motion";
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { setCursorType } from "@/state/slices/cursorSlice";
+
+export default function Services() {
+  const dispatch = useAppDispatch();
+
   return (
     <section id="services" className="relative min-h-screen w-full py-32">
       <div className="container mx-auto px-4">
@@ -76,8 +78,8 @@ export default function Services({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true }}
-              onMouseEnter={() => setCursorType("text")}
-              onMouseLeave={() => setCursorType("default")}
+              onMouseEnter={() => dispatch(setCursorType("text"))}
+              onMouseLeave={() => dispatch(setCursorType("default"))}
             >
               <motion.h3
                 className="text-4xl font-bold mb-4"
@@ -109,4 +111,3 @@ export default function Services({
     </section>
   );
 }
-≥

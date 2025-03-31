@@ -1,10 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./counterSlice";
+import cursorReducer from "./slices/cursorSlice";
+import navigationReducer from "./slices/navigationSlice";
+import loadingReducer from "./slices/loadingSlice";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    cursor: cursorReducer,
+    navigation: navigationReducer,
+    loading: loadingReducer,
   },
 });
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

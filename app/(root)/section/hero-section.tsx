@@ -1,14 +1,25 @@
-import FloatingObjects from "@/components/FloatingObjects";
-import TextGeometry from "@/components/TextGeometry";
-import { useScroll, useTransform, motion } from "framer-motion";
-import { Link, ArrowRight } from "lucide-react";
-import { useRef, Suspense } from "react";
+"use client";
 
-export default function Hero({
-  setCursorType,
-}: {
-  setCursorType: (type: string) => void;
-}) {
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { setCursorType } from "@/state/slices/cursorSlice";
+
+// Dynamically import 3D components
+const FloatingObjects = dynamic(
+  () => import("@/components/3d/FloatingObjects"),
+  {
+    ssr: false,
+  }
+);
+
+export default function Hero() {
+  const dispatch = useAppDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -48,13 +59,7 @@ export default function Hero({
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className="relative h-[30vh] md:h-[40vh] mb-8">
-                <Suspense
-                  fallback={<div className="h-full w-full bg-white/5"></div>}
-                >
-                  <TextGeometry />
-                </Suspense>
-              </div>
+              <div className="relative h-[30vh] md:h-[40vh] mb-8">Nayanaka</div>
 
               <motion.div
                 className="mt-4 pt-4"
@@ -80,8 +85,8 @@ export default function Hero({
             >
               <div
                 className="aspect-square overflow-hidden"
-                onMouseEnter={() => setCursorType("3d")}
-                onMouseLeave={() => setCursorType("default")}
+                onMouseEnter={() => dispatch(setCursorType("3d"))}
+                onMouseLeave={() => dispatch(setCursorType("default"))}
               >
                 <Image
                   src="/placeholder.svg?height=800&width=800"
@@ -97,8 +102,8 @@ export default function Hero({
                 whileInView={{ x: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                onMouseEnter={() => setCursorType("text")}
-                onMouseLeave={() => setCursorType("default")}
+                onMouseEnter={() => dispatch(setCursorType("text"))}
+                onMouseLeave={() => dispatch(setCursorType("default"))}
               >
                 <p className="text-sm">
                   Nayanaka is a creative studio founded in 2018, specializing in
@@ -108,8 +113,8 @@ export default function Hero({
                   <Link
                     href="#about"
                     className="flex items-center gap-2 text-sm uppercase tracking-widest"
-                    onMouseEnter={() => setCursorType("link")}
-                    onMouseLeave={() => setCursorType("text")}
+                    onMouseEnter={() => dispatch(setCursorType("link"))}
+                    onMouseLeave={() => dispatch(setCursorType("text"))}
                   >
                     Learn more <ArrowRight className="h-4 w-4" />
                   </Link>

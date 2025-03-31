@@ -1,10 +1,12 @@
-import { motion } from "framer-motion";
+"use client";
 
-export default function Footer({
-  setCursorType,
-}: {
-  setCursorType: (type: string) => void;
-}) {
+import { motion } from "framer-motion";
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { setCursorType } from "@/state/slices/cursorSlice";
+
+export default function Footer() {
+  const dispatch = useAppDispatch();
+
   return (
     <footer id="contact" className="relative w-full py-32 bg-black text-white">
       <div className="container mx-auto px-4">
@@ -39,15 +41,15 @@ export default function Footer({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              onMouseEnter={() => setCursorType("text")}
-              onMouseLeave={() => setCursorType("default")}
+              onMouseEnter={() => dispatch(setCursorType("text"))}
+              onMouseLeave={() => dispatch(setCursorType("default"))}
             >
               <p className="text-sm text-white/60">Email</p>
               <a
                 href="mailto:hello@nayanaka.com"
                 className="text-xl hover:underline"
-                onMouseEnter={() => setCursorType("link")}
-                onMouseLeave={() => setCursorType("text")}
+                onMouseEnter={() => dispatch(setCursorType("link"))}
+                onMouseLeave={() => dispatch(setCursorType("text"))}
               >
                 hello@nayanaka.com
               </a>
@@ -58,15 +60,15 @@ export default function Footer({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
-              onMouseEnter={() => setCursorType("text")}
-              onMouseLeave={() => setCursorType("default")}
+              onMouseEnter={() => dispatch(setCursorType("text"))}
+              onMouseLeave={() => dispatch(setCursorType("default"))}
             >
               <p className="text-sm text-white/60">Phone</p>
               <a
                 href="tel:+1234567890"
                 className="text-xl hover:underline"
-                onMouseEnter={() => setCursorType("link")}
-                onMouseLeave={() => setCursorType("text")}
+                onMouseEnter={() => dispatch(setCursorType("link"))}
+                onMouseLeave={() => dispatch(setCursorType("text"))}
               >
                 +1 (234) 567-890
               </a>
@@ -77,8 +79,8 @@ export default function Footer({
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
-              onMouseEnter={() => setCursorType("text")}
-              onMouseLeave={() => setCursorType("default")}
+              onMouseEnter={() => dispatch(setCursorType("text"))}
+              onMouseLeave={() => dispatch(setCursorType("default"))}
             >
               <p className="text-sm text-white/60">Follow</p>
               <div className="flex gap-4 mt-2">
@@ -88,8 +90,8 @@ export default function Footer({
                       key={index}
                       href="#"
                       className="hover:underline"
-                      onMouseEnter={() => setCursorType("link")}
-                      onMouseLeave={() => setCursorType("text")}
+                      onMouseEnter={() => dispatch(setCursorType("link"))}
+                      onMouseLeave={() => dispatch(setCursorType("text"))}
                     >
                       {social}
                     </a>
@@ -108,16 +110,16 @@ export default function Footer({
             <a
               href="#"
               className="text-sm hover:underline"
-              onMouseEnter={() => setCursorType("link")}
-              onMouseLeave={() => setCursorType("default")}
+              onMouseEnter={() => dispatch(setCursorType("link"))}
+              onMouseLeave={() => dispatch(setCursorType("default"))}
             >
               Privacy Policy
             </a>
             <a
               href="#"
               className="text-sm hover:underline"
-              onMouseEnter={() => setCursorType("link")}
-              onMouseLeave={() => setCursorType("default")}
+              onMouseEnter={() => dispatch(setCursorType("link"))}
+              onMouseLeave={() => dispatch(setCursorType("default"))}
             >
               Terms of Service
             </a>

@@ -1,13 +1,16 @@
-import { Button } from "@/components/ui/button";
-import { useScroll, useTransform, motion } from "framer-motion";
-import { Link, ArrowUpRight } from "lucide-react";
-import { useRef } from "react";
+"use client";
 
-export default function About({
-  setCursorType,
-}: {
-  setCursorType: (type: string) => void;
-}) {
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { setCursorType } from "@/state/slices/cursorSlice";
+
+export default function About() {
+  const dispatch = useAppDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -31,8 +34,8 @@ export default function About({
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              onMouseEnter={() => setCursorType("text")}
-              onMouseLeave={() => setCursorType("default")}
+              onMouseEnter={() => dispatch(setCursorType("text"))}
+              onMouseLeave={() => dispatch(setCursorType("default"))}
             >
               <h2 className="text-6xl md:text-8xl font-bold uppercase tracking-tighter mb-8">
                 About
@@ -51,8 +54,8 @@ export default function About({
               <div className="mt-8">
                 <Button
                   className="bg-white text-black hover:bg-white/90 text-sm uppercase tracking-widest"
-                  onMouseEnter={() => setCursorType("link")}
-                  onMouseLeave={() => setCursorType("text")}
+                  onMouseEnter={() => dispatch(setCursorType("link"))}
+                  onMouseLeave={() => dispatch(setCursorType("text"))}
                 >
                   Our Process
                 </Button>
@@ -73,8 +76,8 @@ export default function About({
                 >
                   <div
                     className="aspect-[4/3] overflow-hidden"
-                    onMouseEnter={() => setCursorType("3d")}
-                    onMouseLeave={() => setCursorType("default")}
+                    onMouseEnter={() => dispatch(setCursorType("3d"))}
+                    onMouseLeave={() => dispatch(setCursorType("default"))}
                   >
                     <Image
                       src={`/placeholder.svg?height=800&width=1000&text=Project${item}`}
@@ -94,8 +97,8 @@ export default function About({
                     <Link
                       href="#"
                       className="h-12 w-12 rounded-full bg-white text-black flex items-center justify-center"
-                      onMouseEnter={() => setCursorType("link")}
-                      onMouseLeave={() => setCursorType("default")}
+                      onMouseEnter={() => dispatch(setCursorType("link"))}
+                      onMouseLeave={() => dispatch(setCursorType("default"))}
                     >
                       <ArrowUpRight className="h-5 w-5" />
                     </Link>

@@ -1,26 +1,39 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { Link, X, Menu } from "lucide-react";
+"use client";
 
-export default function Navigation({
-  menuOpen,
-  setMenuOpen,
-  setCursorType,
-  activeSection,
-}: {
-  menuOpen: boolean;
-  setMenuOpen: (open: boolean) => void;
-  setCursorType: (type: string) => void;
-  activeSection: string;
-}) {
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
+import { setMenuOpen } from "@/state/slices/navigationSlice";
+import { setCursorType } from "@/state/slices/cursorSlice";
+
+export default function Navigation() {
+  const dispatch = useAppDispatch();
+  const { menuOpen, activeSection } = useAppSelector(
+    (state) => state.navigation
+  );
+
+  const handleCursorEnter = () => {
+    dispatch(setCursorType("link"));
+  };
+
+  const handleCursorLeave = () => {
+    dispatch(setCursorType("default"));
+  };
+
+  const toggleMenu = () => {
+    dispatch(setMenuOpen(!menuOpen));
+  };
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
         <div className="container mx-auto flex justify-between items-center py-6">
           <Link
             href="/"
-            className="text-xl uppercase tracking-tighter font-bold"
-            onMouseEnter={() => setCursorType("link")}
-            onMouseLeave={() => setCursorType("default")}
+            className="text-xl text-white uppercase tracking-tighter font-bold"
+            onMouseEnter={handleCursorEnter}
+            onMouseLeave={handleCursorLeave}
           >
             Nayanaka
           </Link>
@@ -31,11 +44,11 @@ export default function Navigation({
                 <motion.a
                   key={index}
                   href={`#${section}`}
-                  className={`text-sm uppercase tracking-widest ${
+                  className={`text-sm uppercase text-white tracking-widest ${
                     activeSection === section ? "opacity-100" : "opacity-50"
                   }`}
-                  onMouseEnter={() => setCursorType("link")}
-                  onMouseLeave={() => setCursorType("default")}
+                  onMouseEnter={handleCursorEnter}
+                  onMouseLeave={handleCursorLeave}
                   whileHover={{ scale: 1.1 }}
                   animate={{
                     y: activeSection === section ? -5 : 0,
@@ -51,10 +64,10 @@ export default function Navigation({
           </div>
 
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={toggleMenu}
             className="z-50 md:hidden"
-            onMouseEnter={() => setCursorType("link")}
-            onMouseLeave={() => setCursorType("default")}
+            onMouseEnter={handleCursorEnter}
+            onMouseLeave={handleCursorLeave}
           >
             {menuOpen ? (
               <X className="h-6 w-6" />
@@ -92,9 +105,9 @@ export default function Navigation({
                     <Link
                       href={item.href}
                       className="text-7xl md:text-9xl font-bold uppercase tracking-tighter hover:italic transition-all"
-                      onClick={() => setMenuOpen(false)}
-                      onMouseEnter={() => setCursorType("link")}
-                      onMouseLeave={() => setCursorType("default")}
+                      onClick={() => dispatch(setMenuOpen(false))}
+                      onMouseEnter={handleCursorEnter}
+                      onMouseLeave={handleCursorLeave}
                     >
                       {item.name}
                     </Link>

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Inter, Poppins } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navigation from "@/components/navigation";
-import { Provider } from "react-redux";
-import store from "@/state/redux";
+import ReduxProvider from "@/state/redux-provider";
+import Footer from "@/components/footer";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -41,10 +41,11 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${satoshi.variable} ${grotesk.variable} ${inter.variable} antialiased`}
       >
-        <Provider store={store}>
+        <ReduxProvider>
           <Navigation />
           <main>{children}</main>
-        </Provider>
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );

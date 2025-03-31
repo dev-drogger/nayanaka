@@ -1,11 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+"use client";
 
-export default function Pricing({
-  setCursorType,
-}: {
-  setCursorType: (type: string) => void;
-}) {
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { useAppDispatch } from "@/hooks/redux-hooks";
+import { setCursorType } from "@/state/slices/cursorSlice";
+
+export default function Pricing() {
+  const dispatch = useAppDispatch();
+
   return (
     <section
       id="pricing"
@@ -78,8 +80,8 @@ export default function Pricing({
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -10 }}
-              onMouseEnter={() => setCursorType("text")}
-              onMouseLeave={() => setCursorType("default")}
+              onMouseEnter={() => dispatch(setCursorType("text"))}
+              onMouseLeave={() => dispatch(setCursorType("default"))}
             >
               <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
               <div className="flex items-end gap-1 mb-4">
@@ -111,8 +113,8 @@ export default function Pricing({
                       ? "bg-white text-black hover:bg-white/90"
                       : "bg-black text-white hover:bg-black/90"
                   } text-sm uppercase tracking-widest`}
-                  onMouseEnter={() => setCursorType("link")}
-                  onMouseLeave={() => setCursorType("text")}
+                  onMouseEnter={() => dispatch(setCursorType("link"))}
+                  onMouseLeave={() => dispatch(setCursorType("text"))}
                 >
                   Get Started
                 </Button>
