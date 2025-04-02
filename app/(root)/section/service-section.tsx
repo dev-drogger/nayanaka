@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
+import { services } from "@/constant";
 
 export default function Services() {
   const dispatch = useAppDispatch();
@@ -25,52 +26,7 @@ export default function Services() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {[
-            {
-              title: "Digital Design",
-              description:
-                "We create visually stunning and functional designs that elevate your brand and engage your audience.",
-              services: [
-                "UI/UX Design",
-                "Brand Identity",
-                "Motion Design",
-                "Art Direction",
-              ],
-            },
-            {
-              title: "Development",
-              description:
-                "Our development team builds robust, scalable, and performant websites and applications.",
-              services: [
-                "Frontend Development",
-                "Backend Systems",
-                "E-commerce",
-                "CMS Integration",
-              ],
-            },
-            {
-              title: "Strategy",
-              description:
-                "We develop comprehensive strategies that align with your business goals and drive results.",
-              services: [
-                "Digital Strategy",
-                "Content Strategy",
-                "SEO & Analytics",
-                "User Research",
-              ],
-            },
-            {
-              title: "Production",
-              description:
-                "From concept to launch, we manage the entire production process to ensure quality and efficiency.",
-              services: [
-                "Project Management",
-                "Quality Assurance",
-                "Performance Optimization",
-                "Maintenance",
-              ],
-            },
-          ].map((service, index) => (
+          {services.map((service, index) => (
             <motion.div
               key={index}
               className="border-t border-white/20 pt-8 pb-16"
@@ -100,7 +56,7 @@ export default function Services() {
                     viewport={{ once: true }}
                   >
                     <div className="h-1 w-1 bg-white rounded-full"></div>
-                    <span>{item}</span>
+                    <span className="text-white">{item}</span>
                   </motion.li>
                 ))}
               </ul>

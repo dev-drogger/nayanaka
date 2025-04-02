@@ -20,6 +20,7 @@ import About from "./section/about-section";
 import Services from "./section/service-section";
 import Pricing from "./section/pricing-section";
 import BrowserCheck from "@/components/BrowserCheck";
+import { BackgroundPaths } from "@/components/background-paths";
 
 // Dynamically import 3D Background
 const BackgroundShader = dynamic(
@@ -89,7 +90,7 @@ function MainContent() {
   }, [dispatch]);
 
   return (
-    <main className="min-h-screen w-full bg-black overflow-x-hidden font-sans">
+    <main className="min-h-screen w-full bg-jet overflow-x-hidden">
       {/* Browser compatibility check */}
       <BrowserCheck />
 
@@ -121,7 +122,9 @@ function MainContent() {
                 menuOpen ? "opacity-20 blur-sm" : "opacity-100"
               }`}
             >
-              <Hero />
+              <BackgroundPaths>
+                <Hero />
+              </BackgroundPaths>
               <About />
               <Services />
               <Pricing />

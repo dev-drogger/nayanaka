@@ -5,122 +5,72 @@ import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
 
+import { PRICING_TIERS } from "@/constant";
+import { PricingCard } from "@/components/pricing/pricing-card";
+import { Tab } from "@/components/pricing/pricing-tab";
+import { useState } from "react";
+
+export const PAYMENT_FREQUENCIES = ["1 years", "2 years"];
+
 export default function Pricing() {
+  const [selectedFrequency, setSelectedFrequency] = useState(
+    PAYMENT_FREQUENCIES[0]
+  );
   const dispatch = useAppDispatch();
 
   return (
     <section
       id="pricing"
-      className="relative min-h-screen w-full py-32 bg-white text-black"
+      className="relative min-h-screen w-full mb-12 md:mb-0"
     >
       <div className="container mx-auto px-4">
-        <motion.div
-          className="mb-16"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-6xl md:text-8xl font-bold uppercase tracking-tighter">
-            Pricing
-          </h2>
-        </motion.div>
+        <div className="grid grid-cols-12 gap-4">
+          <motion.div
+            className="space-y-7 grid mb-16 grid-cols-1 col-span-12 lg:col-span-5 flex-center "
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <div className="space-y-4">
+              <h1 className="font-medium text-8xl">PRICING</h1>
+              <p className="text-white">Choose the best plan for your needs</p>
+            </div>
+            <div className=" flex w-fit rounded-full bg-muted p-1">
+              {PAYMENT_FREQUENCIES.map((freq) => (
+                <Tab
+                  key={freq}
+                  text={freq}
+                  selected={selectedFrequency === freq}
+                  setSelected={setSelectedFrequency}
+                  discount={freq === "2 years"}
+                />
+              ))}
+            </div>
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              name: "Essential",
-              price: "$3,600",
-              description:
-                "Perfect for small businesses looking to establish their digital presence.",
-              features: [
-                "Custom design (5 sections)",
-                "Responsive development",
-                "Basic SEO setup",
-                "1 month of support",
-              ],
-            },
-            {
-              name: "Professional",
-              price: "$7,200",
-              description:
-                "Comprehensive solution for growing businesses with specific requirements.",
-              features: [
-                "Advanced design (up to 10 sections)",
-                "Complex animations and interactions",
-                "Advanced SEO optimization",
-                "CMS integration",
-                "3 months of support",
-              ],
-              featured: true,
-            },
-            {
-              name: "Enterprise",
-              price: "Custom",
-              description:
-                "Tailored solutions for established businesses with complex needs.",
-              features: [
-                "Premium design (unlimited sections)",
-                "Custom functionality",
-                "Full-scale SEO strategy",
-                "Custom integrations",
-                "6 months of support",
-              ],
-            },
-          ].map((plan, index) => (
-            <motion.div
-              key={index}
-              className={`p-8 ${
-                plan.featured
-                  ? "bg-black text-white"
-                  : "bg-white text-black border border-black"
-              }`}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              onMouseEnter={() => dispatch(setCursorType("text"))}
-              onMouseLeave={() => dispatch(setCursorType("default"))}
-            >
-              <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-              <div className="flex items-end gap-1 mb-4">
-                <span className="text-4xl font-bold">{plan.price}</span>
-                {plan.name !== "Enterprise" && (
-                  <span className="text-sm mb-1">/ project</span>
-                )}
-              </div>
-              <p className="text-sm mb-6">{plan.description}</p>
-              <div className="space-y-3 mb-8">
-                {plan.features.map((feature, i) => (
-                  <motion.div
-                    key={i}
-                    className="flex items-start gap-2"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 + 0.3 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="mt-1 h-1 w-1 rounded-full bg-current"></div>
-                    <span className="text-sm">{feature}</span>
-                  </motion.div>
-                ))}
-              </div>
-              <div className="mt-auto">
-                <Button
-                  className={`w-full ${
-                    plan.featured
-                      ? "bg-white text-black hover:bg-white/90"
-                      : "bg-black text-white hover:bg-black/90"
-                  } text-sm uppercase tracking-widest`}
-                  onMouseEnter={() => dispatch(setCursorType("link"))}
-                  onMouseLeave={() => dispatch(setCursorType("text"))}
+          <div className="col-span-12 lg:col-span-7">
+            <div className="grid grid-cols-2 gap-6">
+              {PRICING_TIERS.map((tier) => (
+                <motion.div
+                  key={tier.name}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                  viewport={{ once: true }}
+                  whileHover={{ y: -10 }}
+                  onMouseEnter={() => dispatch(setCursorType("text"))}
+                  onMouseLeave={() => dispatch(setCursorType("default"))}
                 >
-                  Get Started
-                </Button>
-              </div>
-            </motion.div>
-          ))}
+                  <PricingCard
+                    key={tier.name}
+                    tier={tier}
+                    paymentFrequency={selectedFrequency}
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

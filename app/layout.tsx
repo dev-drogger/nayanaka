@@ -23,7 +23,7 @@ const satoshi = localFont({
 });
 const grotesk = localFont({
   src: "../public/fonts/bdo-grotesk.ttf",
-  variable: "--font-satoshi",
+  variable: "--font-grotesk",
 });
 
 export const metadata: Metadata = {
@@ -39,10 +39,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${poppins.variable} ${satoshi.variable} ${grotesk.variable} ${inter.variable} antialiased`}
+        className={`${satoshi.variable} ${grotesk.variable} ${poppins.variable} ${inter.variable} antialiased`}
       >
         <ReduxProvider>
-          <Navigation />
+          {/* <Navigation /> */}
           <main>{children}</main>
           <Footer />
         </ReduxProvider>

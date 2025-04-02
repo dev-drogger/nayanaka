@@ -62,6 +62,7 @@ export default function About() {
               </div>
             </motion.div>
           </div>
+
           <div className="col-span-12 md:col-span-7 order-1 md:order-2 mb-8 md:mb-0">
             <div className="space-y-32">
               {[1, 2, 3].map((item) => (

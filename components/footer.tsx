@@ -8,12 +8,12 @@ export default function Footer() {
   const dispatch = useAppDispatch();
 
   return (
-    <footer id="contact" className="relative w-full py-32 bg-black text-white">
+    <footer id="contact" className="relative w-full py-6 bg-black text-white">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-          <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-16 gap-4">
+          <div className="col-span-2 lg:col-span-1">
             <motion.h2
-              className="text-6xl md:text-8xl font-bold uppercase tracking-tighter mb-8"
+              className="text-6xl md:text-8xl font-bold uppercase tracking-tighter mb-4 lg:mb-8"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -34,7 +34,7 @@ export default function Footer() {
               how we can help bring your vision to life.
             </motion.p>
           </div>
-          <div className="space-y-8">
+          <div className="space-y-8 col-span-1 ">
             <motion.div
               className="border-t border-white/20 pt-4"
               initial={{ opacity: 0, y: 20 }}
@@ -84,19 +84,17 @@ export default function Footer() {
             >
               <p className="text-sm text-white/60">Follow</p>
               <div className="flex gap-4 mt-2">
-                {["Instagram", "Twitter", "LinkedIn", "Dribbble"].map(
-                  (social, index) => (
-                    <a
-                      key={index}
-                      href="#"
-                      className="hover:underline"
-                      onMouseEnter={() => dispatch(setCursorType("link"))}
-                      onMouseLeave={() => dispatch(setCursorType("text"))}
-                    >
-                      {social}
-                    </a>
-                  )
-                )}
+                {["Instagram", "Twitter", "LinkedIn"].map((social, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    className="hover:underline"
+                    onMouseEnter={() => dispatch(setCursorType("link"))}
+                    onMouseLeave={() => dispatch(setCursorType("text"))}
+                  >
+                    {social}
+                  </a>
+                ))}
               </div>
             </motion.div>
           </div>

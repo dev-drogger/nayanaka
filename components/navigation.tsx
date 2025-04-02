@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { setMenuOpen } from "@/state/slices/navigationSlice";
 import { setCursorType } from "@/state/slices/cursorSlice";
+import { TextEffect } from "./text-effect";
 
 export default function Navigation() {
   const dispatch = useAppDispatch();
@@ -31,11 +32,49 @@ export default function Navigation() {
         <div className="container mx-auto flex justify-between items-center py-6">
           <Link
             href="/"
-            className="text-xl text-white uppercase tracking-tighter font-bold"
+            className="text-xl text-white tracking-tighter font-bold"
             onMouseEnter={handleCursorEnter}
             onMouseLeave={handleCursorLeave}
           >
-            Nayanaka
+            <motion.div
+              className="mb-8"
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="flex-row-center gap-14">
+                <motion.div className="w-auto">
+                  <TextEffect
+                    per="char"
+                    preset="blur"
+                    className="text-2xl md:text-4xl text-white font-light"
+                    delay={3}
+                  >
+                    Nayanaka
+                  </TextEffect>
+
+                  <TextEffect
+                    per="char"
+                    preset="blur"
+                    className="text-sm md:text-lg text-white"
+                    delay={3}
+                  >
+                    なやなか
+                  </TextEffect>
+                </motion.div>
+                <div className="w-auto">
+                  <TextEffect
+                    per="char"
+                    preset="fade"
+                    delay={4}
+                    className="text-lg font-light"
+                  >
+                    Creative Studio
+                  </TextEffect>
+                </div>
+              </div>
+            </motion.div>
           </Link>
 
           <div className="hidden md:flex space-x-8">

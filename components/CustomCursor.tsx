@@ -71,7 +71,7 @@ export default function CustomCursor() {
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, []);
+  });
 
   // Get cursor classes based on type
   const getCursorClasses = () => {

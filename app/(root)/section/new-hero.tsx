@@ -34,7 +34,7 @@ export default function Hero() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center"
+      className="relative min-h-screen w-full flex items-center pt-32 pb-16"
     >
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Suspense fallback={null}>
@@ -42,17 +42,17 @@ export default function Hero() {
         </Suspense>
       </div>
 
-      {/* <motion.div className="absolute inset-0 z-0" style={{ y, opacity }}>
+      <motion.div className="absolute inset-0 z-0" style={{ y, opacity }}>
         <div className="h-full w-full flex items-center justify-center">
           <div className="text-[40vw] font-bold text-white/90 leading-none tracking-tighter">
             N
           </div>
         </div>
-      </motion.div> */}
+      </motion.div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-12 gap-4">
-          {/* <div className="col-span-12 md:col-span-6 flex-center">
+        <div className="flex-col-center gap-4">
+          <div className="col-span-12 md:col-span-6">
             <motion.div
               className="mb-8"
               initial={{ opacity: 0, y: 100 }}
@@ -60,36 +60,8 @@ export default function Hero() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className="flex-row-center gap-14">
-                <motion.div className="w-auto">
-                  <TextEffect
-                    per="char"
-                    preset="blur"
-                    className="text-2xl md:text-5xl text-white font-light"
-                    delay={3}
-                  >
-                    Nayanaka
-                  </TextEffect>
-
-                  <TextEffect
-                    per="char"
-                    preset="blur"
-                    className="text-sm md:text-xl text-white"
-                    delay={3}
-                  >
-                    なやなか
-                  </TextEffect>
-                </motion.div>
-                <div className="w-auto">
-                  <TextEffect
-                    per="char"
-                    preset="fade"
-                    delay={4}
-                    className="text-lg"
-                  >
-                    Creative Studio
-                  </TextEffect>
-                </div>
+              <div className="relative h-[30vh] md:h-[40vh] mb-8">
+                <h1 className="text-cardinal">Nayanakat</h1>
               </div>
 
               <motion.div
@@ -102,29 +74,6 @@ export default function Hero() {
                 <p className="text-lg md:text-xl">
                   We create digital experiences that blend art, technology, and
                   strategy.
-                </p>
-              </motion.div>
-            </motion.div>
-          </div> */}
-          <div className="col-span-12 md:col-span-6 flex-center">
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <motion.div
-                className="mt-4 pt-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                <p className="text-lg md:text-6xl uppercase font-bold">
-                  blend art and <br />
-                  technology <br />
-                  into digital aesthetic
                 </p>
               </motion.div>
             </motion.div>
@@ -161,8 +110,8 @@ export default function Hero() {
                 onMouseLeave={() => dispatch(setCursorType("default"))}
               >
                 <p className="text-sm text-black">
-                  Nayanaka is a creative agency founded in 2025, specializing in
-                  3D web design and development.
+                  Nayanaka is a creative studio founded in 2018, specializing in
+                  digital design and development.
                 </p>
                 <div className="mt-4 flex justify-end">
                   <Link

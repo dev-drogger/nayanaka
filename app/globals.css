@@ -8,8 +8,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-poppins);
   --font-mono: var(--font-inter);
-  --font-primary: var(--font-satoshi)
-  --font-secondary: var(--font-grotesk)
+  --font-primary: var(--font-satoshi);
+  --font-secondary: var(--font-grotesk);
   --color-dark-cyan: var(--dark-cyan);
   --color-almond: var(--almond);
   --color-cardinal: var(--cardinal);
@@ -87,15 +87,15 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --dark-cyan: rgb(110 159 159)
-  --almond: rgb(234 224 213)
-  --cardinal: rgb(181 54 56)
-  --non-photo-blue: rgb(176 224 230)
-  --silver: rgb(176 176 176)
-  --indigo-dye: rgb(14 76 106)
-  --champagne: rgb(247 231 206)
-  --jet: rgb(46 46 46)
-  --gold: rgb(207 174 112)
+  --dark-cyan: oklch(0.3094 17.0884 197.89);
+  --almond: oklch(0.3523 6.7712 76.83);
+  --cardinal: oklch(0.5115 58.5198 29.27);
+  --non-photo-blue: oklch(0.3731 16.209 209.61);
+  --silver: oklch(0.2744 0 158.2);
+  --indigo-dye: oklch(0.2926 23.8024 252.48);
+  --champagne: oklch(0.3881 14.2071 84.16);
+  --jet: oklch(0.1091 0 158.2);
+  --gold: oklch(0.3553 36.4043 83.92);
 }
 
 .dark {
@@ -137,7 +137,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-primary;
   }
   h1 {
     @apply text-3xl md:text-5xl text-white font-light;
