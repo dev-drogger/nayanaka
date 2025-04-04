@@ -11,7 +11,7 @@ const WordsSlider = () => {
         className="absolute uppercase  bottom-25 md:-bottom-0 z-50 text-white text-xl w-full flex-row-center gap-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 5.5 }}
+        transition={{ delay: 1 }}
       >
         <InfiniteSlider reverse className="opacity-70 text-8xl">
           <div>House of Digital Aesthetic - </div>

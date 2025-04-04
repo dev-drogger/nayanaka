@@ -93,7 +93,6 @@ export const PRICING_TIERS = [
     features: [
       "Maximum 12 pages",
       "Everything in general package",
-      "Allow transaction on your website",
       "Admin panel",
       "Digital Marketing friendly",
     ],
@@ -109,7 +108,76 @@ export const PRICING_TIERS = [
     description: "For complex web application",
     features: [
       "Everything in One",
-      "Fully own and control your site",
+      "Fully control your site",
+      "Enterprise level architecture",
+      "15 status pages",
+    ],
+    cta: "Contact Us",
+    highlighted: true,
+  },
+];
+
+export const INVITATION_PRICING_TIERS = [
+  {
+    id: "regular",
+    name: "Regular",
+    price: {
+      "1 years": 159000,
+      "2 years": 1099000,
+    },
+    description: "For your small businesses",
+    features: [
+      "Unlimited Invitations",
+      "Free ",
+      "SEO",
+      "Integration with your social media",
+    ],
+    cta: "Get started",
+  },
+  {
+    id: "premium",
+    name: "Premium",
+    price: {
+      "1 years": 1699000,
+      "2 years": 2299000,
+    },
+    description: "Great for medium businesses",
+    features: [
+      "5 pages",
+      "Everything in basic package",
+      "No template, your site is unique",
+      "Request your own features",
+    ],
+    cta: "Get started",
+    popular: true,
+  },
+  {
+    id: "custom",
+    name: "Custom",
+    price: {
+      "1 years": 699000,
+      "2 years": 5599000,
+    },
+    description: "Great for large businesses",
+    features: [
+      "Maximum 12 pages",
+      "Angpao",
+      "Create as you want",
+      "Free domain couples-name.com",
+    ],
+    cta: "Get started",
+  },
+  {
+    id: "3d-invitation",
+    name: "3D Invitation",
+    price: {
+      "1 years": "1199000",
+      "2 years": "Custom",
+    },
+    description: "For complex web application",
+    features: [
+      "Everything in One",
+      "Fully control your site",
       "Enterprise level architecture",
       "15 status pages",
     ],

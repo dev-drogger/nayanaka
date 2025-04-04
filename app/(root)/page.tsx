@@ -20,8 +20,7 @@ import About from "./section/about-section";
 import Services from "./section/service-section";
 import Pricing from "./section/pricing-section";
 import BrowserCheck from "@/components/BrowserCheck";
-import { BackgroundPaths } from "@/components/background-paths";
-import WordsSlider from "@/components/words-slider";
+import Footer from "@/components/footer";
 
 // Dynamically import 3D Background
 const BackgroundShader = dynamic(
@@ -34,10 +33,12 @@ function MainContent() {
   const { menuOpen } = useAppSelector((state) => state.navigation);
   const { isLoading } = useAppSelector((state) => state.loading);
   const prevPos = useRef({ x: 0, y: 0 });
+  const minimumLoadTime = 3000;
   const lastUpdateTime = useRef(Date.now());
   const throttleDelay = 16; // ~60fps
 
   useEffect(() => {
+    lastUpdateTime.current = Date.now();
     const handleMouseMove = (e: MouseEvent) => {
       const now = Date.now();
 
@@ -77,33 +78,51 @@ function MainContent() {
       }
     };
 
+    const handleFullyLoaded = () => {
+      const timeElapsed = Date.now() - lastUpdateTime.current;
+      const remainingTime = Math.max(0, minimumLoadTime - timeElapsed);
+
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            dispatch(setLoading(false));
+          }, 300);
+        });
+      }, remainingTime);
+    };
+
+    if (document.readyState === "complete") {
+      handleFullyLoaded();
+    } else {
+      window.addEventListener("load", handleFullyLoaded, { once: true });
+    }
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Simulate loading assets
-    const timer = setTimeout(() => dispatch(setLoading(false)), 3000);
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
-      clearTimeout(timer);
+      window.removeEventListener("load", handleFullyLoaded);
     };
-  }, [dispatch]);
+  }, [dispatch, minimumLoadTime]);
 
   return (
-    <main className="min-h-screen w-full bg-jet overflow-x-hidden">
-      {/* Browser compatibility check */}
+    <main className="min-h-screen w-full bg-black overflow-x-hidden">
       <BrowserCheck />
 
-      {/* Custom cursor */}
       <CustomCursor />
 
-      {/* 3D Background for entire site */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="fixed inset-0 z-0 pointer-events-none"
+      >
         <Suspense fallback={null}>
           <BackgroundShader />
         </Suspense>
-      </div>
+      </motion.div>
 
       <AnimatePresence mode="wait">
         {isLoading ? (
@@ -118,19 +137,12 @@ function MainContent() {
           >
             <Navigation />
 
-            <div
-              className={`transition-all duration-700 ${
-                menuOpen ? "opacity-20 blur-sm" : "opacity-100"
-              }`}
-            >
-              <BackgroundPaths>
-                <Hero />
-                <WordsSlider />
-              </BackgroundPaths>
-              <About />
-              <Services />
-              <Pricing />
-            </div>
+            <Hero />
+
+            <About />
+            <Services />
+            <Pricing />
+            <Footer />
           </motion.div>
         )}
       </AnimatePresence>

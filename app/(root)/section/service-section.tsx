@@ -9,7 +9,7 @@ export default function Services() {
   const dispatch = useAppDispatch();
 
   return (
-    <section id="services" className="relative min-h-screen w-full py-32">
+    <section id="services" className="bg-jet">
       <div className="container mx-auto px-4">
         <motion.div
           className="mb-16"

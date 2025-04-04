@@ -19,6 +19,7 @@
   --color-champagne: var(--champagne);
   --color-jet: var(--jet);
   --color-gold: var(--gold);
+  --color-green: var(--green);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -87,14 +88,14 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --almond: oklch(0.3523 6.7712 76.83);
-  --cardinal: oklch(0.5115 58.5198 29.27);
-  --non-photo-blue: oklch(0.3731 16.209 209.61);
-  --silver: oklch(0.2744 0 158.2);
-  --indigo-dye: oklch(0.2926 23.8024 252.48);
-  --champagne: oklch(0.3881 14.2071 84.16);
-  --jet: oklch(0.1091 0 158.2);
-  --gold: oklch(0.3553 36.4043 83.92);
+  --almond: #eae0d5ff;
+  --cardinal: #b53638ff;
+  --silver: #b0b0b0ff;
+  --indigo-dye: #0e4c6aff;
+  --champagne: #f7e7ceff;
+  --jet: #2e2e2eff;
+  --gold: #cfae70ff;
+  --green: #6e8f8fff;
 }
 
 .dark {
@@ -149,6 +150,9 @@
   }
   p {
     @apply text-sm md:text-lg text-white;
+  }
+  section {
+    @apply relative  min-h-screen py-32 w-full;
   }
 }
 

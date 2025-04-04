@@ -21,67 +21,90 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative min-h-screen w-full mb-12 md:mb-0"
+      className="relative  min-h-screen bg-gray-200 py-32 rounded-[3rem] lg:rounded-[5rem] w-full mb-12 md:mb-0"
     >
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-12 gap-4">
-          <motion.div
-            className=" mb-16 col-span-12 lg:col-span-5 "
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="grid grid-cols-1 flex-center gap-28">
-              <div>
-                <h1 className="font-medium text-8xl mb-8">PRICING</h1>
-                <p>
-                  Create everything all in once with just a click. Whether you
-                  need a professional website or a beautiful digital invitation,
-                  we’ve got you covered. No coding needed! Simple, fast, and
-                  hassle-free.
-                </p>
-              </div>
-              <div>
-                <p className="mb-6 text-4xl font-medium">
-                  Choose the best plan for your needs
-                </p>
-                <div className="flex w-fit rounded-full bg-muted p-1 mt-4">
-                  {PAYMENT_FREQUENCIES.map((freq) => (
-                    <Tab
-                      key={freq}
-                      text={freq}
-                      selected={selectedFrequency === freq}
-                      setSelected={setSelectedFrequency}
-                      discount={freq === "2 years"}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
+        <motion.div
+          className=" mb-16 "
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h1 className="font-medium text-black text-8xl mb-8">PRICING</h1>
+          <p className="text-black min-w-[50vw] md:w-[30vw]">
+            Create everything all in once with just a click. Whether you need a
+            professional website or a beautiful digital invitation, we’ve got
+            you covered. No coding needed! Simple, fast, and hassle-free.
+          </p>
+        </motion.div>
 
-          <div className="col-span-12 lg:col-span-7">
-            <div className="grid grid-cols-2 gap-6">
-              {PRICING_TIERS.map((tier) => (
-                <motion.div
-                  key={tier.name}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -10 }}
-                  onMouseEnter={() => dispatch(setCursorType("text"))}
-                  onMouseLeave={() => dispatch(setCursorType("default"))}
-                >
-                  <PricingCard
-                    key={tier.name}
-                    tier={tier}
-                    paymentFrequency={selectedFrequency}
-                  />
-                </motion.div>
+        <div className=" grid grid-cols-12 mb-10 items-center justify-between gap-10 lg:gap-0">
+          <div className="col-span-12 lg:col-span-3">
+            <p className="mb-6 text-4xl text-black font-medium">
+              Web Development
+            </p>
+            <div className="flex w-fit rounded-full bg-muted p-1 mt-4">
+              {PAYMENT_FREQUENCIES.map((freq) => (
+                <Tab
+                  key={freq}
+                  text={freq}
+                  selected={selectedFrequency === freq}
+                  setSelected={setSelectedFrequency}
+                  discount={freq === "2 years"}
+                />
               ))}
             </div>
+          </div>
+
+          <div className="col-span-12 lg:col-span-9 grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {PRICING_TIERS.map((tier) => (
+              <motion.div
+                key={tier.name}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                onMouseEnter={() => dispatch(setCursorType("text"))}
+                onMouseLeave={() => dispatch(setCursorType("default"))}
+              >
+                <PricingCard
+                  key={tier.name}
+                  tier={tier}
+                  paymentFrequency={selectedFrequency}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className=" grid grid-cols-12 items-center justify-between">
+          <div className="col-span-12 lg:col-span-3">
+            <p className="mb-6 text-4xl text-black font-medium">
+              Digital Invitation
+            </p>
+          </div>
+
+          <div className="col-span-12 lg:col-span-9 grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {PRICING_TIERS.map((tier) => (
+              <motion.div
+                key={tier.name}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                onMouseEnter={() => dispatch(setCursorType("text"))}
+                onMouseLeave={() => dispatch(setCursorType("default"))}
+              >
+                <PricingCard
+                  key={tier.name}
+                  tier={tier}
+                  paymentFrequency={selectedFrequency}
+                />
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

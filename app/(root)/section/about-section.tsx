@@ -23,7 +23,7 @@ export default function About() {
     <section
       id="about"
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center py-32"
+      className="bg-gray-200 flex items-center"
     >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-12 gap-8">
@@ -37,17 +37,17 @@ export default function About() {
               onMouseEnter={() => dispatch(setCursorType("text"))}
               onMouseLeave={() => dispatch(setCursorType("default"))}
             >
-              <h2 className="text-6xl md:text-8xl font-bold uppercase tracking-tighter mb-8">
+              <h2 className="text-6xl md:text-8xl text-black font-bold uppercase tracking-tighter mb-8">
                 About
                 <br />
                 Us
               </h2>
-              <p className="text-lg mb-6">
+              <p className="text-lg mb-6 text-black">
                 Nayanaka Creative Studio is a dynamic collective of designers,
                 developers, and strategists, united by a shared passion for
                 creating exceptional digital experiences.
               </p>
-              <p className="text-lg mb-6">
+              <p className="text-lg mb-6 text-black">
                 We seamlessly blend creativity with functionality, crafting
                 websites that are not only visually captivating but also
                 strategically designed to drive meaningful results.

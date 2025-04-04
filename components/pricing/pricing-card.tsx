@@ -37,16 +37,13 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
   return (
     <PrimaryCard
       className={cn(
-        "relative flex flex-col gap-2 md:gap-5  overflow-hidden py-6 p-4 w-fit h-96",
+        "relative flex flex-col gap-2 md:gap-5  overflow-hidden p-4",
         isHighlighted
           ? "bg-foreground text-background"
           : "bg-background text-foreground",
-        isPopular && "ring-4 ring-cardinal border-none"
+        isPopular && "ring-4 ring-gold border-none"
       )}
     >
-      {isHighlighted && <HighlightedBackground />}
-      {isPopular && <PopularBackground />}
-
       <h2
         className={cn(
           "flex items-center gap-3 text-3xl font-medium capitalize",
@@ -55,8 +52,8 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
       >
         {tier.name}
         {isPopular && (
-          <Badge variant="secondary">
-            <p className="text-black text-[8px] font-normal md:text-sm">
+          <Badge variant="secondary" className="mt-2">
+            <p className="text-black text-[10px] font-normal md:text-sm">
               🔥 Popular
             </p>
           </Badge>
@@ -129,18 +126,10 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
 
       <InteractiveHoverButton
         text={tier.cta}
-        className="w-full text-white bg-cardinal rounded-none"
+        className="w-full text-white bg-jet rounded-none"
         onMouseEnter={() => dispatch(setCursorType("link"))}
         onMouseLeave={() => dispatch(setCursorType("text"))}
       />
     </PrimaryCard>
   );
 }
-
-const HighlightedBackground = () => (
-  <div className=" inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:45px_45px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
-);
-
-const PopularBackground = () => (
-  <div className=" inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.1),rgba(255,255,255,0))]" />
-);

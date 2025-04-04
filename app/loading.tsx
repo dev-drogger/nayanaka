@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
+import { TextEffect } from "@/components/text-effect";
 
 // Dynamically import 3D component to avoid SSR issues
 const Scene3D = dynamic(() => import("@/components/3d/Scene3D"), {
@@ -18,9 +19,9 @@ export default function LoadingScreen() {
       exit={{ opacity: 0 }}
     >
       <div className="relative h-full w-full">
-        <Suspense fallback={null}>
+        {/* <Suspense fallback={null}>
           <Scene3D />
-        </Suspense>
+        </Suspense> */}
 
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.div
@@ -29,22 +30,35 @@ export default function LoadingScreen() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            <motion.div
-              className="text-[20vw] font-bold text-white leading-none tracking-tighter"
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-            >
-              NAYA
-            </motion.div>
-            <motion.div
-              className="text-[20vw] font-bold text-white leading-none tracking-tighter"
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.4 }}
-            >
-              NAKA
-            </motion.div>
+            <div className="flex-row-center gap-14 mb-4">
+              <motion.div className="w-auto">
+                <TextEffect
+                  per="char"
+                  preset="blur"
+                  className="text-2xl md:text-6xl text-white font-light"
+                >
+                  Nayanaka
+                </TextEffect>
+
+                <TextEffect
+                  per="char"
+                  preset="blur"
+                  className="text-sm md:text-2xl text-white"
+                >
+                  なやなか
+                </TextEffect>
+              </motion.div>
+              <div className="w-auto">
+                <TextEffect
+                  per="char"
+                  preset="fade"
+                  delay={1}
+                  className="text-2xl font-light"
+                >
+                  Creative Studio
+                </TextEffect>
+              </div>
+            </div>
 
             <motion.div
               className="absolute bottom-0 left-0 w-full h-1 bg-white"

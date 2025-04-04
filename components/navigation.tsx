@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { setMenuOpen } from "@/state/slices/navigationSlice";
 import { setCursorType } from "@/state/slices/cursorSlice";
-import { TextEffect } from "./text-effect";
 
 export default function Navigation() {
   const dispatch = useAppDispatch();
@@ -29,7 +28,7 @@ export default function Navigation() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
-        <div className="container mx-auto flex justify-between items-center py-6">
+        <div className="container mx-auto px-10 flex justify-between items-center py-4">
           <Link
             href="/"
             className="text-xl text-white tracking-tighter font-bold"
@@ -37,53 +36,30 @@ export default function Navigation() {
             onMouseLeave={handleCursorLeave}
           >
             <motion.div
-              className="mb-8"
+              className="flex-center gap-10"
               initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div className="flex-row-center gap-14">
-                <motion.div className="w-auto">
-                  <TextEffect
-                    per="char"
-                    preset="blur"
-                    className="text-2xl md:text-4xl text-white font-light"
-                    delay={3}
-                  >
-                    Nayanaka
-                  </TextEffect>
+              <div>
+                <h2>Nayanaka</h2>
+                <p> なやなか</p>
+              </div>
 
-                  <TextEffect
-                    per="char"
-                    preset="blur"
-                    className="text-sm md:text-lg text-white"
-                    delay={3}
-                  >
-                    なやなか
-                  </TextEffect>
-                </motion.div>
-                <div className="w-auto">
-                  <TextEffect
-                    per="char"
-                    preset="fade"
-                    delay={4}
-                    className="text-lg font-light"
-                  >
-                    Creative Studio
-                  </TextEffect>
-                </div>
+              <div className="hidden lg:flex">
+                <h3>Creative Studio</h3>
               </div>
             </motion.div>
           </Link>
 
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden lg:flex space-x-8">
             {["hero", "about", "services", "pricing", "contact"].map(
               (section, index) => (
                 <motion.a
                   key={index}
                   href={`#${section}`}
-                  className={`text-sm uppercase text-white tracking-widest ${
+                  className={`text-lg font-bold uppercase text-white tracking-widest ${
                     activeSection === section ? "opacity-100" : "opacity-50"
                   }`}
                   onMouseEnter={handleCursorEnter}
@@ -104,14 +80,14 @@ export default function Navigation() {
 
           <button
             onClick={toggleMenu}
-            className="z-50 md:hidden"
+            className="z-50 lg:hidden"
             onMouseEnter={handleCursorEnter}
             onMouseLeave={handleCursorLeave}
           >
             {menuOpen ? (
-              <X className="h-6 w-6" />
+              <X size={36} color="#ffffff" />
             ) : (
-              <Menu className="h-6 w-6" />
+              <Menu size={36} color="#ffffff" />
             )}
           </button>
         </div>
@@ -126,7 +102,7 @@ export default function Navigation() {
             exit={{ opacity: 0, y: 50 }}
             transition={{ duration: 0.5 }}
           >
-            <nav className="text-center">
+            <nav className="text-center text-white">
               <ul className="space-y-8">
                 {[
                   { name: "Home", href: "#hero" },

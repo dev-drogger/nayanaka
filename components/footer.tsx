@@ -3,14 +3,15 @@
 import { motion } from "framer-motion";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
+import { InfiniteSlider } from "./infinite-slider";
 
 export default function Footer() {
   const dispatch = useAppDispatch();
 
   return (
-    <footer id="contact" className="relative w-full py-6 bg-black text-white">
+    <footer id="contact" className="relative w-full text-white">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-16 gap-4">
+        <div className="mb-[11rem] py-[2.5rem] lg:mb-[16rem] lg:py-[8.2rem] grid grid-cols-1 md:grid-cols-2 lg:gap-16 gap-4">
           <div className="col-span-2 lg:col-span-1">
             <motion.h2
               className="text-6xl md:text-8xl font-bold uppercase tracking-tighter mb-4 lg:mb-8"
@@ -100,7 +101,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-32 flex flex-col md:flex-row justify-between items-center">
+        <div className="mb-10 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-white/60">
             © 2025 Nayanaka Creative Studio. All rights reserved.
           </p>
@@ -124,6 +125,18 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <motion.div
+        className="absolute uppercase bottom-30 md:bottom-20 lg:bottom-50 text-white text-xl w-screen flex-row-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+      >
+        <InfiniteSlider reverse className="text-8xl w-full">
+          <div>なやなか -</div>
+          <div>なやなか -</div>
+          <div>なやなか -</div>
+        </InfiniteSlider>
+      </motion.div>
     </footer>
   );
 }
