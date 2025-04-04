@@ -1,46 +1,49 @@
 export const services = [
   {
-    title: "Digital Design",
+    title: "Web Development",
     description:
-      "We create visually stunning and functional designs that elevate your brand and engage your audience.",
+      "Our development team builds robust, scalable, and performant websites with astonishing 3D animation.",
     services: [
-      "UI/UX Design",
-      "Brand Identity",
-      "Motion Design",
-      "Art Direction",
-    ],
-  },
-  {
-    title: "Development",
-    description:
-      "Our development team builds robust, scalable, and performant websites and applications.",
-    services: [
-      "Frontend Development",
-      "Backend Systems",
+      "Landing Page",
       "E-commerce",
-      "CMS Integration",
+      "E-learning",
+      "Custom Web Application",
+      "And many more...",
     ],
   },
   {
-    title: "Strategy",
+    title: "Digital Invitation",
     description:
       "We develop comprehensive strategies that align with your business goals and drive results.",
     services: [
-      "Digital Strategy",
-      "Content Strategy",
-      "SEO & Analytics",
-      "User Research",
+      "Event Invitation",
+      "Wedding Invitation",
+      "Birthday Invitation",
+      "And many more...",
     ],
   },
   {
-    title: "Production",
+    title: "Visual Storytelling (Coming Soon)",
     description:
-      "From concept to launch, we manage the entire production process to ensure quality and efficiency.",
+      "From concept to launch, we manage the entire production process to ensure quality and efficiency for all your visual needs.",
     services: [
-      "Project Management",
-      "Quality Assurance",
-      "Performance Optimization",
-      "Maintenance",
+      "Product, Wedding, Event Photography",
+      "Product, Wedding, Event Video",
+      "Company Profile",
+      "Design",
+      "And many more...",
+    ],
+  },
+  {
+    title: "Social Media (Coming Soon)",
+    description:
+      "We create visually stunning social media content that elevate your brand and engage your audience.",
+    services: [
+      "Content Creation",
+      "Social Media Management",
+      "Analytics and Monitoring",
+      "Social Media Automation",
+      "And many more...",
     ],
   },
 ];

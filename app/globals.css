@@ -87,7 +87,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --dark-cyan: oklch(0.3094 17.0884 197.89);
   --almond: oklch(0.3523 6.7712 76.83);
   --cardinal: oklch(0.5115 58.5198 29.27);
   --non-photo-blue: oklch(0.3731 16.209 209.61);
@@ -143,7 +142,7 @@
     @apply text-3xl md:text-5xl text-white font-light;
   }
   h2 {
-    @apply text-xl md:text-3xl text-white font-light;
+    @apply text-xl md:text-5xl text-white font-light;
   }
   h3 {
     @apply text-base md:text-xl text-white font-light;

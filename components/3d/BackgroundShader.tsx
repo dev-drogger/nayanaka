@@ -18,7 +18,7 @@ function Shader() {
 
   return (
     <mesh ref={meshRef}>
-      <planeGeometry args={[20, 20, 32, 32]} />
+      <planeGeometry args={[10, 10, 32, 32]} />
       <meshStandardMaterial
         color={new Color("#cfae70")}
         wireframe
@@ -31,7 +31,7 @@ function Shader() {
 
 export default function BackgroundShader() {
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full rounded-2xl">
       <Canvas camera={{ position: [0, 0, 5] }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />

@@ -21,6 +21,7 @@ import Services from "./section/service-section";
 import Pricing from "./section/pricing-section";
 import BrowserCheck from "@/components/BrowserCheck";
 import { BackgroundPaths } from "@/components/background-paths";
+import WordsSlider from "@/components/words-slider";
 
 // Dynamically import 3D Background
 const BackgroundShader = dynamic(
@@ -124,6 +125,7 @@ function MainContent() {
             >
               <BackgroundPaths>
                 <Hero />
+                <WordsSlider />
               </BackgroundPaths>
               <About />
               <Services />

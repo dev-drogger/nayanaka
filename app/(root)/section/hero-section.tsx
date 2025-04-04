@@ -9,7 +9,6 @@ import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
-import { TextEffect } from "@/components/text-effect";
 
 // Dynamically import 3D components
 const FloatingObjects = dynamic(
@@ -34,7 +33,7 @@ export default function Hero() {
     <section
       id="hero"
       ref={containerRef}
-      className="relative min-h-screen w-full flex items-center"
+      className="relative min-h-screen w-full flex items-center rounded-4xl"
     >
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Suspense fallback={null}>
@@ -52,60 +51,6 @@ export default function Hero() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid grid-cols-12 gap-4">
-          {/* <div className="col-span-12 md:col-span-6 flex-center">
-            <motion.div
-              className="mb-8"
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="flex-row-center gap-14">
-                <motion.div className="w-auto">
-                  <TextEffect
-                    per="char"
-                    preset="blur"
-                    className="text-2xl md:text-5xl text-white font-light"
-                    delay={3}
-                  >
-                    Nayanaka
-                  </TextEffect>
-
-                  <TextEffect
-                    per="char"
-                    preset="blur"
-                    className="text-sm md:text-xl text-white"
-                    delay={3}
-                  >
-                    なやなか
-                  </TextEffect>
-                </motion.div>
-                <div className="w-auto">
-                  <TextEffect
-                    per="char"
-                    preset="fade"
-                    delay={4}
-                    className="text-lg"
-                  >
-                    Creative Studio
-                  </TextEffect>
-                </div>
-              </div>
-
-              <motion.div
-                className="mt-4 pt-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                <p className="text-lg md:text-xl">
-                  We create digital experiences that blend art, technology, and
-                  strategy.
-                </p>
-              </motion.div>
-            </motion.div>
-          </div> */}
           <div className="col-span-12 md:col-span-6 flex-center">
             <motion.div
               className="mb-8"

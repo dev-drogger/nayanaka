@@ -43,13 +43,14 @@ export default function About() {
                 Us
               </h2>
               <p className="text-lg mb-6">
-                Nayanaka Creative Studio is a collective of designers,
-                developers, and strategists passionate about crafting memorable
-                digital experiences.
+                Nayanaka Creative Studio is a dynamic collective of designers,
+                developers, and strategists, united by a shared passion for
+                creating exceptional digital experiences.
               </p>
               <p className="text-lg mb-6">
-                We blend aesthetics with functionality to create websites that
-                not only look stunning but also deliver results.
+                We seamlessly blend creativity with functionality, crafting
+                websites that are not only visually captivating but also
+                strategically designed to drive meaningful results.
               </p>
               <div className="mt-8">
                 <Button

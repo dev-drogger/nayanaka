@@ -26,26 +26,38 @@ export default function Pricing() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-12 gap-4">
           <motion.div
-            className="space-y-7 grid mb-16 grid-cols-1 col-span-12 lg:col-span-5 flex-center "
+            className=" mb-16 col-span-12 lg:col-span-5 "
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <div className="space-y-4">
-              <h1 className="font-medium text-8xl">PRICING</h1>
-              <p className="text-white">Choose the best plan for your needs</p>
-            </div>
-            <div className=" flex w-fit rounded-full bg-muted p-1">
-              {PAYMENT_FREQUENCIES.map((freq) => (
-                <Tab
-                  key={freq}
-                  text={freq}
-                  selected={selectedFrequency === freq}
-                  setSelected={setSelectedFrequency}
-                  discount={freq === "2 years"}
-                />
-              ))}
+            <div className="grid grid-cols-1 flex-center gap-28">
+              <div>
+                <h1 className="font-medium text-8xl mb-8">PRICING</h1>
+                <p>
+                  Create everything all in once with just a click. Whether you
+                  need a professional website or a beautiful digital invitation,
+                  we’ve got you covered. No coding needed! Simple, fast, and
+                  hassle-free.
+                </p>
+              </div>
+              <div>
+                <p className="mb-6 text-4xl font-medium">
+                  Choose the best plan for your needs
+                </p>
+                <div className="flex w-fit rounded-full bg-muted p-1 mt-4">
+                  {PAYMENT_FREQUENCIES.map((freq) => (
+                    <Tab
+                      key={freq}
+                      text={freq}
+                      selected={selectedFrequency === freq}
+                      setSelected={setSelectedFrequency}
+                      discount={freq === "2 years"}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
 
