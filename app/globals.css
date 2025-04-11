@@ -91,7 +91,6 @@
   --almond: #eae0d5ff;
   --cardinal: #b53638ff;
   --silver: #b0b0b0ff;
-  --indigo-dye: #0e4c6aff;
   --champagne: #f7e7ceff;
   --jet: #2e2e2eff;
   --gold: #cfae70ff;
@@ -152,7 +151,7 @@
     @apply text-sm md:text-lg text-white;
   }
   section {
-    @apply relative  min-h-screen py-32 w-full;
+    @apply relative min-h-screen py-32 w-full;
   }
 }
 

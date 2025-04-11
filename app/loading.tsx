@@ -13,7 +13,7 @@ const Scene3D = dynamic(() => import("@/components/3d/Scene3D"), {
 export default function LoadingScreen() {
   return (
     <motion.div
-      className="h-screen w-full flex flex-col items-center justify-center bg-black"
+      className="h-screen z-50 w-full flex flex-col items-center justify-center bg-black"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

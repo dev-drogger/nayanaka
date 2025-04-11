@@ -12,7 +12,7 @@ export const services = [
     ],
   },
   {
-    title: "Digital Invitation",
+    title: "Digital Invitation (Coming Soon)",
     description:
       "We develop comprehensive strategies that align with your business goals and drive results.",
     services: [

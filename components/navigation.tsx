@@ -6,8 +6,10 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { setMenuOpen } from "@/state/slices/navigationSlice";
 import { setCursorType } from "@/state/slices/cursorSlice";
+import { store } from "@/state/redux";
+import { Provider } from "react-redux";
 
-export default function Navigation() {
+function Page() {
   const dispatch = useAppDispatch();
   const { menuOpen, activeSection } = useAppSelector(
     (state) => state.navigation
@@ -28,20 +30,20 @@ export default function Navigation() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
-        <div className="container mx-auto px-10 flex justify-between items-center py-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+          className="container mx-auto px-10 flex justify-between items-center py-4"
+        >
           <Link
             href="/"
             className="text-xl text-white tracking-tighter font-bold"
             onMouseEnter={handleCursorEnter}
             onMouseLeave={handleCursorLeave}
           >
-            <motion.div
-              className="flex-center gap-10"
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
+            <div className="flex-center gap-10">
               <div>
                 <h2>Nayanaka</h2>
                 <p> なやなか</p>
@@ -50,7 +52,7 @@ export default function Navigation() {
               <div className="hidden lg:flex">
                 <h3>Creative Studio</h3>
               </div>
-            </motion.div>
+            </div>
           </Link>
 
           <div className="hidden lg:flex space-x-8">
@@ -90,7 +92,7 @@ export default function Navigation() {
               <Menu size={36} color="#ffffff" />
             )}
           </button>
-        </div>
+        </motion.div>
       </header>
 
       <AnimatePresence>
@@ -134,5 +136,13 @@ export default function Navigation() {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+export default function NAvigation() {
+  return (
+    <Provider store={store}>
+      <Page />
+    </Provider>
   );
 }

@@ -21,18 +21,18 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative  min-h-screen bg-gray-200 py-32 rounded-[3rem] lg:rounded-[5rem] w-full mb-12 md:mb-0"
+      className="relative  min-h-screen bg-jet py-32 rounded-[3rem] lg:rounded-[5rem] w-full mb-12 md:mb-0"
     >
       <div className="container mx-auto px-4">
         <motion.div
-          className=" mb-16 "
+          className=" mb-16 text-white"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h1 className="font-medium text-black text-8xl mb-8">PRICING</h1>
-          <p className="text-black min-w-[50vw] md:w-[30vw]">
+          <h1 className="font-medium text-8xl mb-8">PRICING</h1>
+          <p className=" min-w-[50vw] md:w-[30vw]">
             Create everything all in once with just a click. Whether you need a
             professional website or a beautiful digital invitation, we’ve got
             you covered. No coding needed! Simple, fast, and hassle-free.
@@ -41,7 +41,7 @@ export default function Pricing() {
 
         <div className=" grid grid-cols-12 mb-10 items-center justify-between gap-10 lg:gap-0">
           <div className="col-span-12 lg:col-span-3">
-            <p className="mb-6 text-4xl text-black font-medium">
+            <p className="mb-6 text-4xl text-white font-medium">
               Web Development
             </p>
             <div className="flex w-fit rounded-full bg-muted p-1 mt-4">
@@ -79,7 +79,7 @@ export default function Pricing() {
           </div>
         </div>
 
-        <div className=" grid grid-cols-12 items-center justify-between">
+        {/* <div className=" grid grid-cols-12 items-center justify-between">
           <div className="col-span-12 lg:col-span-3">
             <p className="mb-6 text-4xl text-black font-medium">
               Digital Invitation
@@ -106,7 +106,7 @@ export default function Pricing() {
               </motion.div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -21,6 +21,10 @@ import Services from "./section/service-section";
 import Pricing from "./section/pricing-section";
 import BrowserCheck from "@/components/BrowserCheck";
 import Footer from "@/components/footer";
+import { ScrollControls, Scroll, Html } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+import ReduxProvider from "@/state/redux-provider";
+import { Projects } from "./section/projects-section";
 
 // Dynamically import 3D Background
 const BackgroundShader = dynamic(
@@ -108,12 +112,12 @@ function MainContent() {
   }, [dispatch, minimumLoadTime]);
 
   return (
-    <main className="min-h-screen w-full bg-black overflow-x-hidden">
+    <>
       <BrowserCheck />
 
       <CustomCursor />
 
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -122,7 +126,7 @@ function MainContent() {
         <Suspense fallback={null}>
           <BackgroundShader />
         </Suspense>
-      </motion.div>
+      </motion.div> */}
 
       <AnimatePresence mode="wait">
         {isLoading ? (
@@ -134,19 +138,29 @@ function MainContent() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
+            className="h-screen w-full"
           >
             <Navigation />
-
-            <Hero />
-
-            <About />
-            <Services />
-            <Pricing />
-            <Footer />
+            <Canvas gl={{ antialias: true, alpha: false }} dpr={[1, 2]}>
+              <color attach="background" args={["#e5e7eb"]} />
+              <ScrollControls pages={10.03} damping={0.25}>
+                <BackgroundShader />
+                <Scroll html>
+                  <ReduxProvider>
+                    <Hero />
+                    <About />
+                    <Services />
+                    <Projects />
+                    <Pricing />
+                    <Footer />
+                  </ReduxProvider>
+                </Scroll>
+              </ScrollControls>
+            </Canvas>
           </motion.div>
         )}
       </AnimatePresence>
-    </main>
+    </>
   );
 }
 
