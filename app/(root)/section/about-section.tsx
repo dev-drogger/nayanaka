@@ -17,14 +17,11 @@ export default function About() {
     offset: ["start end", "end start"],
   });
 
+  // Adjust the scrollYProgress value to move the images
   const y = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
 
   return (
-    <section
-      id="about"
-      ref={containerRef}
-      className="bg-gray-200 flex items-center"
-    >
+    <section id="about" ref={containerRef} className=" flex items-center">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-5 order-2 md:order-1">
@@ -32,7 +29,6 @@ export default function About() {
               className="sticky top-32"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               onMouseEnter={() => dispatch(setCursorType("text"))}
               onMouseLeave={() => dispatch(setCursorType("default"))}
@@ -66,15 +62,20 @@ export default function About() {
 
           <div className="col-span-12 md:col-span-7 order-1 md:order-2 mb-8 md:mb-0">
             <div className="space-y-32">
-              {[1, 2, 3].map((item) => (
+              {[1, 2, 3].map((item, index) => (
                 <motion.div
                   key={item}
                   className="relative"
-                  style={{ y: y }}
-                  initial={{ opacity: 0, y: 100 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  viewport={{ once: true }}
+                  initial={{ opacity: 0, y: 50 }} // Start below the final position
+                  animate={{ opacity: 1, y: 0 }} // End at normal position
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.2, // Delay each card slightly
+                  }}
+                  style={{
+                    zIndex: 3 - index, // Stack the cards with z-index for proper layering
+                    transform: `translateY(${index * 20}px)`, // Apply different vertical offset to simulate stacking
+                  }}
                 >
                   <div
                     className="aspect-[4/3] overflow-hidden"
@@ -82,7 +83,7 @@ export default function About() {
                     onMouseLeave={() => dispatch(setCursorType("default"))}
                   >
                     <Image
-                      src={`/placeholder.svg?height=800&width=1000&text=Project${item}`}
+                      src="/pictures/DSC00128.webp"
                       alt={`Project ${item}`}
                       width={1000}
                       height={800}

@@ -52,32 +52,39 @@ function Page() {
               <div className="hidden lg:flex">
                 <h3>Creative Studio</h3>
               </div>
+              <h3></h3>
             </div>
           </Link>
 
           <div className="hidden lg:flex space-x-8">
-            {["hero", "about", "services", "pricing", "contact"].map(
-              (section, index) => (
-                <motion.a
-                  key={index}
-                  href={`#${section}`}
-                  className={`text-lg font-bold uppercase text-white tracking-widest ${
-                    activeSection === section ? "opacity-100" : "opacity-50"
-                  }`}
-                  onMouseEnter={handleCursorEnter}
-                  onMouseLeave={handleCursorLeave}
-                  whileHover={{ scale: 1.1 }}
-                  animate={{
-                    y: activeSection === section ? -5 : 0,
-                    opacity: activeSection === section ? 1 : 0.5,
-                  }}
-                >
-                  {section === "hero"
-                    ? "Home"
-                    : section.charAt(0).toUpperCase() + section.slice(1)}
-                </motion.a>
-              )
-            )}
+            {[
+              "hero",
+              "new",
+              "about",
+              "services",
+              "projects",
+              "pricing",
+              "contact",
+            ].map((section, index) => (
+              <motion.a
+                key={index}
+                href={`#${section}`}
+                className={`text-lg font-bold uppercase text-white tracking-widest ${
+                  activeSection === section ? "opacity-100" : "opacity-50"
+                }`}
+                onMouseEnter={handleCursorEnter}
+                onMouseLeave={handleCursorLeave}
+                whileHover={{ scale: 1.1 }}
+                animate={{
+                  y: activeSection === section ? -5 : 0,
+                  opacity: activeSection === section ? 1 : 0.5,
+                }}
+              >
+                {section === "hero"
+                  ? "Home"
+                  : section.charAt(0).toUpperCase() + section.slice(1)}
+              </motion.a>
+            ))}
           </div>
 
           <button
@@ -101,7 +108,7 @@ function Page() {
             className="fixed inset-0 bg-black z-40 flex items-center justify-center"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
             <nav className="text-center text-white">
@@ -116,8 +123,23 @@ function Page() {
                   <motion.li
                     key={index}
                     initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.3 }}
+                    whileHover="hover"
+                    animate="initial"
+                    // animate={{
+                    //   y: activeSection === section ? -5 : 0,
+                    //   opacity: activeSection === section ? 1 : 0.5,
+                    // }}
+                    variants={{
+                      initial: { y: 0, opacity: 1 },
+                      hover: {
+                        x: [0, -2, 2, -2, 2, 0],
+                        y: [0, 2, -2, 2, -2, 0],
+                        transition: {
+                          duration: 0.3,
+                        },
+                      },
+                    }}
                   >
                     <Link
                       href={item.href}

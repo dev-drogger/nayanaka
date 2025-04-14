@@ -1,0 +1,15 @@
+ const yScaleFactor = Math.max(
+        0.6,
+        1 - (scrollOffset > 0.05 ? scrollOffset : 0) * 6
+      );
+      const xScaleFactor = Math.max(
+        0.8,
+        1 - (scrollOffset > 0.08 ? scrollOffset : 0) * 6
+      );
+
+      // Apply both scales in a single damp3 call
+      easing.damp3(
+        meshRef.current.scale,
+        [xScaleFactor, yScaleFactor, meshRef.current.scale.z],
+        0.05
+      );

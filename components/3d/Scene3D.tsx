@@ -26,12 +26,10 @@ function Box() {
 
 export default function Scene3D() {
   return (
-    <div className="h-full w-full">
-      <Canvas camera={{ position: [0, 0, 5] }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
-        {/* <Box /> */}
-      </Canvas>
-    </div>
+    <group>
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} />
+      <Box />
+    </group>
   );
 }

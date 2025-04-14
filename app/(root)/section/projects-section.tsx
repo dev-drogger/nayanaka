@@ -1,147 +1,139 @@
-import { InfiniteSlider } from "@/components/infinite-slider";
-import React from "react";
+import { ImageCarousel } from "@/components/image-carousel";
+import { ProjectsSlider } from "@/components/projects-slider";
+
+import { useState } from "react";
 
 export const Projects = () => {
   return (
-    <section className="relative flex-center overflow-hidden">
-      <InfiniteSlider
-        reverse
-        direction="vertical"
-        duration={15}
-        gap={230}
-        className="absolute border-cardinal border-2 -top-100 left-185 h-[120%] w-[80px] -rotate-45 flex-center text-5xl"
-      >
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-      </InfiniteSlider>
-      <InfiniteSlider
-        reverse
-        direction="vertical"
-        duration={15}
-        gap={230}
-        className="absolute border-cardinal border-2 -bottom-40 left-10 h-[30%] w-[80px] -rotate-45 flex-center text-5xl"
-      >
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-      </InfiniteSlider>
-      <InfiniteSlider
-        reverse
-        direction="vertical"
-        duration={15}
-        gap={230}
-        className="absolute border-cardinal border-2 -top-40 right-10 h-[30%] w-[80px] -rotate-45 flex-center text-5xl"
-      >
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-      </InfiniteSlider>
-      <InfiniteSlider
-        direction="vertical"
-        duration={14}
-        gap={230}
-        className="absolute border-cardinal border-2 -top-70 right-115 h-[70%] w-[80px] -rotate-45 flex-center text-5xl"
-      >
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-      </InfiniteSlider>
-      <InfiniteSlider
-        direction="vertical"
-        duration={13}
-        gap={230}
-        className="absolute border-cardinal border-2 -bottom-120 left-80 h-[120%] w-[80px] -rotate-45 flex-center text-5xl"
-      >
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-        <div className="rotate-90">PROJECTS</div>
-      </InfiniteSlider>
+    <section
+      id="projects"
+      className="relativeflex-center overflow-hidden bg-black"
+    >
+      <ProjectsSlider />
 
-      <div className="container mx-auto px-4 z-10">
-        <div className="grid grid-cols-12 grid-rows-5 min-h-screen">
-          <div className="h-[400px] bg-jet col-span-3 col-start-1 row-start-2">
-            1
+      <div className="container mx-auto px-8 z-10">
+        <div className="grid grid-cols-12 lg:grid-rows-11 gap-1">
+          <div className="h-[400px] z-0 bg-jet relative col-span-6 lg:col-span-3 lg:col-start-1 lg:row-start-2">
+            <ImageCarousel
+              src="/pictures/DSC09892.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
           </div>
-          <div className="h-[400px] bg-jet col-span-3 col-start-4">2</div>
-          <div className="h-[400px] bg-jet col-span-3 col-start-7 row-start-2">
-            3
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-4">
+            <ImageCarousel
+              src="/pictures/DSC00128.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
           </div>
-          <div className="h-[400px] bg-jet col-span-3 col-start-10">4</div>
-          <div className="h-[400px] bg-jet col-span-3 col-start-10 row-start-3">
-            5
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-7 lg:row-start-2">
+            <ImageCarousel
+              src="/pictures/img6.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
           </div>
-          <div className="h-[400px] bg-jet col-span-3 col-start-4 row-start-4">
-            6
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-10">
+            <ImageCarousel
+              src="/pictures/img3.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
           </div>
-          <div className="h-[400px] bg-jet col-span-3 col-start-1 row-start-5">
-            7
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-10 lg:row-start-3">
+            <ImageCarousel
+              src="/pictures/img5.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-4 lg:row-start-4">
+            <ImageCarousel
+              src="/pictures/IMG_0918.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-1 lg:row-start-5">
+            <ImageCarousel
+              src="/pictures/IMG_1402.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-1 lg:row-start-6">
+            <ImageCarousel
+              src="/pictures/IMG_1849.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-10 lg:row-start-6">
+            <ImageCarousel
+              src="/pictures/IMG_1867.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-4 lg:row-start-7">
+            <ImageCarousel
+              src="/pictures/IMG_5501.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-7 lg:row-start-7">
+            <ImageCarousel
+              src="/pictures/DSC00212.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-10 lg:row-start-8">
+            <ImageCarousel
+              src="/pictures/IMG_1868.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-4 lg:row-start-9">
+            <ImageCarousel
+              src="/pictures/IMG_5299.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 lg:col-span-3 lg:col-start-1 lg:row-start-10">
+            <ImageCarousel
+              src="/pictures/img4.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
+          </div>
+          <div className="h-[400px] bg-jet relative col-span-6 col-start-4 lg:col-span-3 lg:col-start-7 lg:row-start-11">
+            <ImageCarousel
+              src="/pictures/DSC09949.webp"
+              alt="project1"
+              title="BNC"
+              desc="Photography"
+            />
           </div>
         </div>
-
-        {/* <div className="grid grid-cols-13 h-screen">
-          <div className="grid col-span-3 grid-rows-12">
-            <div className="row-span-4 bg-jet">car 1</div>
-            <div className="row-span-4 ">car3</div>
-          </div>
-          <div className="grid col-span-3 grid-rows-12">
-            <div className="row-span-4 bg-jet">car3</div>
-            <div className="row-span-4">car2</div>
-            <div className="row-span-4">car 1</div>
-          </div>
-
-          <div className="col-span-1 bg-silver flex-center h-[50%] sticky top-0">
-            <h2 className="rotate-90">projects</h2>
-          </div>
-
-          <div className="grid col-span-3 grid-rows-12">
-            <div className="row-span-4">car2</div>
-            <div className="row-span-4 bg-jet">car 1</div>
-            <div className="row-span-4">car3</div>
-          </div>
-          <div className="grid col-span-3 grid-rows-12">
-            <div className="row-span-4 bg-jet">car3</div>
-            <div className="row-span-4">car2</div>
-            <div className="row-span-4 bg-jet">car 1</div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-13 h-screen">
-          <div className="grid col-span-3 grid-rows-12">
-            <div className="row-span-4">car 1</div>
-            <div className="row-span-4 bg-jet">car2</div>
-            <div className="row-span-4 bg-gold">car3</div>
-          </div>
-          <div className="grid col-span-3 grid-rows-12">
-            <div className="row-span-4 bg-jet">car 1</div>
-            <div className="row-span-4">car2</div>
-            <div className="row-span-4">car3</div>
-          </div>
-
-          <div className="col-span-1 bg-silver flex-center ">
-            <h2 className="rotate-90">projects</h2>
-          </div>
-          <div className="grid col-span-3 grid-rows-12">
-            <div className="row-span-4">car 1</div>
-            <div className="row-span-4">car2</div>
-            <div className="row-span-4">car3</div>
-          </div>
-          <div className="grid col-span-3 grid-rows-12">
-            <div className="row-span-4">car2</div>
-            <div className="row-span-4">car3</div>
-            <div className="row-span-4 bg-jet">car 1</div>
-          </div>
-        </div> */}
       </div>
     </section>
   );

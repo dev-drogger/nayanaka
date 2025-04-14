@@ -25,6 +25,9 @@ import { ScrollControls, Scroll, Html } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import ReduxProvider from "@/state/redux-provider";
 import { Projects } from "./section/projects-section";
+import { NewAbout } from "./section/new-about";
+import Scene3D from "@/components/3d/Scene3D";
+import { Square } from "@/components/3d/scene";
 
 // Dynamically import 3D Background
 const BackgroundShader = dynamic(
@@ -64,7 +67,15 @@ function MainContent() {
     };
 
     const handleScroll = () => {
-      const sections = ["hero", "about", "services", "pricing", "contact"];
+      const sections = [
+        "hero",
+        "new",
+        "about",
+        "services",
+        "projects",
+        "pricing",
+        "contact",
+      ];
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
       for (const section of sections) {
@@ -140,14 +151,24 @@ function MainContent() {
             transition={{ duration: 0.5 }}
             className="h-screen w-full"
           >
+            {/* <Navigation />
+            <Hero />
+            <NewAbout />
+            <About />
+            <Services />
+            <Projects />
+            <Pricing />
+            <Footer /> */}
             <Navigation />
             <Canvas gl={{ antialias: true, alpha: false }} dpr={[1, 2]}>
               <color attach="background" args={["#e5e7eb"]} />
-              <ScrollControls pages={10.03} damping={0.25}>
-                <BackgroundShader />
+              <ScrollControls pages={15.03} damping={0.25}>
+                <Square />
+
                 <Scroll html>
                   <ReduxProvider>
                     <Hero />
+                    <NewAbout />
                     <About />
                     <Services />
                     <Projects />

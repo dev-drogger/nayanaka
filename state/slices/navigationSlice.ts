@@ -19,6 +19,7 @@ const navigationSlice = createSlice({
     },
     setActiveSection: (state, action: PayloadAction<string>) => {
       state.activeSection = action.payload;
+      console.log(action.payload);
     },
   },
 });
