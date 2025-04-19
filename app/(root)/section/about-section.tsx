@@ -21,7 +21,7 @@ export default function About() {
   const y = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
 
   return (
-    <section id="about" ref={containerRef} className=" flex items-center">
+    <section ref={containerRef} className=" flex items-center">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-12 gap-8">
           <div className="col-span-12 md:col-span-5 order-2 md:order-1">

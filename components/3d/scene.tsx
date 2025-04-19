@@ -44,7 +44,7 @@ export function Square() {
   });
 
   return (
-    <mesh ref={meshRef} position={[0, -5, 0]}>
+    <mesh ref={meshRef}>
       <planeGeometry args={[size.width, size.height]} />
       <meshStandardMaterial color="#f472b6" />
     </mesh>

@@ -1,140 +1,57 @@
 "use client";
 
-import * as THREE from "three";
-import { useRef, useState } from "react";
+import { ScrollControls, Scroll, useScroll } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Image, ScrollControls, Scroll, useScroll } from "@react-three/drei";
-import { proxy, useSnapshot } from "valtio";
-import { easing } from "maath";
+import React, { useRef } from "react";
 
-const material = new THREE.LineBasicMaterial({ color: "white" });
-const geometry = new THREE.BufferGeometry().setFromPoints([
-  new THREE.Vector3(0, -0.5, 0),
-  new THREE.Vector3(0, 0.5, 0),
-]);
-const state = proxy({
-  clicked: null,
-  urls: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 5, 7, 8, 2, 4, 9, 6].map(
-    (u) => `/${u}.jpg`
-  ),
-});
+export default function Page() {
+  const { viewport } = useThree();
 
-function Minimap() {
-  const ref = useRef();
-  const scroll = useScroll();
-  const { urls } = useSnapshot(state);
-  const { height } = useThree((state) => state.viewport);
-  useFrame((state, delta) => {
-    ref.current.children.forEach((child, index) => {
-      // Give me a value between 0 and 1
-      //   starting at the position of my item
-      //   ranging across 4 / total length
-      //   make it a sine, so the value goes from 0 to 1 to 0.
-     const x =scroll.
-      const y = scroll.curve(
-        index / urls.length - 1.5 / urls.length,
-        4 / urls.length
-      );
-      easing.damp(child.scale, "y", 0.15 + y / 6, 0.15, delta);
-    });
-  });
   return (
-    <group ref={ref}>
-      {urls.map((_, i) => (
-        <line
-          key={i}
-          geometry={geometry}
-          material={material}
-          position={[i * 0.06 - urls.length * 0.03, -height / 2 + 0.6, 0]}
-        />
-      ))}
-    </group>
+    <Canvas>
+      <ScrollControls pages={3} damping={0.1}>
+        {/* Canvas contents in here will *not* scroll, but receive useScroll! */}
+
+        <Scroll>
+          {/* Canvas contents in here will scroll along */}
+          <Foo position={[0, 0, 0]} />
+          <Foo position={[0, viewport.height, 0]} />
+          <Foo position={[0, viewport.height * 1, 0]} />
+        </Scroll>
+        <Scroll html>
+          {/* DOM contents in here will scroll along */}
+          <h1>html in here (optional)</h1>
+          <h1 style={{ top: "100vh" }}>second page</h1>
+          <h1 style={{ top: "200vh" }}>third page</h1>
+        </Scroll>
+      </ScrollControls>
+    </Canvas>
   );
 }
 
-// function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
-//   const ref = useRef();
-//   const scroll = useScroll();
-//   const { clicked, urls } = useSnapshot(state);
-//   const [hovered, hover] = useState(false);
-//   const click = () => (state.clicked = index === clicked ? null : index);
-//   const over = () => hover(true);
-//   const out = () => hover(false);
-//   useFrame((state, delta) => {
-//     const y = scroll.curve(
-//       index / urls.length - 1.5 / urls.length,
-//       4 / urls.length
-//     );
-//     easing.damp3(
-//       ref.current.scale,
-//       [clicked === index ? 4.7 : scale[0], clicked === index ? 5 : 4 + y, 1],
-//       0.15,
-//       delta
-//     );
-//     ref.current.material.scale[0] = ref.current.scale.x;
-//     ref.current.material.scale[1] = ref.current.scale.y;
-//     if (clicked !== null && index < clicked)
-//       easing.damp(ref.current.position, "x", position[0] - 2, 0.15, delta);
-//     if (clicked !== null && index > clicked)
-//       easing.damp(ref.current.position, "x", position[0] + 2, 0.15, delta);
-//     if (clicked === null || clicked === index)
-//       easing.damp(ref.current.position, "x", position[0], 0.15, delta);
-//     easing.damp(
-//       ref.current.material,
-//       "grayscale",
-//       hovered || clicked === index ? 0 : Math.max(0, 1 - y),
-//       0.15,
-//       delta
-//     );
-//     easing.dampC(
-//       ref.current.material.color,
-//       hovered || clicked === index ? "white" : "#aaa",
-//       hovered ? 0.3 : 0.15,
-//       delta
-//     );
-//   });
-//   return (
-//     <Image
-//       ref={ref}
-//       {...props}
-//       position={position}
-//       scale={scale}
-//       onClick={click}
-//       onPointerOver={over}
-//       onPointerOut={out}
-//       alt="image"
-//     />
-//   );
-// }
+function Foo(props) {
+  const ref = useRef();
+  const data = useScroll();
+  useFrame(() => {
+    // data.offset = current scroll position, between 0 and 1, dampened
+    // data.delta = current delta, between 0 and 1, dampened
 
-// function Items({ w = 0.7, gap = 0.15 }) {
-//   const { urls } = useSnapshot(state);
-//   const { width } = useThree((state) => state.viewport);
-//   const xW = w + gap;
-//   return (
-//     <ScrollControls
-//       horizontal
-//       damping={0.1}
-//       pages={(width - xW + urls.length * xW) / width}
-//     >
-//       <Minimap />
-//       <Scroll>
-//         {
-//           urls.map((url, i) => <Item key={i} index={i} position={[i * xW, 0, 0]} scale={[w, 4, 1]} url={url} />) /* prettier-ignore */
-//         }
-//       </Scroll>
-//     </ScrollControls>
-//   );
-// }
-
-export const page = () => (
-  <>
-  <Canvas
-    gl={{ antialias: false }}
-    dpr={[1, 1.5]}
-    onPointerMissed={() => (state.clicked = null)}
-  >
-    {/* <Items /> */}
-  </Canvas>
-  </>
-);
+    // Will be 0 when the scrollbar is at the starting position,
+    // then increase to 1 until 1 / 3 of the scroll distance is reached
+    const a = data.range(0, 1 / 3);
+    // Will start increasing when 1 / 3 of the scroll distance is reached,
+    // and reach 1 when it reaches 2 / 3rds.
+    const b = data.range(1 / 3, 1 / 3);
+    // Same as above but with a margin of 0.1 on both ends
+    const c = data.range(1 / 3, 1 / 3, 0.1);
+    // Will move between 0-1-0 for the selected range
+    const d = data.curve(1 / 3, 1 / 3);
+    // Same as above, but with a margin of 0.1 on both ends
+    const e = data.curve(1 / 3, 1 / 3, 0.1);
+    // Returns true if the offset is in range and false if it isn't
+    const f = data.visible(2 / 3, 1 / 3);
+    // The visible function can also receive a margin
+    const g = data.visible(2 / 3, 1 / 3, 0.1);
+  });
+  return <mesh ref={ref} {...props} />;
+}

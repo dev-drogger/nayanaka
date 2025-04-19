@@ -28,6 +28,7 @@ import { Projects } from "./section/projects-section";
 import { NewAbout } from "./section/new-about";
 import Scene3D from "@/components/3d/Scene3D";
 import { Square } from "@/components/3d/scene";
+import Items, { App } from "@/components/picture-gallery";
 
 // Dynamically import 3D Background
 const BackgroundShader = dynamic(
@@ -160,10 +161,19 @@ function MainContent() {
             <Pricing />
             <Footer /> */}
             <Navigation />
-            <Canvas gl={{ antialias: true, alpha: false }} dpr={[1, 2]}>
+            <Canvas
+              gl={{
+                antialias: true,
+                alpha: false,
+                stencil: false,
+                depth: false,
+              }}
+              dpr={[1, 2]}
+            >
               <color attach="background" args={["#e5e7eb"]} />
-              <ScrollControls pages={15.03} damping={0.25}>
-                <Square />
+              <ScrollControls pages={15.03} damping={0.25} prepend enabled>
+                {/* <Square />
+                <Items /> */}
 
                 <Scroll html>
                   <ReduxProvider>
