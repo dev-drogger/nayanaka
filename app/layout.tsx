@@ -42,7 +42,7 @@ export default function RootLayout({
         className={`${satoshi.variable} ${grotesk.variable} ${poppins.variable} ${inter.variable} antialiased`}
       >
         <ReduxProvider>
-          <main className="min-h-screen min-w-screen bg-black overflow-hidden">
+          <main className="min-h-screen min-w-screen overflow-hidden">
             {children}
           </main>
         </ReduxProvider>

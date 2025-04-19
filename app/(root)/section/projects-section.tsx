@@ -7,7 +7,7 @@ export const Projects = () => {
   return (
     <section
       id="projects"
-      className="relativeflex-center overflow-hidden bg-black"
+      className="relative flex-center overflow-hidden bg-black"
     >
       <ProjectsSlider />
 

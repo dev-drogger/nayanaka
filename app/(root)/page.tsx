@@ -13,7 +13,7 @@ import { Suspense } from "react";
 
 // Components
 import CustomCursor from "@/components/CustomCursor";
-import LoadingScreen from "../loading";
+import LoadingScreen from "../../components/3d/lo";
 import Navigation from "@/components/navigation";
 import Hero from "./section/hero-section";
 import About from "./section/about-section";
@@ -28,7 +28,8 @@ import { Projects } from "./section/projects-section";
 import { NewAbout } from "./section/new-about";
 import Scene3D from "@/components/3d/Scene3D";
 import { Square } from "@/components/3d/scene";
-import Items, { App } from "@/components/picture-gallery";
+import { Items } from "../projects/page";
+import Carousel from "../projects/page";
 
 // Dynamically import 3D Background
 const BackgroundShader = dynamic(
@@ -171,12 +172,60 @@ function MainContent() {
               dpr={[1, 2]}
             >
               <color attach="background" args={["#e5e7eb"]} />
-              <ScrollControls pages={15.03} damping={0.25} prepend enabled>
-                {/* <Square />
-                <Items /> */}
+              <ScrollControls pages={20} damping={0.25}>
+                {/* <Items /> */}
 
                 <Scroll html>
                   <ReduxProvider>
+                    {/* <h1
+                      style={{
+                        position: "absolute",
+                        top: `100vh`,
+                        right: "20vw",
+                        fontSize: "25em",
+                        transform: `translate3d(0,-100%,0)`,
+                      }}
+                    >
+                      all
+                    </h1>
+                    <h1
+                      style={{
+                        position: "absolute",
+                        top: "180vh",
+                        left: "10vw",
+                      }}
+                    >
+                      hail
+                    </h1>
+                    <h1
+                      style={{
+                        position: "absolute",
+                        top: "260vh",
+                        right: "10vw",
+                      }}
+                    >
+                      thee,
+                    </h1>
+                    <h1
+                      style={{
+                        position: "absolute",
+                        top: "350vh",
+                        left: "10vw",
+                      }}
+                    >
+                      thoth
+                    </h1>
+                    <h1
+                      style={{
+                        position: "absolute",
+                        top: "450vh",
+                        right: "10vw",
+                      }}
+                    >
+                      her
+                      <br />
+                      mes.
+                    </h1> */}
                     <Hero />
                     <NewAbout />
                     <About />
