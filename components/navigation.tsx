@@ -11,9 +11,7 @@ import { Provider } from "react-redux";
 
 function Page() {
   const dispatch = useAppDispatch();
-  const { menuOpen, activeSection } = useAppSelector(
-    (state) => state.navigation
-  );
+  const { menuOpen } = useAppSelector((state) => state.navigation);
 
   const handleCursorEnter = () => {
     dispatch(setCursorType("link"));
@@ -29,7 +27,7 @@ function Page() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
+      <header className="fixed top-0 left-0 right-0 z-100 mix-blend-difference">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -59,7 +57,6 @@ function Page() {
           <div className="hidden lg:flex space-x-8">
             {[
               "hero",
-              "new",
               "about",
               "services",
               "projects",
@@ -69,20 +66,12 @@ function Page() {
               <motion.a
                 key={index}
                 href={`#${section}`}
-                className={`text-lg font-bold uppercase text-white tracking-widest ${
-                  activeSection === section ? "opacity-100" : "opacity-50"
-                }`}
+                className={`text-lg font-bold uppercase text-white tracking-widest`}
                 onMouseEnter={handleCursorEnter}
                 onMouseLeave={handleCursorLeave}
                 whileHover={{ scale: 1.1 }}
-                animate={{
-                  y: activeSection === section ? -5 : 0,
-                  opacity: activeSection === section ? 1 : 0.5,
-                }}
               >
-                {section === "hero"
-                  ? "Home"
-                  : section.charAt(0).toUpperCase() + section.slice(1)}
+                {section.toUpperCase()}
               </motion.a>
             ))}
           </div>
@@ -117,6 +106,7 @@ function Page() {
                   { name: "Home", href: "#hero" },
                   { name: "About", href: "#about" },
                   { name: "Services", href: "#services" },
+                  { name: "Projects", href: "#projects" },
                   { name: "Pricing", href: "#pricing" },
                   { name: "Contact", href: "#contact" },
                 ].map((item, index) => (
@@ -161,7 +151,7 @@ function Page() {
   );
 }
 
-export default function NAvigation() {
+export default function Navigation() {
   return (
     <Provider store={store}>
       <Page />

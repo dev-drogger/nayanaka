@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +10,6 @@ import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
 import { BackgroundPaths } from "@/components/background-paths";
 
-// Dynamically import 3D components
 const FloatingObjects = dynamic(
   () => import("@/components/3d/FloatingObjects"),
   {
@@ -21,31 +19,15 @@ const FloatingObjects = dynamic(
 
 export default function Hero() {
   const dispatch = useAppDispatch();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <BackgroundPaths>
-      <section id="hero" ref={containerRef} className=" flex items-center">
+      <section id="hero" className=" flex items-center">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Suspense fallback={null}>
             <FloatingObjects />
           </Suspense>
         </div>
-
-        {/* <motion.div className="absolute inset-0 z-0" style={{ y, opacity }}>
-        <div className="h-full w-full flex items-center justify-center">
-          <div className="text-[40vw] font-bold text-white/90 leading-none tracking-tighter">
-            N
-          </div>
-        </div>
-      </motion.div> */}
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-12 gap-4 z-50">

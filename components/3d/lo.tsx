@@ -1,14 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import { TextEffect } from "@/components/text-effect";
-
-// Dynamically import 3D component to avoid SSR issues
-const Scene3D = dynamic(() => import("@/components/3d/Scene3D"), {
-  ssr: false,
-});
 
 export default function LoadingScreen() {
   return (

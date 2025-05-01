@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
 
@@ -78,35 +77,6 @@ export default function Pricing() {
             ))}
           </div>
         </div>
-
-        {/* <div className=" grid grid-cols-12 items-center justify-between">
-          <div className="col-span-12 lg:col-span-3">
-            <p className="mb-6 text-4xl text-black font-medium">
-              Digital Invitation
-            </p>
-          </div>
-
-          <div className="col-span-12 lg:col-span-9 grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {PRICING_TIERS.map((tier) => (
-              <motion.div
-                key={tier.name}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10 }}
-                onMouseEnter={() => dispatch(setCursorType("text"))}
-                onMouseLeave={() => dispatch(setCursorType("default"))}
-              >
-                <PricingCard
-                  key={tier.name}
-                  tier={tier}
-                  paymentFrequency={selectedFrequency}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div> */}
       </div>
     </section>
   );

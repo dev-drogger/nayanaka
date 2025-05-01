@@ -133,7 +133,17 @@ function Page() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
-        <InfiniteSlider reverse className="text-8xl text-black w-full">
+        <InfiniteSlider
+          reverse
+          duration={60}
+          className="text-8xl text-black w-full"
+        >
+          <div>なやなか -</div>
+          <div>なやなか -</div>
+          <div>なやなか -</div>
+          <div>なやなか -</div>
+          <div>なやなか -</div>
+          <div>なやなか -</div>
           <div>なやなか -</div>
           <div>なやなか -</div>
           <div>なやなか -</div>
