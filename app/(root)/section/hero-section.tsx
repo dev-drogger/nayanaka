@@ -48,7 +48,7 @@ export default function Hero() {
       </motion.div> */}
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-12 gap-4">
+          <div className="grid grid-cols-12 gap-4 z-50">
             <div className="col-span-12 md:col-span-6 flex-center">
               <motion.div
                 className="mb-8"

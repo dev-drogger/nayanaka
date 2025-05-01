@@ -58,7 +58,7 @@ function Item({ url, scale, ...props }: ImageProps) {
   );
 }
 
-function Items() {
+export function Items() {
   const { width: w, height: h } = useThree((state) => state.viewport);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isTablet = useMediaQuery("(max-width: 1024px)");
@@ -75,14 +75,14 @@ function Items() {
             ? [3, 3, 3]
             : [(w / 3) * scaleFactor, (w / 3) * scaleFactor, 1]
         }
-        position={isMobile ? [0, 1, 0] : [-w / 6, 0, 0]}
+        position={isMobile ? [0, 1, 0] : [-w / 6, -27, 0]}
       />
       <Item
         url="/pictures/DSC09892.webp"
         scale={
           isMobile ? [2, 2, 2] : [2 * scaleFactor, (w / 3) * scaleFactor, 1]
         }
-        position={isMobile ? [-1, -h * 0.7, 0] : [w / 30, -h * 1, 0]}
+        position={isMobile ? [-1, -h * 0.7, 0] : [w / 30, -h * 1 - 27, 0]}
       />
       <Item
         url="/pictures/img6.webp"
@@ -91,7 +91,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 3) * scaleFactor, (w / 5) * scaleFactor, 1]
         }
-        position={isMobile ? [1, -h * 0.7, 0] : [-w / 4, -h * 1, 0]}
+        position={isMobile ? [1, -h * 0.7, 0] : [-w / 4, -h * 1 - 27, 0]}
       />
       <Item
         url="/pictures/img3.webp"
@@ -100,7 +100,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 5) * scaleFactor, (w / 5) * scaleFactor, 1]
         }
-        position={isMobile ? [-1, -h * 1.3, 0] : [w / 4, -h * 1.2, 0]}
+        position={isMobile ? [-1, -h * 1.3, 0] : [w / 4, -h * 1.2 - 27, 0]}
       />
       <Item
         url="/pictures/img5.webp"
@@ -109,7 +109,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 5) * scaleFactor, (w / 5) * scaleFactor, 1]
         }
-        position={isMobile ? [1, -h * 1.3, 0] : [w / 10, -h * 1.75, 0]}
+        position={isMobile ? [1, -h * 1.3, 0] : [w / 10, -h * 1.75 - 27, 0]}
       />
       <Item
         url="/pictures/IMG_0918.webp"
@@ -118,7 +118,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 3) * scaleFactor, (w / 3) * scaleFactor, 1]
         }
-        position={isMobile ? [-1, -h * 1.8, 0] : [-w / 4, -h * 2, 0]}
+        position={isMobile ? [-1, -h * 1.8, 0] : [-w / 4, -h * 2 - 27, 0]}
       />
       <Item
         url="/pictures/IMG_1402.webp"
@@ -127,7 +127,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 3) * scaleFactor, (w / 5) * scaleFactor, 1]
         }
-        position={isMobile ? [1, -h * 1.8, 0] : [-w / 4, -h * 2.6, 0]}
+        position={isMobile ? [1, -h * 1.8, 0] : [-w / 4, -h * 2.6 - 27, 0]}
       />
       <Item
         url="/pictures/IMG_1849.webp"
@@ -136,7 +136,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 2) * scaleFactor, (w / 2) * scaleFactor, 1]
         }
-        position={isMobile ? [-1, -h * 2.3, 0] : [w / 4, -h * 3.1, 0]}
+        position={isMobile ? [-1, -h * 2.3, 0] : [w / 4.5, -h * 3.1 - 27, 0]}
       />
       <Item
         url="/pictures/DSC00212.webp"
@@ -145,7 +145,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 2.5) * scaleFactor, (w / 2) * scaleFactor, 1]
         }
-        position={isMobile ? [1, -h * 2.3, 0] : [-w / 6, -h * 4.1, 0]}
+        position={isMobile ? [1, -h * 2.3, 0] : [-w / 6, -h * 4.1 - 27, 0]}
       />
       <Item
         url="/pictures/IMG_5501.webp"
@@ -154,7 +154,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 3) * scaleFactor, (w / 3) * scaleFactor, 1]
         }
-        position={isMobile ? [-1, -h * 2.8, 0] : [-w / 6, -h * 4.9, 0]}
+        position={isMobile ? [-1, -h * 2.8, 0] : [-w / 6, -h * 4.9 - 27, 0]}
       />
       <Item
         url="/pictures/IMG_1867.webp"
@@ -163,7 +163,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 3) * scaleFactor, (w / 4) * scaleFactor, 1]
         }
-        position={isMobile ? [1, -h * 2.8, 0] : [w / 3.5, -h * 5.1, 0]}
+        position={isMobile ? [1, -h * 2.8, 0] : [w / 3.5, -h * 5.1 - 27, 0]}
       />
       <Item
         url="/pictures/IMG_1868.webp"
@@ -172,7 +172,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 3) * scaleFactor, (w / 5) * scaleFactor, 1]
         }
-        position={isMobile ? [-1, -h * 3.3, 0] : [-w / 4, -h * 5.4, 0]}
+        position={isMobile ? [-1, -h * 3.3, 0] : [-w / 4, -h * 5.4 - 27, 0]}
       />
       <Item
         url="/pictures/IMG_5299.webp"
@@ -181,7 +181,7 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 3) * scaleFactor, (w / 3) * scaleFactor, 1]
         }
-        position={isMobile ? [1, -h * 3.3, 0] : [-w / 6, -h * 5.9, 0]}
+        position={isMobile ? [1, -h * 3.3, 0] : [-w / 6, -h * 5.9 - 27, 0]}
       />
       <Item
         url="/pictures/DSC09949.webp"
@@ -190,27 +190,27 @@ function Items() {
             ? [2, 2, 2]
             : [(w / 3) * scaleFactor, (w / 3) * scaleFactor, 1]
         }
-        position={isMobile ? [0, -h * 3.8, 0] : [w / 4, -h * 6, 0]}
+        position={isMobile ? [0, -h * 3.8, 0] : [w / 4, -h * 6 - 27, 0]}
       />
     </Scroll>
   );
 }
 
-function ResponsiveText() {
+export function ResponsiveText() {
   const { width: w } = useThree((state) => state.viewport);
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isTablet = useMediaQuery("(max-width: 1024px)");
 
   // Adjust font sizes based on device size
   const titleSize = isMobile ? "4em" : isTablet ? "8em" : "12em";
-  const headingSize = isMobile ? "3em" : isTablet ? "6em" : "10em";
+  const headingSize = isMobile ? "3em" : isTablet ? "6em" : "13em";
 
   return (
-    <Scroll html style={{ width: "100%" }}>
+    <>
       <h1
         style={{
           position: "absolute",
-          top: `${isMobile ? 70 : 90}vh`,
+          top: `${isMobile ? 70 * 7.9 : 90 * 4.55}vh`,
           right: isMobile ? "50%" : "5vw",
           transform: isMobile
             ? "translate3d(50%,-100%,0)"
@@ -232,7 +232,7 @@ function ResponsiveText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 145 : 180}vh`,
+          top: `${isMobile ? 145 * 7.9 : 180 * 3}vh`,
           left: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translateX(-50%)" : "none",
           textAlign: isMobile ? "center" : "left",
@@ -247,7 +247,7 @@ function ResponsiveText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 200 : 260}vh`,
+          top: `${isMobile ? 200 * 7.9 : 260 * 2.4}vh`,
           right: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translateX(50%)" : "none",
           textAlign: isMobile ? "center" : "right",
@@ -262,7 +262,7 @@ function ResponsiveText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 250 : 350}vh`,
+          top: `${isMobile ? 250 * 7.9 : 350 * 2.03}vh`,
           left: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translateX(-50%)" : "none",
           textAlign: isMobile ? "center" : "left",
@@ -277,10 +277,10 @@ function ResponsiveText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 300 : 450}vh`,
+          top: `${isMobile ? 300 * 7.9 : 450 * 1.76}vh`,
           right: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translateX(50%)" : "none",
-          textAlign: isMobile ? "center" : "right",
+          textAlign: isMobile ? "center" : "left",
         }}
       >
         {isMobile ? (
@@ -293,7 +293,7 @@ function ResponsiveText() {
           </>
         )}
       </h1>
-    </Scroll>
+    </>
   );
 }
 

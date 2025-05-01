@@ -28,7 +28,7 @@ import { Projects } from "./section/projects-section";
 import { NewAbout } from "./section/new-about";
 import Scene3D from "@/components/3d/Scene3D";
 import { Square } from "@/components/3d/scene";
-import { Items } from "../projects/page";
+import { Items, ResponsiveText } from "../projects/page";
 import Carousel from "../projects/page";
 
 // Dynamically import 3D Background
@@ -172,65 +172,16 @@ function MainContent() {
               dpr={[1, 2]}
             >
               <color attach="background" args={["#e5e7eb"]} />
-              <ScrollControls pages={20} damping={0.25}>
-                {/* <Items /> */}
-
+              <ScrollControls pages={12.4} damping={0.25}>
+                <Items></Items>
                 <Scroll html>
                   <ReduxProvider>
-                    {/* <h1
-                      style={{
-                        position: "absolute",
-                        top: `100vh`,
-                        right: "20vw",
-                        fontSize: "25em",
-                        transform: `translate3d(0,-100%,0)`,
-                      }}
-                    >
-                      all
-                    </h1>
-                    <h1
-                      style={{
-                        position: "absolute",
-                        top: "180vh",
-                        left: "10vw",
-                      }}
-                    >
-                      hail
-                    </h1>
-                    <h1
-                      style={{
-                        position: "absolute",
-                        top: "260vh",
-                        right: "10vw",
-                      }}
-                    >
-                      thee,
-                    </h1>
-                    <h1
-                      style={{
-                        position: "absolute",
-                        top: "350vh",
-                        left: "10vw",
-                      }}
-                    >
-                      thoth
-                    </h1>
-                    <h1
-                      style={{
-                        position: "absolute",
-                        top: "450vh",
-                        right: "10vw",
-                      }}
-                    >
-                      her
-                      <br />
-                      mes.
-                    </h1> */}
                     <Hero />
                     <NewAbout />
-                    <About />
+                    {/* <About /> */}
                     <Services />
                     <Projects />
+                    <ResponsiveText />
                     <Pricing />
                     <Footer />
                   </ReduxProvider>

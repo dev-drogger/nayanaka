@@ -21,7 +21,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative  min-h-screen bg-jet py-32 rounded-[3rem] lg:rounded-[5rem] w-full mb-12 md:mb-0"
+      className="relative  min-h-screen bg-jet py-32 rounded-bl[3rem] rounded-br[3rem] lg:rounded-bl-[5rem] lg:rounded-br-[5rem] w-full mb-12 md:mb-0"
     >
       <div className="container mx-auto px-4">
         <motion.div

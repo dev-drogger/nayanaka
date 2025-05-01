@@ -7,9 +7,9 @@ export const Projects = () => {
   return (
     <section
       id="projects"
-      className="relative flex-center overflow-hidden bg-black"
+      className="relative flex-center overflow-hidden h-[700vh]"
     >
-      <ProjectsSlider />
+      {/* <ProjectsSlider />
 
       <div className="container mx-auto px-8 z-10">
         <div className="grid grid-cols-12 lg:grid-rows-11 gap-1">
@@ -134,7 +134,7 @@ export const Projects = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };
