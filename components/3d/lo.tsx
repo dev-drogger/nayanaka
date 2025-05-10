@@ -6,10 +6,11 @@ import { TextEffect } from "@/components/text-effect";
 export default function LoadingScreen() {
   return (
     <motion.div
-      className="h-screen z-50 w-full flex flex-col items-center justify-center bg-black"
+      className="h-screen z-100 w-full flex flex-col items-center justify-center bg-jet"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 1, ease: "easeOut" }}
     >
       <div className="relative h-full w-full">
         {/* <Suspense fallback={null}>

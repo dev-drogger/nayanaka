@@ -42,7 +42,7 @@ function FloatingPaths({ position }: { position: number }) {
               duration: 20 + Math.random() * 10,
               repeat: Number.POSITIVE_INFINITY,
               ease: "linear",
-              delay: 2,
+              delay: 5.5,
             }}
           />
         ))}
@@ -54,7 +54,7 @@ function FloatingPaths({ position }: { position: number }) {
 export function BackgroundPaths({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative min-h-screen w-screen flex items-center justify-center overflow-hidden">
-      <div className=" absolute -bottom-60 inset-0 w-[200vw] md:w-screen bg-jet transform scale-y-[-1]">
+      <div className=" absolute -bottom-60 inset-0 w-[200vw] md:w-screen transform scale-y-[-1]">
         <FloatingPaths position={1} />
         <div className="hidden md:block">
           <FloatingPaths position={-1} />

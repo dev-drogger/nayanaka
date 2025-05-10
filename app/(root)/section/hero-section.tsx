@@ -23,11 +23,17 @@ export default function Hero() {
   return (
     <BackgroundPaths>
       <section id="hero" className=" flex items-center">
-        <div className="absolute inset-0 z-0 pointer-events-none">
+        <motion.div
+          className="absolute inset-0 z-0 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 5 }}
+        >
           <Suspense fallback={null}>
             <FloatingObjects />
           </Suspense>
-        </div>
+        </motion.div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-12 gap-4 z-50">
@@ -37,16 +43,16 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.8, delay: 4 }}
               >
                 <motion.div
                   className="mt-4 pt-4"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
+                  transition={{ duration: 0.8, delay: 4.2 }}
                 >
-                  <p className="text-4xl md:text-6xl uppercase font-bold">
+                  <p className="text-4xl md:text-6xl uppercase font-bold text-black">
                     blend art and <br />
                     technology <br />
                     into digital aesthetic
@@ -61,7 +67,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 4.6 }}
               >
                 <div
                   className="aspect-square overflow-hidden"
@@ -81,7 +87,7 @@ export default function Hero() {
                   initial={{ x: 100, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
+                  transition={{ duration: 0.8, delay: 4.6 }}
                   onMouseEnter={() => dispatch(setCursorType("text"))}
                   onMouseLeave={() => dispatch(setCursorType("default"))}
                 >
@@ -104,6 +110,9 @@ export default function Hero() {
             </div>
           </div>
         </div>
+
+        <div className="bg-jet w-full absolute bottom-0 h-[10vh] md:h-[12vh]"></div>
+        <div className="bg-jet w-full absolute top-0 h-[10vh] md:h-[12vh]"></div>
       </section>
     </BackgroundPaths>
   );
