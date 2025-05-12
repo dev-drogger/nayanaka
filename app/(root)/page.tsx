@@ -159,7 +159,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
         <Navigation />
         <OptimizedCanvas className="main-canvas">
           <color attach="background" args={["#e5e7eb"]} />
-          <ScrollControls pages={12.4} damping={1}>
+          <ScrollControls pages={12.27} damping={1}>
             <ProjectCarousel />
             <Scroll html>
               <ReduxProvider>{children}</ReduxProvider>

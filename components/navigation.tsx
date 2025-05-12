@@ -27,7 +27,7 @@ function Page() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-49 mix-blend-difference">
+      <header className="top-0 left-0 right-0 z-49 mix-blend-difference">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
