@@ -23,6 +23,7 @@ import OptimizedCanvas from "@/components/optimized-canvas";
 import ReduxProvider from "@/state/redux-provider";
 
 import { ProjectCarousel } from "@/components/projects/project-carousel";
+import { Square } from "@/app/scene/page";
 
 function MainContent({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
@@ -160,6 +161,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
         <OptimizedCanvas className="main-canvas">
           <color attach="background" args={["#e5e7eb"]} />
           <ScrollControls pages={12.27} damping={1}>
+            <Square />
             <ProjectCarousel />
             <Scroll html>
               <ReduxProvider>{children}</ReduxProvider>
