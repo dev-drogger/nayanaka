@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import cursorReducer from "./slices/cursorSlice";
 import navigationReducer from "./slices/navigationSlice";
 import loadingReducer from "./slices/loadingSlice";
+import viewReducer from "./slices/viewSlice";
 
 export const store = configureStore({
   reducer: {
     cursor: cursorReducer,
     navigation: navigationReducer,
     loading: loadingReducer,
+    view: viewReducer,
   },
 });
 

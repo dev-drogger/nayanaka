@@ -1,14 +1,11 @@
 import { TextEffect } from "@/components/text-effect";
-import { motion, useInView } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
-import { useThree, useFrame } from "@react-three/fiber";
-import { useScroll } from "@react-three/drei";
-import type * as THREE from "three";
-import { easing } from "maath";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import { useAppSelector } from "@/hooks/redux-hooks";
 
 export default function About() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+  const { isInView } = useAppSelector((state) => state.view);
 
   // Calculate the initial size to fill the viewport
 
@@ -23,7 +20,7 @@ export default function About() {
             <TextEffect
               per="line"
               preset="slide"
-              trigger={inView}
+              trigger={isInView}
               delay={2.5}
               className="text-2xl md:text-5xl text-white text-justify"
               variants={{

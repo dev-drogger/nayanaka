@@ -2,6 +2,7 @@
 
 import { type ReactNode, useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
+import * as THREE from "three";
 
 interface OptimizedCanvasProps {
   children: ReactNode;
@@ -63,6 +64,7 @@ export default function OptimizedCanvas({
         stencil: false,
         depth: false,
         powerPreference: "high-performance",
+        toneMapping: THREE.NoToneMapping,
       }}
       dpr={dpr}
       frameloop={isVisible ? "demand" : "never"}
@@ -70,6 +72,7 @@ export default function OptimizedCanvas({
       style={{
         willChange: "transform",
         transform: "translateZ(0)",
+        pointerEvents: "none",
       }}
     >
       {children}
