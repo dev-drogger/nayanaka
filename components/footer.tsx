@@ -22,7 +22,7 @@ function Page() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Let's
+              Let&apos;s
               <br />
               Connect
             </motion.h2>

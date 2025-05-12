@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navigation from "@/components/navigation";
 import ReduxProvider from "@/state/redux-provider";
-import Footer from "@/components/footer";
 
 const poppins = Poppins({
   variable: "--font-poppins",

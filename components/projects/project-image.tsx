@@ -12,17 +12,20 @@ type ImageProps = {
 export default function ProjectImage({ url, scale, ...props }: ImageProps) {
   const visible = useRef(false);
   const [hovered, hover] = useState(false);
-  const ref = useIntersect((isVisible) => (visible.current = isVisible));
+  const ref = useIntersect<THREE.Mesh>(
+    (isVisible) => (visible.current = isVisible)
+  );
   const { height } = useThree((state) => state.viewport);
 
   useFrame((state, delta) => {
-    const material = ref.current.material;
     ref.current.position.y = THREE.MathUtils.damp(
       ref.current.position.y,
       visible.current ? 0 : -height / 2 + 1,
       4,
       delta
     );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const material = (ref.current as THREE.Mesh).material as any;
     material.zoom = THREE.MathUtils.damp(
       material.zoom,
       visible.current ? 1 : 1.5,
@@ -38,7 +41,7 @@ export default function ProjectImage({ url, scale, ...props }: ImageProps) {
   });
 
   return (
-    <group {...props}>
+    <group {...props} position={props.position as [number, number, number]}>
       <Image
         ref={ref}
         onPointerOver={() => hover(true)}
@@ -49,7 +52,6 @@ export default function ProjectImage({ url, scale, ...props }: ImageProps) {
             : (scale as [number, number])
         }
         url={url}
-        alt="image"
       />
     </group>
   );

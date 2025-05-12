@@ -8,8 +8,8 @@ export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorTextRef = useRef<HTMLDivElement>(null);
   const { type, mouseSpeed } = useAppSelector((state) => state.cursor);
-  const requestRef = useRef<number>();
-  const previousTimeRef = useRef<number>();
+  const requestRef = useRef<number | null>(null);
+  const previousTimeRef = useRef<number | null>(null);
   const mousePosition = useRef({ x: 0, y: 0 });
   const cursorPosition = useRef({ x: 0, y: 0 });
 
