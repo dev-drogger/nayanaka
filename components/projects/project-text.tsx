@@ -13,8 +13,8 @@ export function ProjectText() {
       <h1
         style={{
           position: "absolute",
-          top: `${isMobile ? 70 * 7.9 : 90 * 4.55}vh`,
-          right: isMobile ? "50%" : "5vw",
+          top: `${isMobile ? 60 * 8.5 : 90 * 4.55}vh`,
+          right: isMobile ? "50%" : "9vw",
           transform: isMobile
             ? "translate3d(50%,-100%,0)"
             : "translate3d(0,-100%,0)",
@@ -30,14 +30,15 @@ export function ProjectText() {
       </h1>
       <h1
         style={{
+          position: "absolute",
+          top: `${isMobile ? 70 * 8.4 : 180 * 3}vh`,
+          left: isMobile ? "50%" : "10vw",
+          transform: isMobile ? "translate3d(-50%,-100%,0)" : "none",
           fontSize: headingSize,
           color: "black",
           fontWeight: "normal",
           letterSpacing: "-0.05em",
-          position: "absolute",
-          top: `${isMobile ? 145 * 7.9 : 180 * 3}vh`,
-          left: isMobile ? "50%" : "10vw",
-          transform: isMobile ? "translateX(-50%)" : "none",
+          zIndex: 0,
           textAlign: isMobile ? "center" : "left",
         }}
       >
@@ -46,13 +47,13 @@ export function ProjectText() {
       <h1
         style={{
           fontSize: headingSize,
+          top: `${isMobile ? 70 * 9.12 : 260 * 2.4}vh`,
           color: "black",
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 200 * 7.9 : 260 * 2.4}vh`,
           right: isMobile ? "50%" : "10vw",
-          transform: isMobile ? "translateX(50%)" : "none",
+          transform: isMobile ? "translate3d(50%,-100%,0)" : "none",
           textAlign: isMobile ? "center" : "right",
         }}
       >
@@ -65,13 +66,13 @@ export function ProjectText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 250 * 7.9 : 350 * 2.03}vh`,
+          top: `${isMobile ? 70 * 9.83 : 350 * 2.03}vh`,
           left: isMobile ? "50%" : "10vw",
-          transform: isMobile ? "translateX(-50%)" : "none",
+          transform: isMobile ? "translate3d(-50%,-100%,0)" : "none",
           textAlign: isMobile ? "center" : "left",
         }}
       >
-        thoth
+        i trust
       </h1>
       <h1
         style={{
@@ -80,21 +81,43 @@ export function ProjectText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 300 * 7.9 : 450 * 1.76}vh`,
+          top: `${isMobile ? 70 * 10.45 : 450 * 1.78}vh`,
           right: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translateX(50%)" : "none",
           textAlign: isMobile ? "center" : "left",
         }}
       >
-        {isMobile ? (
-          "her mes."
-        ) : (
-          <>
-            her
-            <br />
-            mes.
-          </>
-        )}
+        thou
+      </h1>
+      <h1
+        style={{
+          fontSize: headingSize,
+          color: "black",
+          fontWeight: "normal",
+          letterSpacing: "-0.05em",
+          position: "absolute",
+          top: `${isMobile ? 70 * 11.26 : 450 * 2.1}vh`,
+          right: isMobile ? "50%" : "10vw",
+          transform: isMobile ? "translate3d(50%,-100%,0)" : "none",
+          textAlign: isMobile ? "center" : "left",
+        }}
+      >
+        shalt
+      </h1>
+      <h1
+        style={{
+          fontSize: headingSize,
+          color: "black",
+          fontWeight: "normal",
+          letterSpacing: "-0.05em",
+          position: "absolute",
+          top: `${isMobile ? 70 * 11.97 : 450 * 2.27}vh`,
+          left: isMobile ? "50%" : "10vw",
+          transform: isMobile ? "translate3d(-50%,-100%,0)" : "none",
+          textAlign: isMobile ? "center" : "left",
+        }}
+      >
+        enjoy.
       </h1>
     </>
   );

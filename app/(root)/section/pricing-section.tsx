@@ -20,9 +20,9 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative  min-h-screen bg-jet py-32 rounded-bl[3rem] rounded-br[3rem] lg:rounded-bl-[5rem] lg:rounded-br-[5rem] w-full mb-12 md:mb-0"
+      className="relative w-screen bg-jet rounded-bl-[3rem] rounded-br-[3rem] lg:rounded-bl-[5rem] lg:rounded-br-[5rem] mb-12 md:mb-0"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto p-4 w-full">
         <motion.div
           className=" mb-16 text-white"
           initial={{ opacity: 0, y: 50 }}
@@ -38,8 +38,8 @@ export default function Pricing() {
           </p>
         </motion.div>
 
-        <div className=" grid grid-cols-12 mb-10 items-center justify-between gap-10 lg:gap-0">
-          <div className="col-span-12 lg:col-span-3">
+        <div className="flex flex-col lg:flex-row mb-10 items-center justify-between gap-10 lg:gap-0 overflow-hidden">
+          <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-start">
             <p className="mb-6 text-4xl text-white font-medium">
               Web Development
             </p>
@@ -56,26 +56,24 @@ export default function Pricing() {
             </div>
           </div>
 
-          <div className="col-span-12 lg:col-span-9 grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -10 }}
+            onMouseEnter={() => dispatch(setCursorType("text"))}
+            onMouseLeave={() => dispatch(setCursorType("default"))}
+            className="grid bg-red-500  col-span-10 lg:col-span-9 grid-cols-2 col-start-2 lg:grid-cols-4 gap-2 lg:gap-4 overflow-hidden"
+          >
             {PRICING_TIERS.map((tier) => (
-              <motion.div
+              <PricingCard
                 key={tier.name}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10 }}
-                onMouseEnter={() => dispatch(setCursorType("text"))}
-                onMouseLeave={() => dispatch(setCursorType("default"))}
-              >
-                <PricingCard
-                  key={tier.name}
-                  tier={tier}
-                  paymentFrequency={selectedFrequency}
-                />
-              </motion.div>
+                tier={tier}
+                paymentFrequency={selectedFrequency}
+              />
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useMemo } from "react";
+import { useAppSelector } from "@/hooks/redux-hooks";
 
 function FloatingPaths({ position }: { position: number }) {
+  const { isContentVisible } = useAppSelector((state) => state.contentVisible);
+
   const paths = useMemo(() => {
     return Array.from({ length: 30 }, (_, i) => ({
       id: i,
@@ -19,6 +22,18 @@ function FloatingPaths({ position }: { position: number }) {
     }));
   }, [position]);
 
+  const pathVariants = useMemo(
+    () => ({
+      initial: { pathLength: 0.3, opacity: 0.6 },
+      animate: {
+        pathLength: 1,
+        opacity: [0.3, 0.6, 0.3],
+        pathOffset: [0, 1, 0],
+      },
+    }),
+    []
+  );
+
   return (
     <motion.div
       className="absolute inset-0 pointer-events-none"
@@ -32,17 +47,14 @@ function FloatingPaths({ position }: { position: number }) {
             stroke="#cfae70"
             strokeWidth={path.width}
             strokeOpacity={0.8 + path.id * 0.03}
-            initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={{
-              pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
-            }}
+            initial="initial"
+            animate={isContentVisible ? "animate" : "initial"}
+            variants={pathVariants}
             transition={{
               duration: 20 + Math.random() * 10,
               repeat: Number.POSITIVE_INFINITY,
               ease: "linear",
-              delay: 5.5,
+              delay: 0.8,
             }}
           />
         ))}
@@ -54,9 +66,9 @@ function FloatingPaths({ position }: { position: number }) {
 export function BackgroundPaths({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative min-h-screen w-screen flex items-center justify-center overflow-hidden">
-      <div className=" absolute -bottom-60 inset-0 w-[200vw] md:w-screen transform scale-y-[-1]">
+      <div className=" absolute -bottom-60 inset-0 w-[200vw] md:w-screen scale-200 transform scale-y-[-1]">
         <FloatingPaths position={1} />
-        <div className="hidden md:block">
+        <div className="md:block">
           <FloatingPaths position={-1} />
         </div>
       </div>

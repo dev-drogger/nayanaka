@@ -3,13 +3,13 @@
 import { motion } from "framer-motion";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
-import { services } from "@/constant";
+import { SERVICES } from "@/constant";
 
 export default function Services() {
   const dispatch = useAppDispatch();
 
   return (
-    <section id="services" className="bg-jet">
+    <section id="services" className="bg-jet w-screen">
       <div className="container mx-auto px-4">
         <motion.div
           className="mb-16"
@@ -26,7 +26,7 @@ export default function Services() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {services.map((service, index) => (
+          {SERVICES.map((service, index) => (
             <motion.div
               key={index}
               className="border-t border-white/20 pt-8 pb-16"

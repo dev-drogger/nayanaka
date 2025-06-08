@@ -72,7 +72,6 @@ export default function OptimizedCanvas({
       style={{
         willChange: "transform",
         transform: "translateZ(0)",
-        pointerEvents: "none",
       }}
     >
       {children}

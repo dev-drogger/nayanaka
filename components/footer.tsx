@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
-import { InfiniteSlider } from "./infinite-slider";
+import { InfiniteSlider } from "./ui/infinite-slider";
 import { store } from "@/state/redux";
 import { Provider } from "react-redux";
 
@@ -37,7 +37,7 @@ function Page() {
               how we can help bring your vision to life.
             </motion.p>
           </div>
-          <div className="space-y-8 col-span-1 ">
+          <div className="space-y-4 md:space-y-8 col-span-1 ">
             <motion.div
               className="border-t border-black/20 pt-4"
               initial={{ opacity: 0, y: 20 }}
@@ -47,7 +47,7 @@ function Page() {
               onMouseEnter={() => dispatch(setCursorType("text"))}
               onMouseLeave={() => dispatch(setCursorType("default"))}
             >
-              <p className="text-sm text-white/60">Email</p>
+              <p className="text-sm text-black">Email</p>
               <a
                 href="mailto:hello@nayanaka.com"
                 className="text-xl hover:underline"
@@ -66,7 +66,7 @@ function Page() {
               onMouseEnter={() => dispatch(setCursorType("text"))}
               onMouseLeave={() => dispatch(setCursorType("default"))}
             >
-              <p className="text-sm text-white/60">Phone</p>
+              <p className="text-sm text-black">Phone</p>
               <a
                 href="tel:+1234567890"
                 className="text-xl hover:underline"
@@ -85,7 +85,7 @@ function Page() {
               onMouseEnter={() => dispatch(setCursorType("text"))}
               onMouseLeave={() => dispatch(setCursorType("default"))}
             >
-              <p className="text-sm text-white/60">Follow</p>
+              <p className="text-sm text-black">Follow</p>
               <div className="flex gap-4 mt-2">
                 {["Instagram", "Twitter", "LinkedIn"].map((social, index) => (
                   <a

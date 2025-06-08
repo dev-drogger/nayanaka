@@ -1,4 +1,4 @@
-export const services = [
+export const SERVICES = [
   {
     title: "Web Development",
     description:
@@ -184,4 +184,57 @@ export const INVITATION_PRICING_TIERS = [
     cta: "Contact Us",
     highlighted: true,
   },
+];
+
+export const IMAGE_URLS = [
+  "/pictures/DSC00128.webp",
+  "/pictures/DSC09892.webp",
+  "/pictures/img6.webp",
+  "/pictures/img3.webp",
+  "/pictures/img5.webp",
+  "/pictures/IMG_0918.webp",
+  "/pictures/IMG_1402.webp",
+  "/pictures/IMG_1849.webp",
+  "/pictures/DSC00212.webp",
+  "/pictures/IMG_5501.webp",
+  "/pictures/IMG_1867.webp",
+  "/pictures/IMG_1868.webp",
+  "/pictures/IMG_5299.webp",
+  "/pictures/DSC09949.webp",
+];
+
+// Desktop layout configuration (scale ratios and position multipliers)
+export const DESKTOP_CONFIG = [
+  { scaleX: 1 / 3, scaleY: 1 / 3, posX: -1 / 6, posY: -27 },
+  { scaleX: 1 / 6.5, scaleY: 1 / 3, posX: 1 / 30, posY: -1, offsetY: -27 },
+  { scaleX: 1 / 3, scaleY: 1 / 5, posX: -1 / 4, posY: -1, offsetY: -27 },
+  { scaleX: 1 / 5, scaleY: 1 / 5, posX: 1 / 4, posY: -1.2, offsetY: -27 },
+  { scaleX: 1 / 5, scaleY: 1 / 5, posX: 1 / 10, posY: -1.75, offsetY: -27 },
+  { scaleX: 1 / 3, scaleY: 1 / 3, posX: -1 / 4, posY: -2, offsetY: -27 },
+  { scaleX: 1 / 3, scaleY: 1 / 5, posX: -1 / 4, posY: -2.6, offsetY: -27 },
+  { scaleX: 1 / 2, scaleY: 1 / 2, posX: 1 / 4.5, posY: -3.1, offsetY: -27 },
+  { scaleX: 1 / 2.5, scaleY: 1 / 2, posX: -1 / 6, posY: -4.1, offsetY: -27 },
+  { scaleX: 1 / 3, scaleY: 1 / 3, posX: -1 / 6, posY: -4.9, offsetY: -27 },
+  { scaleX: 1 / 3, scaleY: 1 / 4, posX: 1 / 3.5, posY: -5.1, offsetY: -27 },
+  { scaleX: 1 / 3, scaleY: 1 / 5, posX: -1 / 6, posY: -5.9, offsetY: -27 },
+  { scaleX: 1 / 3, scaleY: 1 / 3, posX: -1 / 4, posY: -5.4, offsetY: -27 },
+  { scaleX: 1 / 3, scaleY: 1 / 3, posX: 1 / 4, posY: -6, offsetY: -27 },
+];
+
+// Mobile layout configuration
+export const MOBILE_CONFIG = [
+  { scale: [3, 3], pos: [0, -4.3] },
+  { scale: [1.5, 2], pos: [-0.7, -5.1] },
+  { scale: [1.5, 2], pos: [0.8, -5.1] },
+  { scale: [1.5, 2], pos: [-0.7, -5.6] },
+  { scale: [1.5, 2], pos: [0.8, -5.6] },
+  { scale: [1.5, 2], pos: [-0.7, -6.1] },
+  { scale: [1.5, 2], pos: [0.8, -6.1] },
+  { scale: [2.2, 2], pos: [-0.3, -6.6] },
+  { scale: [1.5, 2], pos: [0.8, -6.6] },
+  { scale: [2.2, 2], pos: [-0.3, -7.1] },
+  { scale: [1.5, 2], pos: [0.8, -7.1] },
+  { scale: [1.5, 2], pos: [0.8, -7.6] },
+  { scale: [1.5, 2], pos: [-0.7, -7.6] },
+  { scale: [1.5, 2], pos: [0, -8.1] },
 ];

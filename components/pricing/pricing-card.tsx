@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 
 import { PrimaryCard } from "../ui/card";
-import { InteractiveHoverButton } from "../interactive-hover-button";
+import { InteractiveHoverButton } from "../ui/interactive-hover-button";
 import { motion } from "framer-motion";
 import { setCursorType } from "@/state/slices/cursorSlice";
 import { useAppDispatch } from "@/hooks/redux-hooks";
@@ -37,74 +37,90 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
   return (
     <PrimaryCard
       className={cn(
-        "relative flex flex-col gap-2 md:gap-5  overflow-hidden p-4",
+        "relative flex flex-col gap-3 sm:gap-4 md:gap-5 overflow-hidden",
+        "p-4 md:p-5 w-full mx-auto",
+        "min-h-[420px] md::h-full", // Ensure consistent height
         isHighlighted
           ? "bg-foreground text-background"
           : "bg-background text-foreground",
-        isPopular && "ring-4 ring-gold border-none"
+        isPopular && "ring-2 sm:ring-4 ring-gold border-none"
       )}
     >
-      <h2
-        className={cn(
-          "flex items-center gap-3 text-3xl font-medium capitalize",
-          isHighlighted ? "text-background" : "text-foreground"
-        )}
-      >
-        {tier.name}
-        {isPopular && (
-          <Badge variant="secondary" className="mt-2">
-            <p className="text-black text-[10px] font-normal md:text-sm">
-              🔥 Popular
-            </p>
-          </Badge>
-        )}
-      </h2>
+      {/* Header Section */}
+      <div className="flex flex-col gap-2">
+        <div className="flex items-start">
+          <h2
+            className={cn(
+              "text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium capitalize leading-tight",
+              isHighlighted ? "text-background" : "text-foreground"
+            )}
+          >
+            {tier.name}
+          </h2>
+          {isPopular && (
+            <Badge variant="secondary" className="ml-2 shrink-0 px-2 py-1">
+              <span className="text-black text-[10px] sm:text-xs font-normal whitespace-nowrap">
+                🔥 Popular
+              </span>
+            </Badge>
+          )}
+        </div>
+      </div>
 
-      <div className="relative h-12">
+      {/* Price Section */}
+      <div className="py-2 sm:py-3 md:py-4">
         {typeof price === "number" ? (
-          <>
-            <div className="flex flex-col">
-              <p className="text-muted-foreground text-xs">
+          <div className="flex flex-col space-y-1">
+            <div className="flex items-baseline gap-1 flex-wrap">
+              <span className="text-muted-foreground text-xs sm:text-sm">
                 From
-                <NumberFlow
-                  format={{
-                    style: "currency",
-                    currency: "IDR",
-                    trailingZeroDisplay: "stripIfInteger",
-                  }}
-                  value={price + 200000}
-                  className="text-xs text-muted-foreground ml-1"
-                />
-              </p>
+              </span>
               <NumberFlow
                 format={{
                   style: "currency",
                   currency: "IDR",
                   trailingZeroDisplay: "stripIfInteger",
+                  notation: "compact", // This helps with long numbers on mobile
+                  compactDisplay: "short",
                 }}
-                value={price}
-                className="text-xl md:text-3xl -mt-2 font-medium"
+                value={price + 200000}
+                className="text-xs sm:text-sm text-muted-foreground line-through"
               />
             </div>
-          </>
+            <NumberFlow
+              format={{
+                style: "currency",
+                currency: "IDR",
+                trailingZeroDisplay: "stripIfInteger",
+                notation: "compact",
+                compactDisplay: "short",
+              }}
+              value={price}
+              className="text-xl sm:text-2xl md:text-3xl font-medium leading-none"
+            />
+          </div>
         ) : (
-          <>
-            <p className=" text-xs text-background">Build your own</p>
-            <h2 className="font-medium -mt-2">{price}</h2>
-          </>
+          <div className="space-y-1">
+            <p className="text-xs sm:text-sm text-background">Build your own</p>
+            <h2 className="font-medium text-lg sm:text-xl md:text-2xl leading-tight">
+              {price}
+            </h2>
+          </div>
         )}
       </div>
 
-      <div className="flex-1 space-y-2">
+      {/* Description and Features */}
+      <div className="flex-1 space-y-3 sm:space-y-4">
         <p
           className={cn(
-            "font-normal",
+            "font-normal text-xs sm:text-sm md:text-base leading-relaxed",
             isHighlighted ? "text-background" : "text-foreground"
           )}
         >
           {tier.description}
         </p>
-        <ul className="space-y-2">
+
+        <ul className="space-y-2 sm:space-y-3">
           {tier.features.map((feature, index) => (
             <motion.li
               key={index}
@@ -113,23 +129,31 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
               transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
               viewport={{ once: true }}
               className={cn(
-                "flex items-center gap-2 text-xs font-medium",
+                "flex items-start gap-2 text-xs sm:text-sm font-medium leading-relaxed",
                 isHighlighted ? "text-background" : "text-muted-foreground"
               )}
             >
-              <BadgeCheck className="h-4 w-4" />
-              {feature}
+              <BadgeCheck className="h-3 w-3 sm:h-4 sm:w-4 mt-0.5 shrink-0" />
+              <span className="break-words">{feature}</span>
             </motion.li>
           ))}
         </ul>
       </div>
 
-      <InteractiveHoverButton
-        text={tier.cta}
-        className="w-full text-white bg-jet rounded-none"
-        onMouseEnter={() => dispatch(setCursorType("link"))}
-        onMouseLeave={() => dispatch(setCursorType("text"))}
-      />
+      {/* CTA Button */}
+      <div className="mt-auto pt-3 sm:pt-4">
+        <InteractiveHoverButton
+          text={tier.cta}
+          className={cn(
+            "w-full text-white bg-jet rounded-none",
+            "py-2.5 sm:py-3 md:py-4",
+            "text-sm sm:text-base font-medium",
+            "min-h-[44px]" // Ensure touch-friendly button height
+          )}
+          onMouseEnter={() => dispatch(setCursorType("link"))}
+          onMouseLeave={() => dispatch(setCursorType("text"))}
+        />
+      </div>
     </PrimaryCard>
   );
 }

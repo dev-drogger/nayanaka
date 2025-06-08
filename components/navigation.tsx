@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, Scale, X } from "lucide-react";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { setMenuOpen } from "@/state/slices/navigationSlice";
@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 function Page() {
   const dispatch = useAppDispatch();
   const { menuOpen } = useAppSelector((state) => state.navigation);
+  const { isContentVisible } = useAppSelector((state) => state.contentVisible);
 
   const handleCursorEnter = () => {
     dispatch(setCursorType("link"));
@@ -23,6 +24,63 @@ function Page() {
 
   const toggleMenu = () => {
     dispatch(setMenuOpen(!menuOpen));
+  };
+
+  const menuItems = [
+    { name: "Home", href: "#hero" },
+    { name: "About", href: "#about" },
+    { name: "Services", href: "#services" },
+    { name: "Projects", href: "#projects" },
+    { name: "Pricing", href: "#pricing" },
+    { name: "Contact", href: "#contact" },
+  ];
+
+  // Container variants with different timing for enter and exit
+  const containerVariants = {
+    hidden: {
+      y: -1000,
+    },
+    visible: {
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: "circInOut",
+      },
+    },
+    exit: {
+      y: 1000,
+      transition: {
+        duration: 0.5,
+        ease: "circInOut",
+        delay: 0.8, // Wait for all li animations (5 items * 0.3 delay + 0.3 buffer)
+      },
+    },
+  };
+
+  // List item variants
+  const itemVariants = {
+    hidden: {
+      opacity: 0,
+      y: 50,
+    },
+    visible: (index: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: index * 0.1,
+        duration: 0.5,
+        ease: "circInOut",
+      },
+    }),
+    exit: (index: number) => ({
+      opacity: 0,
+      y: 50,
+      transition: {
+        delay: index * 0.1, // Faster stagger on exit
+        duration: 0.1,
+        ease: "circInOut",
+      },
+    }),
   };
 
   return (
@@ -91,45 +149,25 @@ function Page() {
         </motion.div>
       </header>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 bg-black z-49 flex items-center justify-center"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            className="fixed inset-0 bg-black z-10 flex items-center justify-center"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
             <nav className="text-center text-white">
               <ul className="space-y-8">
-                {[
-                  { name: "Home", href: "#hero" },
-                  { name: "About", href: "#about" },
-                  { name: "Services", href: "#services" },
-                  { name: "Projects", href: "#projects" },
-                  { name: "Pricing", href: "#pricing" },
-                  { name: "Contact", href: "#contact" },
-                ].map((item, index) => (
+                {menuItems.map((item, index) => (
                   <motion.li
                     key={index}
-                    initial={{ opacity: 0, y: 50 }}
-                    transition={{ delay: index * 0.3 }}
-                    whileHover="hover"
-                    animate="initial"
-                    // animate={{
-                    //   y: activeSection === section ? -5 : 0,
-                    //   opacity: activeSection === section ? 1 : 0.5,
-                    // }}
-                    variants={{
-                      initial: { y: 0, opacity: 1 },
-                      hover: {
-                        x: [0, -2, 2, -2, 2, 0],
-                        y: [0, 2, -2, 2, -2, 0],
-                        transition: {
-                          duration: 0.3,
-                        },
-                      },
-                    }}
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    custom={index}
                   >
                     <Link
                       href={item.href}

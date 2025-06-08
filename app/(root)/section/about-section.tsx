@@ -1,35 +1,34 @@
-import { TextEffect } from "@/components/text-effect";
-import { motion } from "framer-motion";
+import { TextEffect } from "@/components/ui/text-effect";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { useAppSelector } from "@/hooks/redux-hooks";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export default function About() {
   const ref = useRef(null);
-  const { isInView } = useAppSelector((state) => state.view);
-
-  // Calculate the initial size to fill the viewport
+  const inView = useInView(ref, { once: true });
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
-    <section id="about" className="flex-center py-0 h-[500vh]">
+    <section id="about" className="flex-center py-0 px-6 h-[100vh] w-screen">
       <div className="h-full w-full">
-        <div className="sticky top-10 w-full h-screen flex-center">
+        <div className="w-full h-screen flex-center">
           <motion.div
-            className="bg-jet px-8 h-[55vh] w-[75vw] sticky top-10 flex-center"
+            className="bg-jet h-[35vh] md:h-[55vh] w-full md:w-[75vw] flex-center"
             ref={ref}
           >
             <TextEffect
               per="line"
               preset="slide"
-              trigger={isInView}
-              delay={2.5}
-              className="text-2xl md:text-5xl text-white text-justify"
+              trigger={inView}
+              delay={2}
+              className="text-lg md:text-5xl text-white text-justify"
               variants={{
                 container: {
                   hidden: { opacity: 0 },
                   visible: {
                     opacity: 1,
                     transition: {
-                      staggerChildren: 0.25,
+                      staggerChildren: 0.1,
                     },
                   },
                 },
@@ -39,15 +38,31 @@ export default function About() {
                 },
               }}
             >
-              {`Nayanaka Creative Studio is a dynamic collective
+              {isMobile
+                ? `Nayanaka Creative Studio is a dynamic
+collective of designers, developers, and
+strategists, united by a shared passion for
+creating exceptional digital experiences.
+We seamlessly blend creativity with
+functionality, crafting websites that are
+not only visually captivating but also
+strategically designed to drive
+meaningful results.`
+                : `Nayanaka Creative Studio is a dynamic collective
 of designers, developers, and strategists, united by
 a shared passion for creating exceptional digital 
 experiences. We seamlessly blend creativity with
 functionality, crafting websites that are not only 
 visually captivating but also strategically designed 
 to drive meaningful results.`}
+              {/* {`Nayanaka Creative Studio is a dynamic collective
+of designers, developers, and strategists, united by
+a shared passion for creating exceptional digital 
+experiences. We seamlessly blend creativity with
+functionality, crafting websites that are not only 
+visually captivating but also strategically designed 
+to drive meaningful results.`} */}
             </TextEffect>
-            <p className="text-2xl md:text-5xl text-white text-justify"></p>
           </motion.div>
         </div>
       </div>

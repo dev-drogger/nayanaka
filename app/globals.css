@@ -151,7 +151,7 @@
     @apply text-sm md:text-lg text-white;
   }
   section {
-    @apply relative min-h-screen py-32 min-w-screen;
+    @apply relative md:min-h-screen py-32 md:min-w-screen;
   }
 }
 
