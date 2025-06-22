@@ -13,7 +13,7 @@ export default function About() {
       <div className="h-full w-full">
         <div className="w-full h-screen flex-center">
           <motion.div
-            className="bg-jet h-[35vh] md:h-[55vh] w-full md:w-[75vw] flex-center"
+            className="bg-jet h-[35vh] lg:h-[55vh] w-full lg:w-[75vw] flex-center"
             ref={ref}
           >
             <TextEffect
@@ -21,7 +21,7 @@ export default function About() {
               preset="slide"
               trigger={inView}
               delay={2}
-              className="text-lg md:text-5xl text-white text-justify"
+              className="text-lg lg:text-5xl text-white text-justify"
               variants={{
                 container: {
                   hidden: { opacity: 0 },

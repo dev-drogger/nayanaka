@@ -35,13 +35,13 @@ export default function Hero() {
       <section id="hero" className=" flex items-center w-screen">
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-12 gap-4 z-50">
-            <div className="col-span-12 md:col-span-6 flex-center">
+            <div className="col-span-12 lg:col-span-6 flex-center">
               <div className="flex-col flex">
                 <TextEffect
                   per="char"
                   preset="slide"
                   trigger={isContentVisible}
-                  className="text-4xl md:text-6xl uppercase font-bold text-black"
+                  className="text-4xl lg:text-6xl uppercase font-bold text-black"
                   variants={{
                     container: {
                       hidden: { opacity: 0 },
@@ -68,7 +68,7 @@ export default function Hero() {
                   per="char"
                   preset="slide"
                   trigger={isContentVisible}
-                  className="text-4xl md:text-6xl uppercase font-bold text-black"
+                  className="text-4xl lg:text-6xl uppercase font-bold text-black"
                   variants={{
                     container: {
                       hidden: { opacity: 0 },
@@ -96,7 +96,7 @@ export default function Hero() {
                   per="char"
                   preset="slide"
                   trigger={isContentVisible}
-                  className="text-4xl md:text-6xl uppercase font-bold text-black"
+                  className="text-4xl lg:text-6xl uppercase font-bold text-black"
                   variants={{
                     container: {
                       hidden: { opacity: 0 },
@@ -122,7 +122,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="col-span-12 md:col-span-6 md:pl-8">
+            <div className="col-span-12 lg:col-span-6 lg:pl-8">
               <motion.div
                 initial="hidden"
                 animate={isContentVisible ? "visible" : "hidden"}
@@ -168,8 +168,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* <div className="bg-jet w-full absolute bottom-0 h-[10vh] md:h-[12vh]"></div>
-        <div className="bg-jet w-full absolute top-0 h-[10vh] md:h-[12vh]"></div> */}
+        {/* <div className="bg-jet w-full absolute bottom-0 h-[10vh] lg:h-[12vh]"></div>
+        <div className="bg-jet w-full absolute top-0 h-[10vh] lg:h-[12vh]"></div> */}
       </section>
     </BackgroundPaths>
   );

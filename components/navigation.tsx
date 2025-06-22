@@ -83,14 +83,28 @@ function Page() {
     }),
   };
 
+  const variants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay: 2.5,
+        duration: 0.8,
+        ease: "circInOut",
+      },
+    },
+  };
+
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-49 mix-blend-difference">
+      <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial="hidden"
+          animate={isContentVisible ? "visible" : "hidden"}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, delay: 10.9 }}
+          variants={variants}
           className="container mx-auto px-10 flex justify-between items-center py-4"
         >
           <Link
@@ -171,7 +185,7 @@ function Page() {
                   >
                     <Link
                       href={item.href}
-                      className="text-7xl md:text-9xl font-bold uppercase tracking-tighter hover:italic transition-all"
+                      className="text-7xl lg:text-9xl font-bold uppercase tracking-tighter hover:italic transition-all"
                       onClick={() => dispatch(setMenuOpen(false))}
                       onMouseEnter={handleCursorEnter}
                       onMouseLeave={handleCursorLeave}
@@ -190,9 +204,5 @@ function Page() {
 }
 
 export default function Navigation() {
-  return (
-    <Provider store={store}>
-      <Page />
-    </Provider>
-  );
+  return <Page />;
 }

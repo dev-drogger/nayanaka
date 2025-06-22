@@ -90,7 +90,7 @@ export default function CustomCursor() {
   return (
     <div
       ref={cursorRef}
-      className={`fixed pointer-events-none z-50 hidden md:flex items-center justify-center will-change-transform ${getCursorClasses()}`}
+      className={`fixed pointer-events-none z-50 hidden lg:flex items-center justify-center will-change-transform ${getCursorClasses()}`}
       style={{
         top: -10, // Offset to center the cursor
         left: -10, // Offset to center the cursor

@@ -18,14 +18,14 @@ export default function Services() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-6xl md:text-8xl font-bold uppercase tracking-tighter">
+          <h2 className="text-6xl lg:text-8xl font-bold uppercase tracking-tighter">
             Our
             <br />
             Services
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {SERVICES.map((service, index) => (
             <motion.div
               key={index}

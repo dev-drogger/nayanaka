@@ -20,7 +20,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative w-screen bg-jet rounded-bl-[3rem] rounded-br-[3rem] lg:rounded-bl-[5rem] lg:rounded-br-[5rem] mb-12 md:mb-0"
+      className="relative w-screen bg-jet rounded-bl-[3rem] rounded-br-[3rem] lg:rounded-bl-[5rem] lg:rounded-br-[5rem] mb-12 lg:mb-0"
     >
       <div className="container mx-auto p-4 w-full">
         <motion.div
@@ -31,7 +31,7 @@ export default function Pricing() {
           viewport={{ once: true }}
         >
           <h1 className="font-medium text-8xl mb-8">PRICING</h1>
-          <p className=" min-w-[50vw] md:w-[30vw]">
+          <p className=" min-w-[50vw] lg:w-[30vw]">
             Create everything all in once with just a click. Whether you need a
             professional website or a beautiful digital invitation, we’ve got
             you covered. No coding needed! Simple, fast, and hassle-free.

@@ -13,10 +13,10 @@ function Page() {
   return (
     <footer id="contact" className="relative w-full text-black bg-gray-200">
       <div className="container mx-auto px-4">
-        <div className="mb-[11rem] py-[2.5rem] lg:mb-[16rem] lg:py-[8.2rem] grid grid-cols-1 md:grid-cols-2 lg:gap-16 gap-4">
+        <div className="mb-[11rem] py-[2.5rem] lg:mb-[16rem] lg:py-[8.2rem] grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-4">
           <div className="col-span-2 lg:col-span-1">
             <motion.h2
-              className="text-6xl text-black md:text-8xl font-bold uppercase tracking-tighter mb-4 lg:mb-8"
+              className="text-6xl text-black lg:text-8xl font-bold uppercase tracking-tighter mb-4 lg:mb-8"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -37,7 +37,7 @@ function Page() {
               how we can help bring your vision to life.
             </motion.p>
           </div>
-          <div className="space-y-4 md:space-y-8 col-span-1 ">
+          <div className="space-y-4 lg:space-y-8 col-span-1 ">
             <motion.div
               className="border-t border-black/20 pt-4"
               initial={{ opacity: 0, y: 20 }}
@@ -103,11 +103,11 @@ function Page() {
           </div>
         </div>
 
-        <div className="mb-10 flex flex-col md:flex-row justify-between items-center">
+        <div className="mb-10 flex flex-col lg:flex-row justify-between items-center">
           <p className="text-sm text-black/60">
             © 2025 Nayanaka Creative Studio. All rights reserved.
           </p>
-          <div className="flex gap-8 mt-4 md:mt-0">
+          <div className="flex gap-8 mt-4 lg:mt-0">
             <a
               href="#"
               className="text-sm hover:underline"
@@ -128,7 +128,7 @@ function Page() {
         </div>
       </div>
       <motion.div
-        className="absolute uppercase bottom-30 md:bottom-20 lg:bottom-50 text-white text-xl w-screen flex-row-center"
+        className="absolute uppercase bottom-30 lg:bottom-50 text-white text-xl w-screen flex-row-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
@@ -154,9 +154,5 @@ function Page() {
 }
 
 export default function Footer() {
-  return (
-    <Provider store={store}>
-      <Page />
-    </Provider>
-  );
+  return <Page />;
 }

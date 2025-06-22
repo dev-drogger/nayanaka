@@ -96,16 +96,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
           zIndex: 1,
         }}
       >
-        <Navigation />
-        <OptimizedCanvas className="main-canvas">
-          <color attach="background" args={["#e5e7eb"]} />
-          <ScrollControls pages={isMobile ? 11.3 : 12.48} damping={0.75}>
-            <ProjectCarousel />
-            <Scroll html>
-              <ReduxProvider>{children}</ReduxProvider>
-            </Scroll>
-          </ScrollControls>
-        </OptimizedCanvas>
+        {children}
       </motion.div>
 
       {/* Loading screen with proper exit animation */}
@@ -114,7 +105,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
           <motion.div
             key="loading-container"
             exit={{
-              x: 1700,
+              x: 1900,
               transition: { duration: 0.8, ease: "circInOut", delay: 0.5 },
             }}
             style={{
@@ -165,7 +156,6 @@ export default function Page() {
         <Services />
         <Projects />
         <Pricing />
-        <Footer />
       </MainContent>
     </ErrorBoundary>
   );

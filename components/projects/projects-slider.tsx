@@ -7,7 +7,7 @@ export const ProjectsSlider = () => {
       <InfiniteSlider
         direction="vertical"
         duration={60}
-        className="text-white absolute border-cardinal border-2 left-1 z-20 md:left-0 h-full w-[50px] md:w-[80px] flex-center bg-jet text-2xl md:text-5xl"
+        className="text-white absolute border-cardinal border-2 left-1 z-20 lg:left-0 h-full w-[50px] lg:w-[80px] flex-center bg-jet text-2xl lg:text-5xl"
       >
         <div className="rotate-90">PROJECTS</div>
         <div className="rotate-90 mt-52">&bull;</div>
@@ -54,7 +54,7 @@ export const ProjectsSlider = () => {
         reverse
         direction="vertical"
         duration={60}
-        className="text-white absolute border-cardinal border-2 z-20 right-1 md:right-0 h-full w-[50px] md:w-[80px] flex-center bg-jet text-2xl md:text-5xl"
+        className="text-white absolute border-cardinal border-2 z-20 right-1 lg:right-0 h-full w-[50px] lg:w-[80px] flex-center bg-jet text-2xl lg:text-5xl"
       >
         <div className="rotate-90">PROJECTS</div>
         <div className="rotate-90 mt-52">&bull;</div>

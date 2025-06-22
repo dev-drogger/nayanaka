@@ -3,6 +3,8 @@ import { Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import ReduxProvider from "@/state/redux-provider";
+import Navigation from "@/components/navigation";
+import Footer from "@/components/footer";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -37,12 +39,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${satoshi.variable} ${grotesk.variable} ${poppins.variable} ${inter.variable} antialiased`}
+        className={`${satoshi.variable} ${grotesk.variable} ${poppins.variable} ${inter.variable} antialiased flex flex-col`}
       >
         <ReduxProvider>
-          <main className="min-h-screen min-w-screen overflow-hidden">
-            {children}
-          </main>
+          <Navigation />
+          <main className="grow min-w-screen overflow-hidden">{children}</main>
+          <Footer />
         </ReduxProvider>
       </body>
     </html>

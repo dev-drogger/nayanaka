@@ -37,9 +37,9 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
   return (
     <PrimaryCard
       className={cn(
-        "relative flex flex-col gap-3 sm:gap-4 md:gap-5 overflow-hidden",
-        "p-4 md:p-5 w-full mx-auto",
-        "min-h-[420px] md::h-full", // Ensure consistent height
+        "relative flex flex-col gap-3 sm:gap-4 lg:gap-5 overflow-hidden",
+        "p-4 lg:p-5 w-full mx-auto",
+        "min-h-[420px] lg::h-full", // Ensure consistent height
         isHighlighted
           ? "bg-foreground text-background"
           : "bg-background text-foreground",
@@ -51,7 +51,7 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
         <div className="flex items-start">
           <h2
             className={cn(
-              "text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium capitalize leading-tight",
+              "text-lg sm:text-xl lg:text-2xl lg:text-3xl font-medium capitalize leading-tight",
               isHighlighted ? "text-background" : "text-foreground"
             )}
           >
@@ -68,7 +68,7 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
       </div>
 
       {/* Price Section */}
-      <div className="py-2 sm:py-3 md:py-4">
+      <div className="py-2 sm:py-3 lg:py-4">
         {typeof price === "number" ? (
           <div className="flex flex-col space-y-1">
             <div className="flex items-baseline gap-1 flex-wrap">
@@ -96,13 +96,13 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
                 compactDisplay: "short",
               }}
               value={price}
-              className="text-xl sm:text-2xl md:text-3xl font-medium leading-none"
+              className="text-xl sm:text-2xl lg:text-3xl font-medium leading-none"
             />
           </div>
         ) : (
           <div className="space-y-1">
             <p className="text-xs sm:text-sm text-background">Build your own</p>
-            <h2 className="font-medium text-lg sm:text-xl md:text-2xl leading-tight">
+            <h2 className="font-medium text-lg sm:text-xl lg:text-2xl leading-tight">
               {price}
             </h2>
           </div>
@@ -113,7 +113,7 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
       <div className="flex-1 space-y-3 sm:space-y-4">
         <p
           className={cn(
-            "font-normal text-xs sm:text-sm md:text-base leading-relaxed",
+            "font-normal text-xs sm:text-sm lg:text-base leading-relaxed",
             isHighlighted ? "text-background" : "text-foreground"
           )}
         >
@@ -146,7 +146,7 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
           text={tier.cta}
           className={cn(
             "w-full text-white bg-jet rounded-none",
-            "py-2.5 sm:py-3 md:py-4",
+            "py-2.5 sm:py-3 lg:py-4",
             "text-sm sm:text-base font-medium",
             "min-h-[44px]" // Ensure touch-friendly button height
           )}

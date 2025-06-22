@@ -136,22 +136,22 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-primary;
+    @apply bg-gray-200 text-foreground font-primary;
   }
   h1 {
-    @apply text-3xl md:text-5xl text-white font-light;
+    @apply text-3xl lg:text-5xl text-white font-light;
   }
   h2 {
-    @apply text-xl md:text-5xl text-white font-light;
+    @apply text-xl lg:text-5xl text-white font-light;
   }
   h3 {
-    @apply text-base md:text-xl text-white font-light;
+    @apply text-base lg:text-xl text-white font-light;
   }
   p {
-    @apply text-sm md:text-lg text-white;
+    @apply text-sm lg:text-lg text-white;
   }
   section {
-    @apply relative md:min-h-screen py-32 md:min-w-screen;
+    @apply relative lg:min-h-screen py-32 lg:min-w-screen;
   }
 }
 

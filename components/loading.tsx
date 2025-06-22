@@ -44,7 +44,7 @@ export default function LoadingScreen() {
                 <TextEffect
                   per="char"
                   preset="blur"
-                  className="text-2xl md:text-6xl text-white font-light"
+                  className="text-2xl lg:text-6xl text-white font-light"
                 >
                   Nayanaka
                 </TextEffect>
@@ -52,7 +52,7 @@ export default function LoadingScreen() {
                 <TextEffect
                   per="char"
                   preset="blur"
-                  className="text-sm md:text-2xl text-white"
+                  className="text-sm lg:text-2xl text-white"
                 >
                   なやなか
                 </TextEffect>
