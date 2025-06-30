@@ -354,3 +354,15 @@ export const TABLET_CONFIG = [
   { scaleX: 3.2, scaleY: 3.2, posX: -1.55, posY: -58.31685108640099 },
   { scaleX: 3.2, scaleY: 3.2, posX: 0, posY: 62.15348602629579 },
 ];
+
+export const ABOUT_TEXT = [
+  "Nayanaka Creative Studio is a dynamic",
+  "collective of designers, developers, and",
+  "strategists, united by a shared passion for",
+  "creating exceptional digital experiences.",
+  "We seamlessly blend creativity with",
+  "functionality, crafting websites that are",
+  "not only visually captivating but also",
+  "strategically designed to drive",
+  "meaningful results.",
+];

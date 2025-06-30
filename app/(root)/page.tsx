@@ -7,23 +7,19 @@ import { setMouseSpeed } from "@/state/slices/cursorSlice";
 
 import CustomCursor from "@/components/ui/custom-cursor";
 import LoadingScreen from "../../components/loading";
-import Navigation from "@/components/navigation";
 import Hero from "./section/hero-section";
 import About from "./section/about-section";
 import Services from "./section/service-section";
 import Pricing from "./section/pricing-section";
 import Projects from "./section/projects-section";
 import BrowserCheck from "@/components/browser-check";
-import Footer from "@/components/footer";
-import { ScrollControls, Scroll } from "@react-three/drei";
 import { useRafCallback } from "@/hooks/use-raf-callback";
-import OptimizedCanvas from "@/components/optimized-canvas";
-import ReduxProvider from "@/state/redux-provider";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
 
-import { ProjectCarousel } from "@/components/projects/project-carousel";
 import useMouseTracking from "@/hooks/use-mouse-tracking";
 import useAnimationTiming from "@/hooks/use-animation-timing";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import StickyFix from "./section/new-about";
 
 function MainContent({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
@@ -32,7 +28,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
   const minimumLoadTime = 3500;
   const mouseSpeedRef = useMouseTracking();
   const { childrenRef } = useAnimationTiming(minimumLoadTime);
-  const isMobile = useMediaQuery("(max-width: 768px)");
 
   useRafCallback(() => {
     if (Math.abs(mouseSpeedRef.current) > 2) {
@@ -41,6 +36,15 @@ function MainContent({ children }: { children: React.ReactNode }) {
     }
   }, !isLoading);
 
+  useEffect(() => {
+    if (!isLoading) {
+      // Wait a tick to ensure content is visible
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 50);
+    }
+  }, [isLoading]);
+
   const contentVariants = useMemo(
     () => ({
       hidden: { opacity: 0 },
@@ -48,7 +52,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
         opacity: 1,
         transition: {
           duration: 0.8,
-          ease: "easeOut",
+          ease: [0.25, 0.46, 0.45, 0.94],
         },
       },
     }),
@@ -71,7 +75,6 @@ function MainContent({ children }: { children: React.ReactNode }) {
             pointerEvents: "none",
             width: 0,
             height: 0,
-            overflow: "hidden",
           }}
         >
           {children}
@@ -84,16 +87,10 @@ function MainContent({ children }: { children: React.ReactNode }) {
         initial="hidden"
         animate={isPageMounted ? "visible" : "hidden"}
         variants={contentVariants}
-        className="h-screen w-full"
+        className="w-full"
         style={{
           willChange: "opacity, transform",
           transform: "translateZ(0)",
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 1,
         }}
       >
         {children}
@@ -152,7 +149,8 @@ export default function Page() {
     <ErrorBoundary>
       <MainContent>
         <Hero />
-        <About />
+        {/* <About /> */}
+        <StickyFix />
         <Services />
         <Projects />
         <Pricing />

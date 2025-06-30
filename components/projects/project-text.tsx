@@ -13,7 +13,7 @@ export function ProjectText() {
       <h1
         style={{
           position: "absolute",
-          top: `${isMobile ? 60 * 8.5 : 90 * 4.55}vh`,
+          top: `${isMobile ? 60 * 8.5 : 10 * 6}vh`,
           right: isMobile ? "50%" : "9vw",
           transform: isMobile
             ? "translate3d(50%,-100%,0)"
@@ -31,7 +31,7 @@ export function ProjectText() {
       <h1
         style={{
           position: "absolute",
-          top: `${isMobile ? 70 * 8.4 : 180 * 3}vh`,
+          top: `${isMobile ? 70 * 8.4 : 10 * 18.5}vh`,
           left: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translate3d(-50%,-100%,0)" : "none",
           fontSize: headingSize,
@@ -47,7 +47,7 @@ export function ProjectText() {
       <h1
         style={{
           fontSize: headingSize,
-          top: `${isMobile ? 70 * 9.12 : 260 * 2.4}vh`,
+          top: `${isMobile ? 70 * 9.12 : 10 * 26.5}vh`,
           color: "black",
           fontWeight: "normal",
           letterSpacing: "-0.05em",
@@ -66,7 +66,7 @@ export function ProjectText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 70 * 9.83 : 350 * 2.03}vh`,
+          top: `${isMobile ? 70 * 9.83 : 10 * 36}vh`,
           left: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translate3d(-50%,-100%,0)" : "none",
           textAlign: isMobile ? "center" : "left",
@@ -81,7 +81,7 @@ export function ProjectText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 70 * 10.45 : 450 * 1.78}vh`,
+          top: `${isMobile ? 70 * 10.45 : 10 * 45}vh`,
           right: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translateX(50%)" : "none",
           textAlign: isMobile ? "center" : "left",
@@ -96,7 +96,7 @@ export function ProjectText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 70 * 11.26 : 450 * 2.1}vh`,
+          top: `${isMobile ? 70 * 11.26 : 10 * 59}vh`,
           right: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translate3d(50%,-100%,0)" : "none",
           textAlign: isMobile ? "center" : "left",
@@ -111,7 +111,7 @@ export function ProjectText() {
           fontWeight: "normal",
           letterSpacing: "-0.05em",
           position: "absolute",
-          top: `${isMobile ? 70 * 11.97 : 450 * 2.27}vh`,
+          top: `${isMobile ? 70 * 11.97 : 10 * 68}vh`,
           left: isMobile ? "50%" : "10vw",
           transform: isMobile ? "translate3d(-50%,-100%,0)" : "none",
           textAlign: isMobile ? "center" : "left",

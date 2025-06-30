@@ -6,11 +6,14 @@ import NewCarousel from "../../new-project/carousel";
 export default function Projects() {
   return (
     <>
-      <section id="projects" className="h-[450vh] lg:h-[720vh] w-screen py-0">
+      <section
+        id="projects"
+        className="h-[450vh] lg:h-[720vh] w-screen py-0 overflow-hidden"
+      >
         <ProjectsSlider />
         <NewCarousel />
+        <ProjectText />
       </section>
-      <ProjectText />
     </>
   );
 }

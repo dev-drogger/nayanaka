@@ -35,7 +35,7 @@ export default function AnimatedImage({
   const [imageError, setImageError] = useState(false);
 
   const isInView = useInView(containerRef, {
-    once: false,
+    once: true,
     margin: "0px 0px -100px 0px",
   });
 

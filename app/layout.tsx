@@ -39,12 +39,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${satoshi.variable} ${grotesk.variable} ${poppins.variable} ${inter.variable} antialiased flex flex-col`}
+        className={`${satoshi.variable} ${grotesk.variable} ${poppins.variable} ${inter.variable} antialiased min-h-screen`}
       >
         <ReduxProvider>
           <Navigation />
-          <main className="grow min-w-screen overflow-hidden">{children}</main>
+
+          <main>{children}</main>
+
           <Footer />
+          {/* <div className="h-[50vh]">
+            hello
+          </div> */}
         </ReduxProvider>
       </body>
     </html>

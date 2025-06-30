@@ -11,9 +11,12 @@ function Page() {
   const dispatch = useAppDispatch();
 
   return (
-    <footer id="contact" className="relative w-full text-black bg-gray-200">
+    <footer
+      id="contact"
+      className="relative w-full text-black bg-gray-200 h-[85vh]"
+    >
       <div className="container mx-auto px-4">
-        <div className="mb-[11rem] py-[2.5rem] lg:mb-[16rem] lg:py-[8.2rem] grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-4">
+        <div className="mb-[11rem] py-[2.5rem] lg:mb-[12rem] lg:py-[4rem] grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-4">
           <div className="col-span-2 lg:col-span-1">
             <motion.h2
               className="text-6xl text-black lg:text-8xl font-bold uppercase tracking-tighter mb-4 lg:mb-8"
@@ -102,37 +105,8 @@ function Page() {
             </motion.div>
           </div>
         </div>
-
-        <div className="mb-10 flex flex-col lg:flex-row justify-between items-center">
-          <p className="text-sm text-black/60">
-            © 2025 Nayanaka Creative Studio. All rights reserved.
-          </p>
-          <div className="flex gap-8 mt-4 lg:mt-0">
-            <a
-              href="#"
-              className="text-sm hover:underline"
-              onMouseEnter={() => dispatch(setCursorType("link"))}
-              onMouseLeave={() => dispatch(setCursorType("default"))}
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="text-sm hover:underline"
-              onMouseEnter={() => dispatch(setCursorType("link"))}
-              onMouseLeave={() => dispatch(setCursorType("default"))}
-            >
-              Terms of Service
-            </a>
-          </div>
-        </div>
       </div>
-      <motion.div
-        className="absolute uppercase bottom-30 lg:bottom-50 text-white text-xl w-screen flex-row-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
+      <div className="absolute uppercase bottom-30 lg:bottom-40 text-white text-xl w-screen flex-row-center">
         <InfiniteSlider
           reverse
           duration={60}
@@ -148,7 +122,31 @@ function Page() {
           <div>なやなか -</div>
           <div>なやなか -</div>
         </InfiniteSlider>
-      </motion.div>
+      </div>
+
+      <div className=" absolute bottom-0 w-full p-4 flex flex-col lg:flex-row justify-between items-center">
+        <p className="text-sm text-black/60">
+          © 2025 Nayanaka Creative Studio. All rights reserved.
+        </p>
+        <div className="flex gap-8 mt-4 lg:mt-0">
+          <a
+            href="#"
+            className="text-sm hover:underline"
+            onMouseEnter={() => dispatch(setCursorType("link"))}
+            onMouseLeave={() => dispatch(setCursorType("default"))}
+          >
+            Privacy Policy
+          </a>
+          <a
+            href="#"
+            className="text-sm hover:underline"
+            onMouseEnter={() => dispatch(setCursorType("link"))}
+            onMouseLeave={() => dispatch(setCursorType("default"))}
+          >
+            Terms of Service
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }

@@ -9,22 +9,22 @@ export default function NewCarousel() {
   const imageData = [
     {
       url: "/pictures/DSC00128.webp",
-      position: { top: 55, left: 32 },
+      position: { top: 55, left: 30 },
       size: { width: 550, height: 550 },
     },
     {
       url: "/pictures/DSC09892.webp",
-      position: { top: 158, left: 54 },
+      position: { top: 158, left: 56 },
       size: { width: 250, height: 570 },
     },
     {
       url: "/pictures/img6.webp",
-      position: { top: 157, left: 23 },
+      position: { top: 157, left: 26 },
       size: { width: 550, height: 350 },
     },
     {
       url: "/pictures/img3.webp",
-      position: { top: 177, left: 78 },
+      position: { top: 177, left: 80 },
       size: { width: 350, height: 350 },
     },
     {
@@ -49,12 +49,12 @@ export default function NewCarousel() {
     },
     {
       url: "/pictures/DSC00212.webp",
-      position: { top: 452, left: 33 },
+      position: { top: 465, left: 33 },
       size: { width: 700, height: 850 },
     },
     {
       url: "/pictures/IMG_5501.webp",
-      position: { top: 534, left: 32 },
+      position: { top: 552, left: 32 },
       size: { width: 550, height: 550 },
     },
     {
@@ -64,17 +64,12 @@ export default function NewCarousel() {
     },
     {
       url: "/pictures/IMG_5299.webp",
-      position: { top: 584, left: 23 },
+      position: { top: 640, left: 23 },
       size: { width: 550, height: 550 },
     },
     {
-      url: "/pictures/IMG_1868.webp",
-      position: { top: 634, left: 32 },
-      size: { width: 550, height: 330 },
-    },
-    {
       url: "/pictures/DSC09949.webp",
-      position: { top: 644, left: 77 },
+      position: { top: 666, left: 77 },
       size: { width: 550, height: 550 },
     },
   ];

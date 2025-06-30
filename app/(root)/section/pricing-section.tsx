@@ -38,9 +38,9 @@ export default function Pricing() {
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row mb-10 items-center justify-between gap-10 lg:gap-0 overflow-hidden">
-          <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-start">
-            <p className="mb-6 text-4xl text-white font-medium">
+        <div className="flex flex-col lg:flex-row mb-10 items-center justify-between gap-10 lg:gap-2 overflow-hidden">
+          <div className="w-[450px] flex flex-col items-center justify-center lg:justify-start">
+            <p className="mb-6 text-4xl text-white font-medium text-center">
               Web Development
             </p>
             <div className="flex w-fit rounded-full bg-muted p-1 mt-4">

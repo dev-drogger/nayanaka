@@ -65,7 +65,7 @@ function FloatingPaths({ position }: { position: number }) {
 
 export function BackgroundPaths({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative min-h-screen w-screen flex items-center justify-center overflow-hidden">
+    <div className="relative h-screen w-screen flex items-center justify-center overflow-hidden">
       <div className=" absolute -bottom-60 inset-0 w-[200vw] lg:w-screen scale-200 transform scale-y-[-1]">
         <FloatingPaths position={1} />
         <div className="lg:block">

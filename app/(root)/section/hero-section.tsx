@@ -32,10 +32,10 @@ export default function Hero() {
 
   return (
     <BackgroundPaths>
-      <section id="hero" className=" flex items-center w-screen">
+      <section id="hero" className="h-screen flex items-center w-screen">
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-12 gap-4 z-50">
-            <div className="col-span-12 lg:col-span-6 flex-center">
+            <div className="col-span-12 lg:col-span-8 flex-center">
               <div className="flex-col flex">
                 <TextEffect
                   per="char"
@@ -122,7 +122,7 @@ export default function Hero() {
               </div>
             </div>
 
-            <div className="col-span-12 lg:col-span-6 lg:pl-8">
+            <div className="col-span-12 lg:col-span-4 lg:pl-8">
               <motion.div
                 initial="hidden"
                 animate={isContentVisible ? "visible" : "hidden"}
@@ -144,7 +144,7 @@ export default function Hero() {
                 </div>
 
                 <div
-                  className="absolute -bottom-10 right-0 bg-white text-black p-6 max-w-xs"
+                  className="absolute -bottom-45 right-0 bg-white text-black p-6 max-w-xs"
                   onMouseEnter={() => dispatch(setCursorType("text"))}
                   onMouseLeave={() => dispatch(setCursorType("default"))}
                 >
@@ -168,8 +168,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* <div className="bg-jet w-full absolute bottom-0 h-[10vh] lg:h-[12vh]"></div>
-        <div className="bg-jet w-full absolute top-0 h-[10vh] lg:h-[12vh]"></div> */}
+        <div className="bg-jet w-full z-2 absolute bottom-0 h-[10vh] lg:h-[13vh]"></div>
+        <div className="bg-jet w-full z-2 absolute top-0 h-[10vh] lg:h-[13vh]"></div>
       </section>
     </BackgroundPaths>
   );

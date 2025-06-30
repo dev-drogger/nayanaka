@@ -58,7 +58,7 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
             {tier.name}
           </h2>
           {isPopular && (
-            <Badge variant="secondary" className="ml-2 shrink-0 px-2 py-1">
+            <Badge variant="secondary" className="ml-2 mt-2 shrink-0 px-2 py-1">
               <span className="text-black text-[10px] sm:text-xs font-normal whitespace-nowrap">
                 🔥 Popular
               </span>
@@ -68,9 +68,9 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
       </div>
 
       {/* Price Section */}
-      <div className="py-2 sm:py-3 lg:py-4">
+      <div className="py-2 sm:py-3 lg:py-0">
         {typeof price === "number" ? (
-          <div className="flex flex-col space-y-1">
+          <div className="flex flex-col">
             <div className="flex items-baseline gap-1 flex-wrap">
               <span className="text-muted-foreground text-xs sm:text-sm">
                 From
@@ -80,8 +80,6 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
                   style: "currency",
                   currency: "IDR",
                   trailingZeroDisplay: "stripIfInteger",
-                  notation: "compact", // This helps with long numbers on mobile
-                  compactDisplay: "short",
                 }}
                 value={price + 200000}
                 className="text-xs sm:text-sm text-muted-foreground line-through"
@@ -92,11 +90,10 @@ export function PricingCard({ tier, paymentFrequency }: PricingCardProps) {
                 style: "currency",
                 currency: "IDR",
                 trailingZeroDisplay: "stripIfInteger",
-                notation: "compact",
-                compactDisplay: "short",
+                
               }}
               value={price}
-              className="text-xl sm:text-2xl lg:text-3xl font-medium leading-none"
+              className="text-xl sm:text-2xl lg:text-[1.7rem] font-medium leading-none"
             />
           </div>
         ) : (
