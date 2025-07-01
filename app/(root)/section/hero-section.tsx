@@ -32,7 +32,7 @@ export default function Hero() {
 
   return (
     <BackgroundPaths>
-      <section id="hero" className="h-screen flex items-center w-screen">
+      <section id="hero" className="h-screen z-2 flex items-center w-screen">
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-12 gap-4 z-50">
             <div className="col-span-12 lg:col-span-8 flex-center">

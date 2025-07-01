@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useMemo } from "react";
+import { useRef, useCallback, useMemo, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -26,25 +26,19 @@ export default function StickyFix() {
 
   const h2Elements = getH2Elements();
 
+  useEffect(() => {
+    ScrollTrigger.refresh();
+  });
+
   useGSAP(() => {
     if (!isContentVisible) return;
 
-    gsap.set(boxRef.current, { scaleX: 1.185, scaleY: 2.5 });
-    gsap.set(titleRef.current, { scale: 3, top: -53 });
+    // gsap.set(titleRef.current, { scale: 3, top: -50 });
+    gsap.set(boxRef.current, { scaleX: 1.13, scaleY: 2.5 });
+
     gsap.set(h2Elements, {
       y: 20,
       opacity: 0,
-    });
-
-    const textEnterAnimation = gsap.timeline({
-      scrollTrigger: {
-        trigger: textRef.current,
-        start: "center center",
-        end: "center+=50 center",
-        scrub: 1,
-        id: "enter",
-        markers: true,
-      },
     });
 
     const textExitAnimation = gsap.timeline({
@@ -54,22 +48,23 @@ export default function StickyFix() {
         end: "center+=500 center",
         scrub: 1,
         id: "exit",
-        markers: true,
       },
     });
+    const textEnterAnimation = gsap.timeline({
+      scrollTrigger: {
+        trigger: textRef.current,
+        start: "center center",
+        end: "center+=50 center",
+        scrub: 1,
+        id: "enter",
+      },
+    });
+    const boxScaleAnimation = gsap.timeline();
+    const titleAnimation = gsap.timeline();
 
     h2Elements?.forEach((h2: HTMLHeadingElement, index: number) => {
       const reverseIndex = h2Elements.length - 1 - index;
-      textExitAnimation.to(
-        h2,
-        {
-          y: -20,
-          opacity: 0,
-          duration: 1,
-          ease: "power2.in",
-        },
-        reverseIndex * 0.3
-      );
+
       textEnterAnimation.to(
         h2,
         {
@@ -80,20 +75,22 @@ export default function StickyFix() {
         },
         index * 0.3
       );
+
+      textExitAnimation.fromTo(
+        h2,
+        { y: 0, opacity: 1 },
+        {
+          y: -20,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.in",
+          immediateRender: false,
+        },
+        reverseIndex * 0.3
+      );
     });
 
-    const boxScaleXAnimation = gsap.to(boxRef.current, {
-      scaleX: 1,
-      scrollTrigger: {
-        trigger: ".about",
-        start: "top+=410 center",
-        end: "center-=525 center",
-        scrub: 1,
-        id: "boxScaleX",
-      },
-    });
-
-    const boxScaleYAnimation = gsap.to(boxRef.current, {
+    boxScaleAnimation.to(boxRef.current, {
       scaleY: 1,
       scrollTrigger: {
         trigger: ".about",
@@ -103,56 +100,72 @@ export default function StickyFix() {
         id: "boxScaleY",
       },
     });
-    const boxExitAnimation = gsap.fromTo(
+
+    boxScaleAnimation.fromTo(
       boxRef.current,
-      { scaleY: 1, scaleX: 1 },
+      { scaleX: 1 },
       {
-        scaleY: 2.2,
-        scaleX: 1.185,
+        scaleX: 0.85,
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: ".about",
+          start: "top+=410 center",
+          end: "center-=525 center",
+          scrub: 1,
+          id: "boxScaleX",
+        },
+      }
+    );
+
+    boxScaleAnimation.fromTo(
+      boxRef.current,
+      { scaleY: 1 },
+      {
+        scaleY: 0,
+        transformOrigin: "top center",
+        immediateRender: false,
         scrollTrigger: {
           trigger: ".about",
           start: "bottom-=600 center",
           end: "bottom-=555 bottom-=550",
           scrub: 1,
           id: "boxScaleExit",
-          markers: true,
         },
       }
     );
 
-    const titleEnterAnimation = gsap.to(titleRef.current, {
-      scale: 1,
-      top: 130,
-      scrollTrigger: {
-        trigger: ".about",
-        start: "top-=125 center",
-        end: "top+=325 center",
-        scrub: 1,
-      },
-    });
-    const titleExitAnimation = gsap.fromTo(
-      titleRef.current,
-      { y: 0, opacity: 1 },
-      {
-        y: -20,
-        opacity: 0,
+    titleAnimation
+      .from(titleRef.current, {
+        scale: 3,
+        y: -395,
         scrollTrigger: {
           trigger: ".about",
-          start: "top+=425 center",
-          end: "top+=455 center",
-          scrub: 1,
+          start: "top-=125 center",
+          end: "top+=415 center",
+          scrub: 0.5,
         },
-      }
-    );
+      })
+      .fromTo(
+        titleRef.current,
+        { y: 0, opacity: 1 },
+        {
+          y: -20,
+          opacity: 0,
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: ".about",
+            start: "top+=425 center",
+            end: "top+=455 center",
+            scrub: 1,
+          },
+        }
+      );
 
     animationsRef.current.push(
       textEnterAnimation,
       textExitAnimation,
-      boxScaleYAnimation,
-      boxScaleXAnimation,
-      boxExitAnimation,
-      titleEnterAnimation,
-      titleExitAnimation
+      boxScaleAnimation,
+      titleAnimation
     );
 
     return () => {
@@ -169,11 +182,11 @@ export default function StickyFix() {
   return (
     <div className="w-screen">
       <div className="relative">
-        <div className="about h-[300vh] bg-gray-200 relative">
-          <div className="flex-center h-[60vh] bg-gray-200 mb-30">
+        <div className="about h-[300vh] relative">
+          <div className="relative flex-center h-[60vh] bg-cardinal mb-30">
             <h1
               ref={titleRef}
-              className="absolute z-1 text-black text-8xl font-medium"
+              className="absolute top-40 z-1 text-black text-8xl font-medium"
             >
               ABOUT US
             </h1>
@@ -181,14 +194,14 @@ export default function StickyFix() {
 
           <div
             ref={boxRef}
-            className="sticky top-1/2 z-2 -translate-y-1/2 bg-jet text-white p-8 text-center font-bold text-xl h-[65vh] max-w-screen mx-20"
+            className="sticky z-2 top-1/2 -translate-y-1/2 bg-jet text-white p-8 text-center font-bold text-xl h-[65vh] min-w-screen"
           ></div>
           <div
             ref={textRef}
-            className="sticky z-3 mx-36 top-1/2 -translate-y-1/2 uppercase "
+            className="sticky z-3 top-1/2 left-[10.5%] -translate-y-1/2 w-fit uppercase text-justify"
           >
             {textContent.map((text, index) => (
-              <h2 key={index} className="font-medium">
+              <h2 key={index} className="font-medium text-justify">
                 {text}
               </h2>
             ))}
