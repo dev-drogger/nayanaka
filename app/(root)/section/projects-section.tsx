@@ -8,7 +8,7 @@ export default function Projects() {
     <>
       <section
         id="projects"
-        className="h-[450vh] lg:h-[720vh] w-screen py-0 overflow-hidden"
+        className="h-[450vh] lg:h-[720vh] w-screen bg-gray-200  py-0 overflow-hidden"
       >
         <ProjectsSlider />
         <NewCarousel />

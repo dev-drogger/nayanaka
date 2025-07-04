@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, easeOut } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
 import { SERVICES } from "@/constant";
@@ -8,7 +8,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 import { useInView } from "framer-motion";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -36,11 +36,10 @@ export default function Services() {
       .timeline({
         scrollTrigger: {
           trigger: ".services",
-          start: "top-=400 center",
-          end: "top center",
+          start: "top-=500 center",
+          end: "top-=150 center",
           scrub: 1,
           id: "services-bg",
-          markers: true,
         },
       })
       .fromTo(
@@ -50,7 +49,6 @@ export default function Services() {
       );
   }, [isContentVisible]);
 
-  // Framer Motion variants
   const headingVariants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -58,7 +56,7 @@ export default function Services() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       },
     },
   };
@@ -71,7 +69,7 @@ export default function Services() {
       transition: {
         delay: 0.2 + i * 0.2,
         duration: 0.6,
-        ease: "easeOut",
+        ease: easeOut,
       },
     }),
   };
@@ -84,7 +82,7 @@ export default function Services() {
       transition: {
         delay: 0.5 + i * 0.1,
         duration: 0.4,
-        ease: "easeOut",
+        ease: easeOut,
       },
     }),
   };

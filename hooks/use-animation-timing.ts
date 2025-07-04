@@ -23,7 +23,7 @@ export default function useAnimationTiming(minimumLoadTime?: number) {
 
           setTimeout(() => {
             dispatch(setContentVisible(true));
-          }, 1000);
+          }, 5000);
         }, 1000);
       });
     }, remainingTime);

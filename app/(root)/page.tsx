@@ -3,23 +3,22 @@
 import React, { useMemo } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
-import { setMouseSpeed } from "@/state/slices/cursorSlice";
+import { useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import CustomCursor from "@/components/ui/custom-cursor";
 import LoadingScreen from "../../components/loading";
 import Hero from "./section/hero-section";
-import About from "./section/about-section";
 import Services from "./section/service-section";
 import Pricing from "./section/pricing-section";
 import Projects from "./section/projects-section";
+import About from "./section/about-section";
 import BrowserCheck from "@/components/browser-check";
-import { useRafCallback } from "@/hooks/use-raf-callback";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect } from "react";
 
 import useMouseTracking from "@/hooks/use-mouse-tracking";
 import useAnimationTiming from "@/hooks/use-animation-timing";
-import StickyFix from "./section/new-about";
+import { useRafCallback } from "@/hooks/use-raf-callback";
+import { setMouseSpeed } from "@/state/slices/cursorSlice";
 
 function MainContent({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
@@ -52,7 +51,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
         opacity: 1,
         transition: {
           duration: 0.8,
-          ease: [0.25, 0.46, 0.45, 0.94],
+          ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
         },
       },
     }),
@@ -102,8 +101,9 @@ function MainContent({ children }: { children: React.ReactNode }) {
           <motion.div
             key="loading-container"
             exit={{
-              x: 1900,
+              // x: 1900,
               transition: { duration: 0.8, ease: "circInOut", delay: 0.5 },
+              opacity: 0,
             }}
             style={{
               position: "fixed",
@@ -149,8 +149,7 @@ export default function Page() {
     <ErrorBoundary>
       <MainContent>
         <Hero />
-        {/* <About /> */}
-        <StickyFix />
+        <About />
         <Services />
         <Projects />
         <Pricing />

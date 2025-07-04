@@ -1,15 +1,23 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, Scale, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { setMenuOpen } from "@/state/slices/navigationSlice";
 import { setCursorType } from "@/state/slices/cursorSlice";
-import { store } from "@/state/redux";
-import { Provider } from "react-redux";
+import { circInOut } from "framer-motion";
 
-function Page() {
+const MENU_ITEMS = [
+  { name: "Home", href: "#hero" },
+  { name: "About", href: "#about" },
+  { name: "Services", href: "#services" },
+  { name: "Projects", href: "#projects" },
+  { name: "Pricing", href: "#pricing" },
+  { name: "Contact", href: "#contact" },
+];
+
+export default function Navigation() {
   const dispatch = useAppDispatch();
   const { menuOpen } = useAppSelector((state) => state.navigation);
   const { isContentVisible } = useAppSelector((state) => state.contentVisible);
@@ -26,16 +34,6 @@ function Page() {
     dispatch(setMenuOpen(!menuOpen));
   };
 
-  const menuItems = [
-    { name: "Home", href: "#hero" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Projects", href: "#projects" },
-    { name: "Pricing", href: "#pricing" },
-    { name: "Contact", href: "#contact" },
-  ];
-
-  // Container variants with different timing for enter and exit
   const containerVariants = {
     hidden: {
       y: -1000,
@@ -44,20 +42,19 @@ function Page() {
       y: 0,
       transition: {
         duration: 0.7,
-        ease: "circInOut",
+        ease: circInOut,
       },
     },
     exit: {
       y: 1000,
       transition: {
         duration: 0.5,
-        ease: "circInOut",
-        delay: 0.8, // Wait for all li animations (5 items * 0.3 delay + 0.3 buffer)
+        ease: circInOut,
+        delay: 0.8,
       },
     },
   };
 
-  // List item variants
   const itemVariants = {
     hidden: {
       opacity: 0,
@@ -69,16 +66,16 @@ function Page() {
       transition: {
         delay: index * 0.1,
         duration: 0.5,
-        ease: "circInOut",
+        ease: circInOut,
       },
     }),
     exit: (index: number) => ({
       opacity: 0,
       y: 50,
       transition: {
-        delay: index * 0.1, // Faster stagger on exit
+        delay: index * 0.1,
         duration: 0.1,
-        ease: "circInOut",
+        ease: circInOut,
       },
     }),
   };
@@ -92,7 +89,7 @@ function Page() {
       transition: {
         delay: 2.5,
         duration: 0.8,
-        ease: "circInOut",
+        ease: circInOut,
       },
     },
   };
@@ -115,7 +112,7 @@ function Page() {
           >
             <div className="flex-center gap-10">
               <div>
-                <h2>Nayanaka</h2>
+                <h2 className="text-4xl">Nayanaka</h2>
                 <p> なやなか</p>
               </div>
 
@@ -127,23 +124,16 @@ function Page() {
           </Link>
 
           <div className="hidden lg:flex space-x-8">
-            {[
-              "hero",
-              "about",
-              "services",
-              "projects",
-              "pricing",
-              "contact",
-            ].map((section, index) => (
+            {MENU_ITEMS.map((section, index) => (
               <motion.a
                 key={index}
-                href={`#${section}`}
+                href={`#${section.name}`}
                 className={`text-lg font-bold uppercase text-white tracking-widest`}
                 onMouseEnter={handleCursorEnter}
                 onMouseLeave={handleCursorLeave}
                 whileHover={{ scale: 1.1 }}
               >
-                {section.toUpperCase()}
+                {section.name.toUpperCase()}
               </motion.a>
             ))}
           </div>
@@ -174,7 +164,7 @@ function Page() {
           >
             <nav className="text-center text-white">
               <ul className="space-y-8">
-                {menuItems.map((item, index) => (
+                {MENU_ITEMS.map((item, index) => (
                   <motion.li
                     key={index}
                     variants={itemVariants}
@@ -201,8 +191,4 @@ function Page() {
       </AnimatePresence>
     </>
   );
-}
-
-export default function Navigation() {
-  return <Page />;
 }

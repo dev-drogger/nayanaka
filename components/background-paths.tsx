@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { circIn, circInOut, motion } from "framer-motion";
 import { useMemo } from "react";
 import { useAppSelector } from "@/hooks/redux-hooks";
 
@@ -64,8 +64,23 @@ function FloatingPaths({ position }: { position: number }) {
 }
 
 export function BackgroundPaths({ children }: { children: React.ReactNode }) {
+  // const { isContentVisible } = useAppSelector((state) => state.contentVisible);
+
+  // const pageVariants = {
+  //   hidden: { scaleY: 0 },
+  //   visible: {
+  //     scaleY: 1,
+  //     transition: { duration: 0.6, ease: circIn },
+  //   },
+  // };
+
   return (
-    <div className="relative h-screen w-screen bg-gray-200 z-3 flex items-center justify-center overflow-hidden">
+    <motion.div
+      className="relative size-full bg-gray-200 z-3 flex items-center justify-center overflow-hidden"
+      // initial="hidden"
+      // animate={isContentVisible ? "visible" : "hidden"}
+      // variants={pageVariants}
+    >
       <div className=" absolute -bottom-60 inset-0 w-[200vw] lg:w-screen scale-200 transform scale-y-[-1]">
         <FloatingPaths position={1} />
         <div className="lg:block">
@@ -76,6 +91,6 @@ export function BackgroundPaths({ children }: { children: React.ReactNode }) {
       <div className="flex-col-center lg:flex-row-center lg:gap-0 w-full">
         {children}
       </div>
-    </div>
+    </motion.div>
   );
 }

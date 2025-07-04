@@ -4,10 +4,8 @@ import { motion } from "framer-motion";
 import { useAppDispatch } from "@/hooks/redux-hooks";
 import { setCursorType } from "@/state/slices/cursorSlice";
 import { InfiniteSlider } from "./ui/infinite-slider";
-import { store } from "@/state/redux";
-import { Provider } from "react-redux";
 
-function Page() {
+export default function Footer() {
   const dispatch = useAppDispatch();
 
   return (
@@ -106,6 +104,7 @@ function Page() {
           </div>
         </div>
       </div>
+
       <div className="absolute uppercase bottom-30 lg:bottom-40 text-white text-xl w-screen flex-row-center">
         <InfiniteSlider
           reverse
@@ -149,8 +148,4 @@ function Page() {
       </div>
     </footer>
   );
-}
-
-export default function Footer() {
-  return <Page />;
 }
