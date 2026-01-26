@@ -12,7 +12,6 @@ import {
 export function ProjectCarousel() {
   const isMobile = useMediaQuery("(max-width: 700px)");
   const isTablet = useMediaQuery("(max-width: 1024px)");
-
   // const imageConfigs = useMemo(() => {
   //   if (isMobile) {
   //     return IMAGE_URLS.map((url, index) => {

@@ -45,11 +45,7 @@ export default function RootLayout({
           <Navigation />
 
           <main>{children}</main>
-
           <Footer />
-          {/* <div className="h-[50vh]">
-            hello
-          </div> */}
         </ReduxProvider>
       </body>
     </html>

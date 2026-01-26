@@ -1,27 +1,50 @@
 "use client";
 
-import { motion, circIn } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { useAppSelector } from "@/hooks/redux-hooks";
 import { BackgroundPaths } from "@/components/background-paths";
 import HeroTitle from "@/components/hero/hero-title";
 import { HeroGraphic } from "@/components/hero/hero-graphic";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function Hero() {
+  gsap.registerPlugin(useGSAP);
+  const pageRef = useRef(null);
+  const page2Ref = useRef(null);
+
+  const pageTl = useRef<gsap.core.Timeline | null>(null);
+  const page2Tl = useRef<gsap.core.Timeline | null>(null);
+
   const { isContentVisible } = useAppSelector((state) => state.contentVisible);
-  const pageVariants = {
-    hidden: { y: 100 },
-    visible: {
-      y: 0,
-      transition: { duration: 0.6, ease: circIn },
-    },
-  };
-  const page2Variants = {
-    hidden: { y: -100 },
-    visible: {
-      y: 0,
-      transition: { duration: 0.6, ease: circIn },
-    },
-  };
+
+  useGSAP(() => {
+    pageTl.current = gsap
+      .timeline({ paused: true })
+      .fromTo(
+        pageRef.current,
+        { y: 100 },
+        { y: 0, duration: 0.6, ease: "circ.inOut" },
+      );
+
+    page2Tl.current = gsap
+      .timeline({ paused: true })
+      .fromTo(
+        page2Ref.current,
+        { y: -100 },
+        { y: 0, duration: 0.6, ease: "circ.inOut" },
+      );
+  });
+
+  useEffect(() => {
+    if (isContentVisible) {
+      pageTl.current?.play();
+      page2Tl.current?.play();
+    } else {
+      pageTl.current?.reverse();
+      page2Tl.current?.reverse();
+    }
+  }, [isContentVisible]);
 
   return (
     <section className="py-0 bg-jet">
@@ -36,18 +59,14 @@ export default function Hero() {
         </div>
       </BackgroundPaths>
 
-      <motion.div
+      <div
         className="bg-jet w-full z-4 absolute bottom-0 h-[10vh] lg:h-[13vh]"
-        initial="hidden"
-        animate={isContentVisible ? "visible" : "hidden"}
-        variants={pageVariants}
-      ></motion.div>
-      <motion.div
+        ref={pageRef}
+      ></div>
+      <div
         className="bg-jet w-full z-4 absolute top-0 h-[10vh] lg:h-[13vh]"
-        initial="hidden"
-        animate={isContentVisible ? "visible" : "hidden"}
-        variants={page2Variants}
-      ></motion.div>
+        ref={page2Ref}
+      ></div>
     </section>
   );
 }

@@ -135,7 +135,8 @@
   * {
     @apply border-border outline-ring/50;
   }
-  html, body {
+  html,
+  body {
     @apply h-full;
   }
   body {

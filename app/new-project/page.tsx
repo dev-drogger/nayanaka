@@ -2,15 +2,7 @@
 
 import { useAppSelector } from "@/hooks/redux-hooks";
 import React from "react";
-import {
-  backIn,
-  backInOut,
-  backOut,
-  circIn,
-  circInOut,
-  circOut,
-  motion,
-} from "framer-motion";
+import { circOut, motion } from "framer-motion";
 
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -51,17 +43,17 @@ const Page = () => {
         opacity: 1,
         duration: 0.2,
         delay: 2,
-      }
+      },
     )
       .fromTo(
         ref.current,
         { x: -5, y: -5, opacity: 0 },
-        { x: -0, y: -0, opacity: 1, duration: 0.2, immediateRender: false }
+        { x: -0, y: -0, opacity: 1, duration: 0.2, immediateRender: false },
       )
       .fromTo(
         ref.current,
         { x: 10, y: 10, opacity: 0 },
-        { x: 0, y: 0, opacity: 1, duration: 0.2, immediateRender: false }
+        { x: 0, y: 0, opacity: 1, duration: 0.2, immediateRender: false },
       );
   });
 
