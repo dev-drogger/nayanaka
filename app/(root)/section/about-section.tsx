@@ -1,20 +1,17 @@
 "use client";
 
-import { useRef, useCallback, useMemo, useEffect } from "react";
+import { useRef, useCallback, useMemo } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useAppSelector } from "@/hooks/redux-hooks";
 import { ABOUT_TEXT } from "@/constant";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(useGSAP);
 
 export default function About() {
   const boxRef = useRef<HTMLDivElement>(null);
+  const boxRef2 = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const textRef = useRef<HTMLHeadingElement>(null);
-  const animationsRef = useRef<(gsap.core.Timeline | gsap.core.Tween)[]>([]);
-  const { isContentVisible } = useAppSelector((state) => state.contentVisible);
+  const textRef = useRef<HTMLDivElement>(null);
   const textContent = useMemo(() => ABOUT_TEXT, []);
 
   const getH2Elements =
@@ -25,200 +22,187 @@ export default function About() {
       return elements.length > 0 ? elements : null;
     }, []);
 
-  useEffect(() => {
-    const id = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 1000);
-    return () => clearTimeout(id);
-  }, [isContentVisible]);
-
   useGSAP(() => {
-    if (!isContentVisible) return;
-
     const h2Elements = getH2Elements();
     if (!h2Elements) return;
 
-    requestAnimationFrame(() => {
-      gsap.set(boxRef.current, { scaleX: 1.13, scaleY: 2.5 });
-
-      gsap.set(h2Elements, {
-        y: 20,
-        opacity: 0,
-      });
-
-      const textExitAnimation = gsap.timeline({
-        scrollTrigger: {
-          trigger: textRef.current,
-          start: "center+=450 center",
-          end: "center+=500 center",
-          scrub: 0.7,
-          id: "exit",
-          invalidateOnRefresh: true,
-        },
-      });
-      const textEnterAnimation = gsap.timeline({
-        scrollTrigger: {
-          trigger: textRef.current,
-          start: "center center",
-          end: "center+=50 center",
-          scrub: 0.7,
-          id: "enter",
-          invalidateOnRefresh: true,
-        },
-      });
-      const boxScaleAnimation = gsap.timeline();
-      const titleAnimation = gsap.timeline();
-
-      h2Elements?.forEach((h2: HTMLHeadingElement, index: number) => {
-        const reverseIndex = h2Elements.length - 1 - index;
-
-        textEnterAnimation.to(
-          h2,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: "power2.out",
-            immediateRender: false,
-          },
-          index * 0.3
-        );
-
-        textExitAnimation.fromTo(
-          h2,
-          { y: 0, opacity: 1 },
-          {
-            y: -20,
-            opacity: 0,
-            duration: 1,
-            ease: "power2.in",
-            immediateRender: false,
-          },
-          reverseIndex * 0.3
-        );
-      });
-
-      boxScaleAnimation.to(boxRef.current, {
-        scaleY: 1,
-        scrollTrigger: {
-          trigger: ".about",
-          start: "top-=120 center",
-          end: "center-=590 center",
-          scrub: 1,
-          id: "boxScaleY",
-        },
-      });
-
-      boxScaleAnimation.fromTo(
-        boxRef.current,
-        { scaleX: 1 },
-        {
-          scaleX: 0.85,
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: ".about",
-            start: "top+=410 center",
-            end: "center-=525 center",
-            scrub: 1,
-            id: "boxScaleX",
-          },
-        }
-      );
-
-      boxScaleAnimation.fromTo(
-        boxRef.current,
-        { scaleY: 1, y: 0 },
-        {
-          scaleY: 0,
-          y: -50,
-          transformOrigin: "top center",
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: ".about",
-            start: "bottom-=835 center",
-            end: "bottom-=775 center",
-            scrub: 1,
-            id: "boxScaleExit",
-            markers: true,
-          },
-        }
-      );
-
-      titleAnimation
-        .from(titleRef.current, {
-          scale: 3,
-          y: -395,
-          scrollTrigger: {
-            trigger: ".about",
-            start: "top-=125 center",
-            end: "top+=415 center",
-            scrub: 0.5,
-          },
-        })
-        .fromTo(
-          titleRef.current,
-          { y: 0, opacity: 1 },
-          {
-            y: -20,
-            opacity: 0,
-            immediateRender: false,
-            scrollTrigger: {
-              trigger: ".about",
-              start: "top+=425 center",
-              end: "top+=455 center",
-              scrub: 1,
-            },
-          }
-        );
-
-      animationsRef.current.push(
-        textEnterAnimation,
-        textExitAnimation,
-        boxScaleAnimation,
-        titleAnimation
-      );
+    // Set initial state for h2 elements
+    gsap.set(h2Elements, {
+      y: 20,
+      opacity: 0,
     });
 
-    return () => {
-      animationsRef.current.forEach((animation) => {
-        if (animation && typeof animation.kill === "function") {
-          animation.kill();
-        }
-      });
-      animationsRef.current = [];
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [isContentVisible]);
+    // Pin the main container
+    gsap.to(boxRef.current, {
+      scrollTrigger: {
+        trigger: boxRef.current,
+        start: "top+=395 center",
+        end: "center+=1200 center",
+        scrub: 0.5,
+        pin: true,
+        pinSpacing: true,
+        id: "pin",
+      },
+    });
+
+    // Clip path animation for box2
+    gsap.set(boxRef2.current, {
+      clipPath: "polygon(0 50%, 100% 50%, 100% 50%, 0 50%)",
+    });
+
+    gsap.to(boxRef2.current, {
+      clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0 0%)",
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: boxRef2.current,
+        start: "center center",
+        end: "+=300 center",
+        scrub: 0.5,
+        markers: true,
+        id: "firstpath",
+      },
+    });
+
+    gsap.to(boxRef2.current, {
+      scale: 0.7,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: boxRef2.current,
+        start: "center+=300 center",
+        end: "bottom+=200 center",
+        scrub: 0.5,
+        id: "boxScaleYsecond",
+      },
+    });
+
+    gsap.to(boxRef2.current, {
+      clipPath: "polygon(0 0%, 100% 0%, 100% 0%, 0 0%)",
+      immediateRender: false,
+      scrollTrigger: {
+        trigger: boxRef2.current,
+        start: "center+=900 center",
+        end: "+=490",
+        scrub: 0.5,
+      },
+    });
+
+    gsap.from(titleRef.current, {
+      scale: 3,
+      scrollTrigger: {
+        trigger: titleRef.current,
+        start: "center center",
+        end: "+=200 center",
+        scrub: 0.5,
+      },
+    });
+
+    // Title scale down animation
+    gsap.fromTo(
+      titleRef.current,
+      { y: 0 },
+      {
+        y: -600,
+        ease: "none",
+        immediateRender: false,
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "center+=200 center",
+          end: "+=125",
+          scrub: 0.5,
+          id: "scalePhase2",
+        },
+      },
+    );
+    // gsap.fromTo(
+    //   titleRef.current,
+    //   { scale: 1 },
+    //   {
+    //     scale: 0,
+    //     ease: "none",
+    //     immediateRender: false,
+    //     scrollTrigger: {
+    //       trigger: titleRef.current,
+    //       start: "center+=300 center",
+    //       end: "+=125",
+    //       scrub: 0.5,
+    //       id: "scalePhase2",
+    //     },
+    //   },
+    // );
+
+    // Create timelines for h2 enter and exit animations
+    const textEnterAnimation = gsap.timeline({
+      scrollTrigger: {
+        trigger: titleRef.current,
+        start: "center+=485 center",
+        end: "+=200",
+        scrub: 0.5,
+        id: "h2Enter",
+      },
+    });
+
+    const textExitAnimation = gsap.timeline({
+      scrollTrigger: {
+        trigger: textRef.current,
+        start: "center+=625 center",
+        end: "+=475",
+        scrub: 0.5,
+        id: "h2Exit",
+      },
+    });
+
+    // Animate h2 elements
+    h2Elements?.forEach((h2: HTMLHeadingElement, index: number) => {
+      const reverseIndex = h2Elements.length - 1 - index;
+
+      textEnterAnimation.to(
+        h2,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power2.out",
+          immediateRender: false,
+        },
+        index * 0.3,
+      );
+
+      textExitAnimation.fromTo(
+        h2,
+        { y: 0, opacity: 1 },
+        {
+          y: -20,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.in",
+          immediateRender: false,
+        },
+        reverseIndex * 0.3,
+      );
+    });
+  }, []);
 
   return (
-    <div className="w-screen">
-      <div className="relative">
-        <div className="about h-[300vh] relative">
-          <div className="relative flex-center h-[60vh] bg-cardinal mb-30">
-            <h1
-              ref={titleRef}
-              className="absolute top-40 z-1 text-black text-8xl font-medium"
-            >
-              ABOUT US
-            </h1>
-          </div>
+    <section ref={boxRef} className="about h-[150vh] relative bg-jet py-0">
+      <div
+        ref={boxRef2}
+        className="about min-h-screen relative bg-gray-200 flex-center"
+      >
+        <h1 ref={titleRef} className="text-jet text-8xl font-medium absolute">
+          ABOUT
+        </h1>
 
-          <div
-            ref={boxRef}
-            className="sticky z-2 top-1/2 -translate-y-1/2 bg-jet text-white p-8 text-center font-bold text-xl h-[65vh] min-w-screen"
-          ></div>
-          <div
-            ref={textRef}
-            className="sticky z-3 top-1/2 left-[10.5%] -translate-y-1/2 w-fit uppercase text-justify"
-          >
-            {textContent.map((text, index) => (
-              <h2 key={index} className="font-medium text-justify">
-                {text}
-              </h2>
-            ))}
-          </div>
+        <div ref={textRef} className="">
+          {textContent.map((text, index) => (
+            <h2
+              key={index}
+              className="uppercase font-medium text-justify text-jet text-6xl leading-20"
+            >
+              {text}
+            </h2>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

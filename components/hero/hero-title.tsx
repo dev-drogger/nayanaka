@@ -1,7 +1,7 @@
 import { TextEffect } from "../ui/text-effect";
 import { useMemo } from "react";
 
-export default function HeroTitle({ state }: { state: boolean }) {
+export default function HeroTitle() {
   const HERO_TITLE_ANIM_VARIANTS = useMemo(
     () => ({
       container: {
@@ -21,7 +21,7 @@ export default function HeroTitle({ state }: { state: boolean }) {
         },
       },
     }),
-    []
+    [],
   );
 
   return (
@@ -30,7 +30,6 @@ export default function HeroTitle({ state }: { state: boolean }) {
         <TextEffect
           per="char"
           preset="slide"
-          trigger={state}
           className="text-4xl lg:text-6xl uppercase font-bold text-black"
           variants={HERO_TITLE_ANIM_VARIANTS}
         >
@@ -40,7 +39,6 @@ export default function HeroTitle({ state }: { state: boolean }) {
         <TextEffect
           per="char"
           preset="slide"
-          trigger={state}
           className="text-4xl lg:text-6xl uppercase font-bold text-black"
           variants={{
             container: {
@@ -68,7 +66,6 @@ export default function HeroTitle({ state }: { state: boolean }) {
         <TextEffect
           per="char"
           preset="slide"
-          trigger={state}
           className="text-4xl lg:text-6xl uppercase font-bold text-black"
           variants={{
             container: {

@@ -1,38 +1,13 @@
 "use client";
 
-import { motion, easeOut } from "framer-motion";
+import { motion } from "framer-motion";
 import { TextEffect } from "@/components/ui/text-effect";
-import { useAppSelector } from "@/hooks/redux-hooks";
-import { useMemo } from "react";
 
 export default function LoadingScreen() {
-  const isLoading = useAppSelector((state) => state.loading.isLoading);
-
-  const variants = useMemo(
-    () => ({
-      hidden: {
-        opacity: 0,
-        transition: {
-          duration: 0.3,
-          ease: easeOut,
-        },
-      },
-      visible: {
-        opacity: 1,
-      },
-    }),
-    []
-  );
-
   return (
-    <div className="h-screen relative  z-100 w-full flex flex-col items-center justify-center bg-jet">
+    <div className="h-screen fixed inset-0 z-[999] w-full flex flex-col items-center justify-center bg-jet">
       <div className="absolute inset-0 flex items-center justify-center">
-        <motion.div
-          className="relative"
-          initial="visible"
-          animate={isLoading ? "visible" : "hidden"}
-          variants={variants}
-        >
+        <motion.div className="relative">
           <div className="flex-row-center gap-14 mb-4">
             <motion.div
               className="w-auto"

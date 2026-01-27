@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ReactLenis from "lenis/react";
 
 import CustomCursor from "@/components/ui/custom-cursor";
 import LoadingScreen from "../../components/loading";
@@ -19,14 +20,20 @@ import useMouseTracking from "@/hooks/use-mouse-tracking";
 import useAnimationTiming from "@/hooks/use-animation-timing";
 import { useRafCallback } from "@/hooks/use-raf-callback";
 import { setMouseSpeed } from "@/state/slices/cursorSlice";
+import { useState } from "react";
+import { useProgress } from "@react-three/drei";
+import dynamic from "next/dynamic";
 
 function MainContent({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.loading);
   const { isPageMounted } = useAppSelector((state) => state.pageMounted);
+  const [isReady, setIsReady] = useState(false);
+
   const minimumLoadTime = 3500;
   const mouseSpeedRef = useMouseTracking();
   const { childrenRef } = useAnimationTiming(minimumLoadTime);
+  const progress = useProgress();
 
   useRafCallback(() => {
     if (Math.abs(mouseSpeedRef.current) > 2) {
@@ -42,7 +49,11 @@ function MainContent({ children }: { children: React.ReactNode }) {
         ScrollTrigger.refresh();
       }, 50);
     }
-  }, [isLoading]);
+
+    if (progress === 100) {
+      setIsReady(true);
+    }
+  }, [isLoading, progress]);
 
   const contentVariants = useMemo(
     () => ({
@@ -55,7 +66,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
         },
       },
     }),
-    []
+    [],
   );
 
   return (
@@ -84,7 +95,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
       <motion.div
         key="content"
         initial="hidden"
-        animate={isPageMounted ? "visible" : "hidden"}
+        animate={"visible"}
         variants={contentVariants}
         className="w-full"
         style={{
@@ -95,29 +106,7 @@ function MainContent({ children }: { children: React.ReactNode }) {
         {children}
       </motion.div>
 
-      {/* Loading screen with proper exit animation */}
-      <AnimatePresence mode="wait">
-        {isLoading && (
-          <motion.div
-            key="loading-container"
-            exit={{
-              // x: 1900,
-              transition: { duration: 0.8, ease: "circInOut", delay: 0.5 },
-              opacity: 0,
-            }}
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 100, // Higher than content
-            }}
-          >
-            <LoadingScreen />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {!isReady && <LoadingScreen />}
     </>
   );
 }
@@ -144,16 +133,11 @@ class ErrorBoundary extends React.Component<
   }
 }
 
+const DynamicContent = dynamic(() => import("./section/main-content"), {
+  ssr: false,
+  loading: () => <LoadingScreen />,
+});
+
 export default function Page() {
-  return (
-    <ErrorBoundary>
-      <MainContent>
-        <Hero />
-        <About />
-        <Services />
-        <Projects />
-        <Pricing />
-      </MainContent>
-    </ErrorBoundary>
-  );
+  return <DynamicContent />;
 }

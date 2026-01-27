@@ -6,7 +6,7 @@ import { setCursorType } from "@/state/slices/cursorSlice";
 import { useMemo } from "react";
 import { ArrowRight } from "lucide-react";
 
-export const HeroGraphic = ({ state }: { state: boolean }) => {
+export const HeroGraphic = () => {
   const dispatch = useAppDispatch();
   const HERO_GRAPHIC_ANIM_VARIANTS = useMemo(
     () => ({
@@ -21,14 +21,14 @@ export const HeroGraphic = ({ state }: { state: boolean }) => {
         },
       },
     }),
-    []
+    [],
   );
 
   return (
     <div className="col-span-12 lg:col-span-4 lg:pl-8">
       <motion.div
         initial="hidden"
-        animate={state ? "visible" : "hidden"}
+        animate={"visible"}
         variants={HERO_GRAPHIC_ANIM_VARIANTS}
         viewport={{ once: true }}
       >

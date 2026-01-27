@@ -20,7 +20,6 @@ const MENU_ITEMS = [
 export default function Navigation() {
   const dispatch = useAppDispatch();
   const { menuOpen } = useAppSelector((state) => state.navigation);
-  const { isContentVisible } = useAppSelector((state) => state.contentVisible);
 
   const handleCursorEnter = () => {
     dispatch(setCursorType("link"));
@@ -87,7 +86,6 @@ export default function Navigation() {
     visible: {
       opacity: 1,
       transition: {
-        delay: 2.5,
         duration: 0.8,
         ease: circInOut,
       },
@@ -99,7 +97,7 @@ export default function Navigation() {
       <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
         <motion.div
           initial="hidden"
-          animate={isContentVisible ? "visible" : "hidden"}
+          animate={"visible"}
           exit={{ opacity: 0 }}
           variants={variants}
           className="container mx-auto px-10 flex justify-between items-center py-4"
