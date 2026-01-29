@@ -6,9 +6,16 @@ import Projects from "./projects-section";
 
 export default function MainConten() {
   return (
-    <ReactLenis root className="relative w-screen min-h-screen overflow-x-auto">
+    <ReactLenis
+      root
+      options={{
+        duration: 2,
+        lerp: 0.05,
+      }}
+      className="relative w-screen min-h-screen overflow-x-auto"
+    >
       <Hero />
-      {/* <About /> */}
+      <About />
       {/* <Projects /> */}
     </ReactLenis>
   );

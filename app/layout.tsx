@@ -6,16 +6,16 @@ import ReduxProvider from "@/state/redux-provider";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+// const poppins = Poppins({
+//   variable: "--font-poppins",
+//   subsets: ["latin"],
+//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+// });
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+// const inter = Inter({
+//   variable: "--font-inter",
+//   subsets: ["latin"],
+// });
 
 const satoshi = localFont({
   src: "../public/fonts/satoshi.ttf",
@@ -24,6 +24,73 @@ const satoshi = localFont({
 const grotesk = localFont({
   src: "../public/fonts/bdo-grotesk.ttf",
   variable: "--font-grotesk",
+});
+
+export const amiamie = localFont({
+  src: [
+    {
+      path: "../public/fonts/Amiamie-Light.ttf",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Amiamie-LightItalic.ttf",
+      weight: "200",
+      style: "italic",
+    },
+
+    {
+      path: "../public/fonts/Amiamie-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Amiamie-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+
+    {
+      path: "../public/fonts/Amiamie-Black.ttf",
+      weight: "900",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Amiamie-BlackItalic.ttf",
+      weight: "900",
+      style: "italic",
+    },
+  ],
+  variable: "--font-amiamie",
+  display: "swap",
+});
+
+export const amiamieRound = localFont({
+  src: [
+    {
+      path: "../public/fonts/Amiamie-RegularRound.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Amiamie-ItalicRound.ttf",
+      weight: "400",
+      style: "italic",
+    },
+
+    {
+      path: "../public/fonts/Amiamie-BlackRound.ttf",
+      weight: "900",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Amiamie-BlackItalicRound.ttf",
+      weight: "900",
+      style: "italic",
+    },
+  ],
+  variable: "--font-amiamie-round",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -39,7 +106,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${satoshi.variable} ${grotesk.variable} ${poppins.variable} ${inter.variable} antialiased min-h-screen`}
+        className={`${satoshi.variable} ${amiamie.variable} ${amiamieRound.variable} ${grotesk.variable} antialiased min-h-screen`}
       >
         <ReduxProvider>
           <Navigation />

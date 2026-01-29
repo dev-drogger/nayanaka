@@ -35,10 +35,11 @@ export default function About() {
       scrollTrigger: {
         trigger: boxRef.current,
         start: "top+=395 center",
-        end: "center+=1200 center",
+        end: "center+=2700 center",
         scrub: 0.5,
         pin: true,
         pinSpacing: true,
+        markers: true,
         id: "pin",
       },
     });
@@ -53,10 +54,10 @@ export default function About() {
       scrollTrigger: {
         trigger: boxRef2.current,
         start: "center center",
-        end: "+=300 center",
+        end: "+=600 center",
         scrub: 0.5,
         markers: true,
-        id: "firstpath",
+        id: "clip from center",
       },
     });
 
@@ -65,10 +66,11 @@ export default function About() {
       ease: "power4.out",
       scrollTrigger: {
         trigger: boxRef2.current,
-        start: "center+=300 center",
-        end: "bottom+=200 center",
+        start: "center+=600 center",
+        end: "bottom+=500 center",
         scrub: 0.5,
-        id: "boxScaleYsecond",
+        markers: true,
+        id: "box scaling down",
       },
     });
 
@@ -77,43 +79,49 @@ export default function About() {
       immediateRender: false,
       scrollTrigger: {
         trigger: boxRef2.current,
-        start: "center+=900 center",
-        end: "+=490",
+        start: "center+=1700 center",
+        end: "+=900",
         scrub: 0.5,
+        markers: true,
+        id: "box swipe up",
       },
     });
 
-    gsap.from(titleRef.current, {
-      scale: 3,
-      scrollTrigger: {
-        trigger: titleRef.current,
-        start: "center center",
-        end: "+=200 center",
-        scrub: 0.5,
-      },
-    });
-
-    gsap.fromTo(
-      titleRef.current,
-      { y: 0 },
-      {
-        y: -600,
-        ease: "none",
-        immediateRender: false,
+    gsap
+      .timeline({
         scrollTrigger: {
           trigger: titleRef.current,
-          start: "center+=200 center",
-          end: "+=125",
+          start: "center center",
+          end: "+=400 center",
           scrub: 0.5,
-          id: "scalePhase2",
+          markers: true,
+          id: "title scaled down",
         },
-      },
-    );
+      })
+      .from(titleRef.current, {
+        scale: 3,
+      })
+      .to("#background", { opacity: 0 });
+
+    gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "center+=550 center",
+          end: "center+=580 center",
+          scrub: 0.5,
+          markers: true,
+          id: "title scaled down",
+        },
+      })
+      .to(titleRef.current, {
+        opacity: 0,
+      });
 
     const textEnterAnimation = gsap.timeline({
       scrollTrigger: {
         trigger: titleRef.current,
-        start: "center+=485 center",
+        start: "center+=885 center",
         end: "+=200",
         scrub: 0.5,
         id: "h2Enter",
@@ -125,8 +133,8 @@ export default function About() {
     const textExitAnimation = gsap.timeline({
       scrollTrigger: {
         trigger: textRef.current,
-        start: "center+=625 center",
-        end: "+=475",
+        start: "center+=1425 center",
+        end: "+=800",
         scrub: 0.5,
         id: "h2Exit",
         fastScrollEnd: true,
@@ -165,20 +173,57 @@ export default function About() {
   }, []);
 
   return (
-    <section ref={boxRef} className="about h-[150vh] relative bg-jet py-0">
+    <section
+      ref={boxRef}
+      className="about h-screen overflow-x-hidden relative bg-gray-200 py-0"
+    >
+      <div id="background">
+        <div className="absolute top-20 w-screen flex-center">
+          <h1 className="text-jet font-amie italic">introducing</h1>
+        </div>
+        <div className="absolute px-40 top-40 w-screen flex flex-col items-center justify-center">
+          <h1 className="text-jet text-9xl font-medium uppercase">Nayanaka</h1>
+          <h1 className="text-jet font-amie tracking-widest uppercase">
+            Creative Studio
+          </h1>
+        </div>
+
+        <div className="bg-jet w-screen flex gap-8 whitespace-nowrap absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-x-hidden">
+          {Array.from({ length: 22 }).map((_, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center leading-none"
+            >
+              <p className="text-xs m-0 p-0">なやなか</p>
+              <p className="text-xs m-0 p-0 -translate-x-8">なやなか</p>
+            </div>
+          ))}
+        </div>
+        <div className="absolute font-secondary bottom-30 flex-col-center w-screen">
+          <h3 className="text-jet">
+            Making your contribution to innovation and development is a true
+            miracle
+          </h3>
+          <h3 className="text-jet">
+            Each of us capable of it. you are invited to participate in
+          </h3>
+          <h3 className="text-jet">turning dreams into reality</h3>
+        </div>
+      </div>
+
       <div
         ref={boxRef2}
-        className="about min-h-screen relative bg-gray-200 flex-center"
+        className="about min-h-screen relative bg-jet flex-center"
       >
-        <h1 ref={titleRef} className="text-jet text-8xl font-medium absolute">
-          ABOUT
+        <h1 ref={titleRef} className="text-white text-9xl font-medium absolute">
+          about <span className="font-amie italic">us</span>
         </h1>
 
         <div ref={textRef} className="">
           {textContent.map((text, index) => (
             <h2
               key={index}
-              className="uppercase font-medium text-justify text-jet text-6xl leading-20"
+              className="uppercase font-medium text-justify text-white text-6xl leading-20"
             >
               {text}
             </h2>
