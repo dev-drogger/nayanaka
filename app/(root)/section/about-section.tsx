@@ -26,13 +26,11 @@ export default function About() {
     const h2Elements = getH2Elements();
     if (!h2Elements) return;
 
-    // Set initial state for h2 elements
     gsap.set(h2Elements, {
       y: 20,
       opacity: 0,
     });
 
-    // Pin the main container
     gsap.to(boxRef.current, {
       scrollTrigger: {
         trigger: boxRef.current,
@@ -45,7 +43,6 @@ export default function About() {
       },
     });
 
-    // Clip path animation for box2
     gsap.set(boxRef2.current, {
       clipPath: "polygon(0 50%, 100% 50%, 100% 50%, 0 50%)",
     });
@@ -96,7 +93,6 @@ export default function About() {
       },
     });
 
-    // Title scale down animation
     gsap.fromTo(
       titleRef.current,
       { y: 0 },
@@ -113,24 +109,7 @@ export default function About() {
         },
       },
     );
-    // gsap.fromTo(
-    //   titleRef.current,
-    //   { scale: 1 },
-    //   {
-    //     scale: 0,
-    //     ease: "none",
-    //     immediateRender: false,
-    //     scrollTrigger: {
-    //       trigger: titleRef.current,
-    //       start: "center+=300 center",
-    //       end: "+=125",
-    //       scrub: 0.5,
-    //       id: "scalePhase2",
-    //     },
-    //   },
-    // );
 
-    // Create timelines for h2 enter and exit animations
     const textEnterAnimation = gsap.timeline({
       scrollTrigger: {
         trigger: titleRef.current,
@@ -138,6 +117,8 @@ export default function About() {
         end: "+=200",
         scrub: 0.5,
         id: "h2Enter",
+        fastScrollEnd: true,
+        preventOverlaps: "textSequence",
       },
     });
 
@@ -148,10 +129,11 @@ export default function About() {
         end: "+=475",
         scrub: 0.5,
         id: "h2Exit",
+        fastScrollEnd: true,
+        preventOverlaps: "textSequence",
       },
     });
 
-    // Animate h2 elements
     h2Elements?.forEach((h2: HTMLHeadingElement, index: number) => {
       const reverseIndex = h2Elements.length - 1 - index;
 

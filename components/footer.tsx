@@ -8,7 +8,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Footer() {
   const headingRef = useRef(null);
@@ -17,41 +17,138 @@ export default function Footer() {
   const phoneRef = useRef(null);
   const socialRef = useRef(null);
   const footerRef = useRef(null);
+  const sliderRef = useRef(null);
 
   useGSAP(() => {
-    let hasAnimated = false;
-
-    ScrollTrigger.create({
-      start: 0,
-      end: "max",
-      onUpdate: () => {
-        if (
-          !hasAnimated &&
-          ScrollTrigger.isInViewport(footerRef.current, 0.2)
-        ) {
-          hasAnimated = true;
-
-          gsap.fromTo(
-            [
-              headingRef.current,
-              descRef.current,
-              emailRef.current,
-              phoneRef.current,
-              socialRef.current,
-            ],
-            { opacity: 0, y: 50 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: "circ.inOut",
-              stagger: 0.1,
-            },
-          );
-        }
+    //   trigger: footerRef.current,
+    //   start: "top+=75 center",
+    //   markers: true,
+    //   id: "test",
+    //   onEnter: () => {
+    //     gsap.from(
+    //       [
+    //         headingRef.current,
+    //         descRef.current,
+    //         emailRef.current,
+    //         phoneRef.current,
+    //         socialRef.current,
+    //       ],
+    //       {
+    //         opacity: 0,
+    //         y: 50,
+    //         duration: 0.8,
+    //         ease: "power2.out",
+    //         stagger: 0.3,
+    //       },
+    //     );
+    //   },
+    // });
+    // gsap.set(sliderRef.current, {
+    //   clipPath: "polygon(100% 0%, 100% 0, 100% 100%, 100% 100%)",
+    // });
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: footerRef.current,
+        markers: true,
+        start: "bottom+=888 bottom",
+        end: "+=200",
       },
     });
-  });
+    tl.from(
+      [
+        headingRef.current,
+        descRef.current,
+        emailRef.current,
+        phoneRef.current,
+        socialRef.current,
+      ],
+      {
+        opacity: 0,
+        y: 50,
+        duration: 0.5,
+        ease: "power2.out",
+        stagger: 0.1,
+      },
+    ).fromTo(
+      sliderRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.5, ease: "power4.out" },
+      "<",
+    );
+
+    // gsap.fromTo(
+    //   sliderRef.current,
+    //   {
+    //     clipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)", // Collapsed on left
+    //     WebkitClipPath: "polygon(0 0, 0 0, 0 100%, 0 100%)",
+    //   },
+    //   {
+    //     clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)", // Full reveal
+    //     WebkitClipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+    //     scrollTrigger: {
+    //       trigger: footerRef.current,
+    //       start: "bottom+=500 bottom",
+    //       end: "+=200",
+    //       scrub: true,
+    //       markers: true,
+    //       id: "slider",
+    //     },
+    //   },
+    // );
+
+    // gsap.set(sliderRef.current, {
+    //   clipPath: "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)",
+    // });
+
+    // gsap.to(sliderRef.current, {
+    //   clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0 0%)",
+    //   scrollTrigger: {
+    //     trigger: sliderRef.current,
+    //   },
+    // });
+
+    // gsap.fromTo(
+    //   sliderRef.current,
+    //   {
+    //     clipPath: "polygon(100% 0%, 100% 0, 100% 100%, 100% 100%)",
+    //   },
+    //   {
+    //     clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0 0%)",
+    //     scrollTrigger: {
+    //       trigger: sliderRef.current,
+    //     },
+    //   },
+    // );
+    //   start: 0,
+    //   end: "max",
+    //   onUpdate: () => {
+    //     if (
+    //       !hasAnimated &&
+    //       ScrollTrigger.isInViewport(footerRef.current, 0.2)
+    //     ) {
+    //       hasAnimated = true;
+
+    //       gsap.fromTo(
+    //         [
+    //           headingRef.current,
+    //           descRef.current,
+    //           emailRef.current,
+    //           phoneRef.current,
+    //           socialRef.current,
+    //         ],
+    //         { opacity: 0, y: 50 },
+    //         {
+    //           opacity: 1,
+    //           y: 0,
+    //           duration: 0.8,
+    //           ease: "circ.inOut",
+    //           stagger: 0.2,
+    //         },
+    //       );
+    //     }
+    //   },
+    // });
+  }, []);
 
   const dispatch = useAppDispatch();
 
@@ -141,13 +238,10 @@ export default function Footer() {
 
       <div
         id="footer"
-        className="absolute uppercase bottom-30 lg:bottom-40 text-white text-xl w-screen flex-row-center"
+        ref={sliderRef}
+        className="absolute uppercase overflow-hidden bottom-30 lg:bottom-40 text-white text-xl w-screen flex-row-center"
       >
-        <InfiniteSlider
-          reverse
-          duration={60}
-          className="text-8xl text-black w-full"
-        >
+        <InfiniteSlider duration={60} className="text-8xl text-black w-full">
           <div>なやなか -</div>
           <div>なやなか -</div>
           <div>なやなか -</div>

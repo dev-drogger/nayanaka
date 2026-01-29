@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import { setMenuOpen } from "@/state/slices/navigationSlice";
 import { setCursorType } from "@/state/slices/cursorSlice";
 import { circInOut } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const MENU_ITEMS = [
   { name: "Home", href: "#hero" },
@@ -19,6 +20,7 @@ const MENU_ITEMS = [
 
 export default function Navigation() {
   const dispatch = useAppDispatch();
+  const [showNavbar, setShowNavbar] = useState(true);
   const { menuOpen } = useAppSelector((state) => state.navigation);
 
   const handleCursorEnter = () => {
@@ -33,6 +35,20 @@ export default function Navigation() {
     dispatch(setMenuOpen(!menuOpen));
   };
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      setShowNavbar(currentScrollY <= lastScrollY || currentScrollY < 10);
+
+      lastScrollY = currentScrollY;
+    };
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   const containerVariants = {
     hidden: {
       y: -1000,
@@ -94,7 +110,10 @@ export default function Navigation() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
+      <header
+        className="fixed top-0 left-0 right-0 z-50 mix-blend-difference transition-all duration-300"
+        style={showNavbar ? { opacity: 1 } : { opacity: 0 }}
+      >
         <motion.div
           initial="hidden"
           animate={"visible"}
@@ -104,7 +123,7 @@ export default function Navigation() {
         >
           <Link
             href="/"
-            className="text-xl text-white tracking-tighter font-bold"
+            className="text-xl text-white cursor-pointer tracking-tighter font-bold"
             onMouseEnter={handleCursorEnter}
             onMouseLeave={handleCursorLeave}
           >
@@ -126,7 +145,7 @@ export default function Navigation() {
               <motion.a
                 key={index}
                 href={`#${section.name}`}
-                className={`text-lg font-bold uppercase text-white tracking-widest`}
+                className={`text-lg cursor-pointer font-bold uppercase text-white tracking-widest`}
                 onMouseEnter={handleCursorEnter}
                 onMouseLeave={handleCursorLeave}
                 whileHover={{ scale: 1.1 }}

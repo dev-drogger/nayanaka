@@ -8,8 +8,8 @@ export default function MainConten() {
   return (
     <ReactLenis root className="relative w-screen min-h-screen overflow-x-auto">
       <Hero />
-      <About />
-      <Projects />
+      {/* <About /> */}
+      {/* <Projects /> */}
     </ReactLenis>
   );
 }
