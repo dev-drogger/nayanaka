@@ -140,7 +140,7 @@
     @apply h-full;
   }
   body {
-    @apply bg-jet text-foreground font-primary;
+    @apply bg-gray-200 text-foreground font-primary overflow-hidden;
   }
   h1 {
     @apply text-3xl lg:text-5xl text-white font-light;
@@ -157,6 +157,10 @@
   section {
     @apply relative lg:min-h-screen py-32 lg:min-w-screen;
   }
+}
+
+@utility clip-path {
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
 }
 
 @utility flex-center {

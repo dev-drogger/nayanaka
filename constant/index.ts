@@ -8,31 +8,19 @@ export const SERVICES = [
       "E-commerce",
       "E-learning",
       "Custom Web Application",
-      "And many more...",
     ],
   },
   {
     title: "Digital Invitation (Coming Soon)",
     description:
       "We develop comprehensive strategies that align with your business goals and drive results.",
-    services: [
-      "Event Invitation",
-      "Wedding Invitation",
-      "Birthday Invitation",
-      "And many more...",
-    ],
+    services: ["Event Invitation", "Wedding Invitation", "Birthday Invitation"],
   },
   {
     title: "Visual Storytelling (Coming Soon)",
     description:
       "From concept to launch, we manage the entire production process to ensure quality and efficiency for all your visual needs.",
-    services: [
-      "Product, Wedding, Event Photography",
-      "Product, Wedding, Event Video",
-      "Company Profile",
-      "Design",
-      "And many more...",
-    ],
+    services: ["Photo and Videography", "Company Profile", "Design"],
   },
   {
     title: "Social Media (Coming Soon)",
@@ -42,8 +30,6 @@ export const SERVICES = [
       "Content Creation",
       "Social Media Management",
       "Analytics and Monitoring",
-      "Social Media Automation",
-      "And many more...",
     ],
   },
 ];

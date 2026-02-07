@@ -41,22 +41,54 @@ export default function CustomCursor() {
   };
 
   useEffect(() => {
-    // Track mouse position
+    // Only run on desktop
+    if (window.innerWidth < 1024) return;
+
+    let lastFrameTime = 0;
+    const targetFPS = 60;
+    const frameInterval = 1000 / targetFPS;
+
+    // Track mouse position with throttling
+    let rafId: number | null = null;
     const handleMouseMove = (e: MouseEvent) => {
       mousePosition.current = { x: e.clientX, y: e.clientY };
+      
+      // Throttle RAF calls
+      if (!rafId) {
+        rafId = requestAnimationFrame((currentTime) => {
+          if (currentTime - lastFrameTime >= frameInterval) {
+            lastFrameTime = currentTime;
+            if (requestRef.current === null) {
+              requestRef.current = requestAnimationFrame(animate);
+            }
+          }
+          rafId = null;
+        });
+      }
     };
 
-    // Start animation loop
-    requestRef.current = requestAnimationFrame(animate);
+    // Start animation loop only when needed
+    const startAnimation = () => {
+      if (requestRef.current === null) {
+        requestRef.current = requestAnimationFrame(animate);
+      }
+    };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    startAnimation();
 
     // Handle cursor visibility when mouse leaves window
     const handleMouseLeave = () => {
       if (cursorRef.current) cursorRef.current.style.opacity = "0";
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+        requestRef.current = null;
+      }
     };
 
     const handleMouseEnter = () => {
       if (cursorRef.current) cursorRef.current.style.opacity = "1";
+      startAnimation();
     };
 
     window.addEventListener("mouseleave", handleMouseLeave);
@@ -66,12 +98,16 @@ export default function CustomCursor() {
     return () => {
       if (requestRef.current) {
         cancelAnimationFrame(requestRef.current);
+        requestRef.current = null;
+      }
+      if (rafId) {
+        cancelAnimationFrame(rafId);
       }
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mouseenter", handleMouseEnter);
     };
-  });
+  }, []);
 
   // Get cursor classes based on type
   const getCursorClasses = () => {

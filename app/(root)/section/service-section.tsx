@@ -20,18 +20,15 @@ export default function Services() {
   const listTl = useRef<gsap.core.Timeline>(null);
 
   const dispatch = useAppDispatch();
-  const { isContentVisible } = useAppSelector((state) => state.contentVisible);
 
   useGSAP(() => {
-    if (!isContentVisible) return;
-
     gsap
       .timeline({
         scrollTrigger: {
           trigger: ".services",
           start: "top-=500 center",
           end: "top-=150 center",
-          scrub: 1,
+          scrub: 0.5,
           id: "services-bg",
         },
       })
@@ -47,7 +44,7 @@ export default function Services() {
           trigger: ".services",
           start: "top center",
           end: "top center",
-          scrub: 1,
+          scrub: 0.5,
           id: "services-heading",
         },
       })
@@ -63,7 +60,7 @@ export default function Services() {
           trigger: ".services",
           start: "start+=70 center",
           end: "bottom bottom+=120",
-          scrub: 1,
+          scrub: 0.5,
           id: "services-card",
         },
       })
@@ -84,7 +81,7 @@ export default function Services() {
           trigger: ".services",
           start: "start+=55 center",
           end: "bottom bottom+=90",
-          scrub: 1,
+          scrub: 0.5,
           id: "services-list",
         },
       })
@@ -100,18 +97,6 @@ export default function Services() {
         },
       );
   }, [isContentVisible]);
-
-  // useEffect(() => {
-  //   if (shouldAnimate) {
-  //     headingTl.current?.play();
-  //     cardTl.current?.play();
-  //     listTl.current?.play();
-  //   } else {
-  //     headingTl.current?.play();
-  //     cardTl.current?.play();
-  //     listTl.current?.play();
-  //   }
-  // }, [shouldAnimate]);
 
   return (
     <section id="services" className="services w-screen" ref={sectionRef}>

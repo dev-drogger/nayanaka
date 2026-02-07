@@ -1,5 +1,6 @@
 "use client";
 
+import { useMediaQuery } from "@/hooks/use-media-query";
 import Image from "next/image";
 
 type AnimatedImageProps = {
@@ -29,17 +30,19 @@ export default function AnimatedImage({
   className = "",
   position: { top = 0, left = 0, right = 0, bottom = 0 },
 }: AnimatedImageProps) {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <div
-      className="absolute"
+      className={isMobile ? "" : "absolute"}
       style={{
-        top: `${top}vh`,
-        left: `${left}%`,
+        top: isMobile ? "0" : `${top}vh`,
+        left: isMobile ? "0" : `${left}%`,
         right: right ? `${right}%` : "auto",
         bottom: bottom ? `${bottom}vh` : "auto",
-        width: `${width}px`,
-        height: `${height}px`,
-        transform: "translate(-50%, -50%)",
+        width: isMobile ? "100vw" : `${width}px`,
+        height: isMobile ? "40vh" : `${height}px`,
+        transform: isMobile ? "" : "translate(-50%, -50%)",
       }}
     >
       <div
@@ -50,12 +53,15 @@ export default function AnimatedImage({
           <Image
             src={src || "/placeholder.svg"}
             alt={alt}
-            quality={85}
+            quality={75}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{
               objectFit: "cover",
             }}
-            priority
+            loading="lazy"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           />
         </div>
       </div>

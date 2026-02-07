@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { BackgroundPaths } from "@/components/background-paths";
 import HeroTitle from "@/components/hero/hero-title";
 import { HeroGraphic } from "@/components/hero/hero-graphic";
@@ -13,6 +13,8 @@ export default function Hero() {
   const heroRef = useRef(null);
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
+  const [contentVisible, setContentVisible] = useState(false);
+  const [timeline, setTimeline] = useState<gsap.core.Timeline>(null);
   useGSAP(() => {
     gsap.set(heroRef.current, {
       clipPath: "polygon(0 50%, 100% 50%, 100% 50%, 0 50%)",
@@ -25,17 +27,18 @@ export default function Hero() {
         end: "+=600 center",
         scrub: 0.5,
         pin: true,
-        pinSpacing: true,
-        id: "pin",
       },
     });
 
-    gsap.to(heroRef.current, {
+    const heroTimeline = gsap.timeline();
+    setTimeline(heroTimeline);
+
+    heroTimeline.to(heroRef.current, {
       clipPath: "polygon(0 85%, 100% 85%, 100% 15%, 0 15%)",
       duration: 2,
-      delay: 1,
       ease: "power4.out",
     });
+
     gsap
       .timeline({
         scrollTrigger: {
@@ -55,7 +58,6 @@ export default function Hero() {
           immediateRender: false,
         },
       );
-    // .to(titleRef.current, { opacity: 0, duration: 0.5 });
 
     ScrollTrigger.create({
       trigger: heroRef.current,
@@ -66,6 +68,7 @@ export default function Hero() {
           opacity: 0,
           duration: 0.5,
           ease: "power4.out",
+          force3D: true,
         });
       },
       onEnterBack: () => {
@@ -73,25 +76,34 @@ export default function Hero() {
           opacity: 1,
           duration: 0.5,
           ease: "power4.out",
+          force3D: true,
         });
       },
     });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (
+          trigger.vars.trigger === sectionRef.current ||
+          trigger.vars.trigger === heroRef.current
+        ) {
+          trigger.kill();
+        }
+      });
+    };
   }, []);
 
   return (
-    <section ref={sectionRef} className=" relative py-0 bg-jet z-2">
-      {/* <BackgroundPaths>
-      </BackgroundPaths> */}
+    <section id="hero" ref={sectionRef} className="relative py-0 bg-jet z-2">
       <div
-        id="hero"
         ref={heroRef}
-        className="min-h-screen z-2 flex items-center relative w-screen bg-gray-200"
+        className="h-screen z-2 flex-center relative w-screen bg-gray-200 py-40"
       >
-        <div ref={titleRef} className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-12 gap-4 z-50">
-            <HeroTitle />
-            <HeroGraphic />
-          </div>
+        <BackgroundPaths></BackgroundPaths>
+        <div ref={titleRef} className="md:size-screen z-10 grid grid-cols-12">
+          <HeroTitle timeline={timeline} />
+          <HeroGraphic timeline={timeline} />
         </div>
       </div>
     </section>

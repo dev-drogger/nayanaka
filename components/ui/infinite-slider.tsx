@@ -30,6 +30,8 @@ export function InfiniteSlider({
   const [key, setKey] = useState(0);
 
   useEffect(() => {
+    if (!width && !height) return; // Don't animate until measured
+    
     let controls;
     const size = direction === "horizontal" ? width : height;
     const contentSize = size + gap;

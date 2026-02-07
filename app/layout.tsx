@@ -1,68 +1,42 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import ReduxProvider from "@/state/redux-provider";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 
-// const poppins = Poppins({
-//   variable: "--font-poppins",
-//   subsets: ["latin"],
-//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-// });
-
-// const inter = Inter({
-//   variable: "--font-inter",
-//   subsets: ["latin"],
-// });
-
 const satoshi = localFont({
   src: "../public/fonts/satoshi.ttf",
   variable: "--font-satoshi",
+  display: "swap",
+  preload: true,
+  fallback: ["system-ui", "arial"],
 });
 const grotesk = localFont({
   src: "../public/fonts/bdo-grotesk.ttf",
   variable: "--font-grotesk",
+  display: "swap",
+  preload: false,
+  fallback: ["system-ui", "arial"],
 });
 
 export const amiamie = localFont({
   src: [
-    {
-      path: "../public/fonts/Amiamie-Light.ttf",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Amiamie-LightItalic.ttf",
-      weight: "200",
-      style: "italic",
-    },
-
     {
       path: "../public/fonts/Amiamie-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../public/fonts/Amiamie-Italic.ttf",
-      weight: "400",
-      style: "italic",
-    },
-
-    {
       path: "../public/fonts/Amiamie-Black.ttf",
       weight: "900",
       style: "normal",
     },
-    {
-      path: "../public/fonts/Amiamie-BlackItalic.ttf",
-      weight: "900",
-      style: "italic",
-    },
   ],
   variable: "--font-amiamie",
   display: "swap",
+  preload: false,
+  fallback: ["system-ui", "serif"],
 });
 
 export const amiamieRound = localFont({
@@ -73,24 +47,15 @@ export const amiamieRound = localFont({
       style: "normal",
     },
     {
-      path: "../public/fonts/Amiamie-ItalicRound.ttf",
-      weight: "400",
-      style: "italic",
-    },
-
-    {
       path: "../public/fonts/Amiamie-BlackRound.ttf",
       weight: "900",
       style: "normal",
     },
-    {
-      path: "../public/fonts/Amiamie-BlackItalicRound.ttf",
-      weight: "900",
-      style: "italic",
-    },
   ],
   variable: "--font-amiamie-round",
   display: "swap",
+  preload: false,
+  fallback: ["system-ui", "serif"],
 });
 
 export const metadata: Metadata = {

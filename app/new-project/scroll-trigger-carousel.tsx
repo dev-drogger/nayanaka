@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -13,47 +13,49 @@ export default function NewCarousel() {
     {
       url: "/pictures/DSC00128.webp",
       position: { top: 55, left: 30 },
-      size: { width: 550, height: 550 },
-    },
-    {
-      url: "/pictures/DSC09892.webp",
-      position: { top: 158, left: 56 },
-      size: { width: 250, height: 570 },
+      size: { width: 480, height: 470 },
     },
     {
       url: "/pictures/img6.webp",
       position: { top: 157, left: 26 },
-      size: { width: 550, height: 350 },
+      size: { width: 480, height: 290 },
     },
+
+    {
+      url: "/pictures/DSC09892.webp",
+      position: { top: 158, left: 56 },
+      size: { width: 165, height: 485 },
+    },
+
     {
       url: "/pictures/img3.webp",
       position: { top: 177, left: 80 },
-      size: { width: 350, height: 350 },
+      size: { width: 290, height: 290 },
     },
     {
       url: "/pictures/img5.webp",
       position: { top: 231, left: 61 },
-      size: { width: 350, height: 350 },
+      size: { width: 290, height: 290 },
     },
     {
       url: "/pictures/IMG_0918.webp",
       position: { top: 255, left: 23 },
-      size: { width: 550, height: 550 },
+      size: { width: 480, height: 470 },
     },
     {
       url: "/pictures/IMG_1402.webp",
       position: { top: 316, left: 23 },
-      size: { width: 550, height: 350 },
+      size: { width: 480, height: 470 },
     },
     {
       url: "/pictures/IMG_1849.webp",
       position: { top: 361, left: 73 },
-      size: { width: 800, height: 750 },
+      size: { width: 700, height: 650 },
     },
     {
       url: "/pictures/DSC00212.webp",
       position: { top: 465, left: 33 },
-      size: { width: 700, height: 850 },
+      size: { width: 575, height: 670 },
     },
     {
       url: "/pictures/IMG_5501.webp",
@@ -100,9 +102,30 @@ export default function NewCarousel() {
 
         ScrollTrigger.create({
           trigger: container,
-          start: "center-=175 center",
-          end: "bottom center",
+          start: "top center",
+          end: "bottom top",
           onEnter: () => {
+            gsap
+              .timeline()
+              .to(container, {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: "circ.out",
+                force3D: true,
+              })
+              .to(
+                image,
+                {
+                  scale: 1,
+                  duration: 1.2,
+                  ease: "circ.out",
+                  force3D: true,
+                },
+                0,
+              );
+          },
+          onEnterBack: () => {
             gsap
               .timeline()
               .to(container, {
@@ -118,27 +141,6 @@ export default function NewCarousel() {
                   scale: 1,
                   duration: 1.2,
                   ease: "power2.out",
-                  force3D: true,
-                },
-                0,
-              );
-          },
-          onLeave: () => {
-            gsap
-              .timeline()
-              .to(container, {
-                y: -100,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.in",
-                force3D: true,
-              })
-              .to(
-                image,
-                {
-                  scale: 1.5,
-                  duration: 0.8,
-                  ease: "power2.in",
                   force3D: true,
                 },
                 0,
@@ -168,20 +170,26 @@ export default function NewCarousel() {
         });
       });
       ScrollTrigger.config({
-        limitCallbacks: true, // Limit callback frequency
-        syncInterval: 150, // Reduce sync frequency for better performance
-        // autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+        limitCallbacks: true,
+        syncInterval: 200, // Increased interval for better performance
+        autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
       });
 
-      // Refresh ScrollTrigger after all components mount
-      const refreshTimer = setTimeout(() => {
-        ScrollTrigger.refresh();
-      }, 200);
+      // Batch ScrollTrigger refresh
+      const refreshTimer = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh();
+        });
+      });
 
       return () => {
-        clearTimeout(refreshTimer);
+        cancelAnimationFrame(refreshTimer);
         // Clean up all ScrollTriggers on unmount
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+        ScrollTrigger.getAll().forEach((trigger) => {
+          if (trigger.vars.trigger) {
+            trigger.kill();
+          }
+        });
       };
     },
     { dependencies: [], scope: imageContainerRef },

@@ -11,44 +11,33 @@ import { useRef } from "react";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Footer() {
-  const headingRef = useRef(null);
-  const descRef = useRef(null);
-  const emailRef = useRef(null);
-  const phoneRef = useRef(null);
-  const socialRef = useRef(null);
   const footerRef = useRef(null);
   const sliderRef = useRef(null);
+  const textRef = useRef(null);
+  const animationTimeline = useRef<gsap.core.Timeline>(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: headingRef.current,
-        markers: true,
-        start: "bottom+=888 bottom",
-        end: "+=200",
-      },
-    });
-    tl.from(
-      [
-        headingRef.current,
-        descRef.current,
-        emailRef.current,
-        phoneRef.current,
-        socialRef.current,
-      ],
-      {
+    animationTimeline.current = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: footerRef.current,
+          markers: true,
+          start: "top+=100 bottom",
+        },
+      })
+      .from(".text", {
         opacity: 0,
         y: 50,
         duration: 0.5,
         ease: "power2.out",
         stagger: 0.1,
-      },
-    ).fromTo(
-      sliderRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.5, ease: "power4.out" },
-      "<",
-    );
+      })
+      .fromTo(
+        sliderRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: "power4.out" },
+        "<",
+      );
   }, []);
 
   const dispatch = useAppDispatch();
@@ -57,30 +46,28 @@ export default function Footer() {
     <footer
       ref={footerRef}
       id="contact"
-      className="relative w-full text-black bg-gray-200 h-[85vh]"
+      className="relative w-full text-black bg-gray-200 h-[88vh]"
     >
       <div className="container mx-auto px-4">
-        <div className="mb-[11rem] py-[2.5rem] lg:mb-[12rem] lg:py-[4rem] grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-4">
+        <div
+          ref={textRef}
+          className="mb-[11rem] py-[2.5rem] lg:mb-[12rem] lg:py-[4rem] grid grid-cols-1 lg:grid-cols-2 lg:gap-16 gap-4"
+        >
           <div className="col-span-2 lg:col-span-1">
-            <h2
-              ref={headingRef}
-              className="text-6xl text-black lg:text-8xl font-bold uppercase tracking-tighter mb-4 lg:mb-8"
-            >
+            <h2 className="text text-6xl text-black lg:text-8xl font-bold uppercase tracking-tighter mb-4 lg:mb-8">
               Let&apos;s
               <br />
               Connect
             </h2>
-            <p ref={descRef} className="text-lg max-w-md text-black">
+            <p className="text text-lg max-w-md text-black">
               Ready to start your next project? Get in touch with us to discuss
               how we can help bring your vision to life.
             </p>
           </div>
 
-          {/* contact div */}
           <div className="space-y-4 lg:space-y-8 col-span-1 ">
             <div
-              ref={emailRef}
-              className="border-t border-black/20 pt-4"
+              className="border-t border-black/20 pt-4 text"
               onMouseEnter={() => dispatch(setCursorType("text"))}
               onMouseLeave={() => dispatch(setCursorType("default"))}
             >
@@ -96,8 +83,7 @@ export default function Footer() {
               </a>
             </div>
             <div
-              ref={phoneRef}
-              className="not-first:border-t border-black/20 pt-4"
+              className="not-first:border-t border-black/20 pt-4 text"
               onMouseEnter={() => dispatch(setCursorType("text"))}
               onMouseLeave={() => dispatch(setCursorType("default"))}
             >
@@ -113,8 +99,7 @@ export default function Footer() {
               </a>
             </div>
             <div
-              ref={socialRef}
-              className="border-t border-black/20 pt-4"
+              className="border-t border-black/20 pt-4 text"
               onMouseEnter={() => dispatch(setCursorType("text"))}
               onMouseLeave={() => dispatch(setCursorType("default"))}
             >
@@ -142,7 +127,10 @@ export default function Footer() {
         ref={sliderRef}
         className="absolute uppercase overflow-hidden bottom-30 lg:bottom-40 text-white text-xl w-screen flex-row-center"
       >
-        <InfiniteSlider duration={60} className="text-8xl text-black w-full">
+        <InfiniteSlider
+          duration={60}
+          className=" text-5xl md:text-8xl text-black w-full"
+        >
           <div>なやなか -</div>
           <div>なやなか -</div>
           <div>なやなか -</div>
