@@ -140,7 +140,7 @@
     @apply h-full;
   }
   body {
-    @apply bg-gray-200 text-foreground font-primary overflow-hidden;
+    @apply bg-gray-200 text-foreground font-primary
   }
   h1 {
     @apply text-3xl lg:text-5xl text-white font-light;
