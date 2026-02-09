@@ -1,4 +1,9 @@
 import type { NextConfig } from "next";
+import bundleAnalyzer from "@next/bundle-analyzer";
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig: NextConfig = {
   // Optimize images
@@ -10,57 +15,6 @@ const nextConfig: NextConfig = {
   },
   // Enable compression
   compress: true,
-  cssChunking: true,
-  // Optimize production builds
-  swcMinify: true,
-  // Reduce bundle size
-  experimental: {
-    optimizePackageImports: [
-      "framer-motion",
-      "lucide-react",
-      "@gsap/react",
-      "gsap",
-    ],
-  },
-  // Webpack optimizations
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.optimization = {
-        ...config.optimization,
-        moduleIds: "deterministic",
-        runtimeChunk: "single",
-        splitChunks: {
-          chunks: "all",
-          cacheGroups: {
-            default: false,
-            vendors: false,
-            // Separate vendor chunks
-            gsap: {
-              name: "gsap",
-              test: /[\\/]node_modules[\\/](gsap|@gsap)[\\/]/,
-              priority: 20,
-            },
-            framerMotion: {
-              name: "framer-motion",
-              test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
-              priority: 20,
-            },
-            react: {
-              name: "react",
-              test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-              priority: 30,
-            },
-            vendor: {
-              name: "vendor",
-              test: /[\\/]node_modules[\\/]/,
-              priority: 10,
-            },
-          },
-        },
-      };
-    }
-    return config;
-  },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

@@ -9,7 +9,6 @@ import ReactLenis from "lenis/react";
 import Hero from "./section/hero-section";
 import Projects from "./section/projects-section";
 import About from "./section/new-about";
-// import About from "./section/about-section";
 import Services from "./section/new-service";
 
 export default function Page() {
