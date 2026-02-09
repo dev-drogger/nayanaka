@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useMemo } from "react";
+import { useRef, useCallback, useMemo, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ABOUT_TEXT } from "@/constant";
@@ -14,6 +14,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function About() {
+  const [dpr, setDpr] = useState<[number, number]>([1, 1]);
+
+  useEffect(() => {
+    if (typeof window !== undefined)
+      setDpr([1, Math.min(window.devicePixelRatio, 2)]);
+  }, []);
   const isMobile = useMediaQuery("(max-width: 700px)");
 
   const boxRef = useRef<HTMLDivElement>(null);
@@ -230,10 +236,6 @@ export default function About() {
           about <span className="font-amie italic">us</span>
         </h1>
         <div ref={assetRef} className="flex-center">
-          {/* <h1 className="absolute bottom-4 font-medium left-4 uppercase">
-          nayanaka creative studio
-        </h1> */}
-
           <SpinningText
             radius={5}
             fontSize={isMobile ? 1.2 : 2}
@@ -263,7 +265,7 @@ export default function About() {
                 stencil: false,
                 depth: true,
               }}
-              dpr={[1, Math.min(window.devicePixelRatio, 2)]}
+              dpr={dpr}
               onCreated={({ gl }) => {
                 gl.domElement.addEventListener("webglcontextlost", (e) => {
                   e.preventDefault();

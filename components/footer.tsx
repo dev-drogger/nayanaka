@@ -21,8 +21,7 @@ export default function Footer() {
       .timeline({
         scrollTrigger: {
           trigger: footerRef.current,
-          markers: true,
-          start: "top+=100 bottom",
+          start: "top center",
         },
       })
       .from(".text", {
@@ -36,7 +35,6 @@ export default function Footer() {
         sliderRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 0.5, ease: "power4.out" },
-        "<",
       );
   }, []);
 

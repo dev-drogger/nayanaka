@@ -9,29 +9,32 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 export default function Hero() {
-  const heroRef = useRef(null);
   const sectionRef = useRef(null);
+  const pathRef = useRef(null);
+  const heroRef = useRef(null);
   const titleRef = useRef(null);
-  const [contentVisible, setContentVisible] = useState(false);
-  const [timeline, setTimeline] = useState<gsap.core.Timeline>(null);
+  const scrollTimeline = useRef<gsap.core.Timeline>(null);
+  const [timeline, setTimeline] = useState<gsap.core.Timeline>(() =>
+    gsap.timeline(),
+  );
   useGSAP(() => {
     gsap.set(heroRef.current, {
       clipPath: "polygon(0 50%, 100% 50%, 100% 50%, 0 50%)",
     });
 
-    gsap.to(sectionRef.current, {
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=600 center",
-        scrub: 0.5,
-        pin: true,
-      },
-    });
+    // gsap.to(sectionRef.current, {
+    //   scrollTrigger: {
+    //     trigger: sectionRef.current,
+    //     start: "top top",
+    //     end: "+=800 center",
+    //     scrub: 0.5,
+    //     pin: true,
+    //   },
+    // });
 
     const heroTimeline = gsap.timeline();
-    setTimeline(heroTimeline);
 
     heroTimeline.to(heroRef.current, {
       clipPath: "polygon(0 85%, 100% 85%, 100% 15%, 0 15%)",
@@ -39,13 +42,16 @@ export default function Hero() {
       ease: "power4.out",
     });
 
-    gsap
+    setTimeline(heroTimeline);
+
+    scrollTimeline.current = gsap
       .timeline({
         scrollTrigger: {
-          trigger: heroRef.current,
+          trigger: sectionRef.current,
           start: "top top",
-          end: "+=500 center",
+          end: "+=1000 center",
           scrub: 0.5,
+          pin: true,
         },
       })
       .fromTo(
@@ -55,42 +61,42 @@ export default function Hero() {
         },
         {
           clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0 0%)",
+          duration: 1,
           immediateRender: false,
         },
-      );
+      )
+      .to([pathRef.current, titleRef.current], {
+        opacity: 0,
+        duration: 0.5,
+        delay: 0.5,
+        force3D: true,
+      });
 
-    ScrollTrigger.create({
-      trigger: heroRef.current,
-      start: "+=550 center",
-      end: "center center",
-      onLeave: () => {
-        gsap.to(titleRef.current, {
-          opacity: 0,
-          duration: 0.5,
-          ease: "power4.out",
-          force3D: true,
-        });
-      },
-      onEnterBack: () => {
-        gsap.to(titleRef.current, {
-          opacity: 1,
-          duration: 0.5,
-          ease: "power4.out",
-          force3D: true,
-        });
-      },
-    });
+    // ScrollTrigger.create({
+    //   trigger: heroRef.current,
+    //   start: "+=550 center",
+    //   end: "center center",
+    //   onLeave: () => {
+    //     gsap.to(titleRef.current, {
+    //       opacity: 0,
+    //       duration: 0.5,
+    //       ease: "power4.out",
+    //       force3D: true,
+    //     });
+    //   },
+    //   onEnterBack: () => {
+    //     gsap.to(titleRef.current, {
+    //       opacity: 1,
+    //       duration: 0.5,
+    //       ease: "power4.out",
+    //       force3D: true,
+    //     });
+    //   },
+    // });
 
     // Cleanup function
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => {
-        if (
-          trigger.vars.trigger === sectionRef.current ||
-          trigger.vars.trigger === heroRef.current
-        ) {
-          trigger.kill();
-        }
-      });
+      scrollTimeline.current?.ScrollTrigger.kill();
     };
   }, []);
 
@@ -98,10 +104,13 @@ export default function Hero() {
     <section id="hero" ref={sectionRef} className="relative py-0 bg-jet z-2">
       <div
         ref={heroRef}
-        className="h-screen z-2 flex-center relative w-screen bg-gray-200 py-40"
+        className="h-full z-2 flex-center relative w-screen bg-gray-200"
       >
-        <BackgroundPaths></BackgroundPaths>
-        <div ref={titleRef} className="md:size-screen z-10 grid grid-cols-12">
+        <BackgroundPaths ref={pathRef} />
+        <div
+          ref={titleRef}
+          className="md:size-full z-10 grid grid-cols-12 py-32 container mx-auto"
+        >
           <HeroTitle timeline={timeline} />
           <HeroGraphic timeline={timeline} />
         </div>

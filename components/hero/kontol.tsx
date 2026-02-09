@@ -17,30 +17,27 @@ export const HeroGraphic = ({ timeline }: { timeline: gsap.core.Timeline }) => {
 
   useGSAP(() => {
     if (timeline) {
-      timeline.fromTo(
-        el.current,
-        {
-          y: 100,
-          opacity: 0,
-        },
-        { y: 0, opacity: 1, ease: "power2.out" },
-      );
+      timeline.from(el.current, {
+        y: 100,
+        opacity: 0,
+        ease: "power2.out",
+      });
     }
   }, [timeline]);
 
   return (
-    <div className="col-span-12 lg:col-span-4 relative flex-center" ref={el}>
+    <div className="col-span-12 lg:col-span-5 relative" ref={el}>
       <div
-        className="aspect-square overflow-hidden w-[90%] h-[90%]"
+        className="aspect-square overflow-hidden"
         onMouseEnter={() => dispatch(setCursorType("3d"))}
         onMouseLeave={() => dispatch(setCursorType("default"))}
       >
         <Image
-          src="/pictures/DSC00128.webp"
+          src="/placeholder.svg?height=800&width=800"
           alt="Creative visual"
-          width={777}
-          height={777}
-          className="object-cover h-full w-full grayscale"
+          width={800}
+          height={800}
+          className="object-cover h-full w-full"
           priority
           sizes="(max-width: 768px) 100vw, 33vw"
           quality={85}
@@ -48,7 +45,7 @@ export const HeroGraphic = ({ timeline }: { timeline: gsap.core.Timeline }) => {
       </div>
 
       <div
-        className="absolute -bottom-2 z-6 right-0 bg-white text-black p-6 max-w-xs"
+        className="absolute -bottom-16 z-6 right-0 bg-white text-black p-6 max-w-xs"
         onMouseEnter={() => dispatch(setCursorType("text"))}
         onMouseLeave={() => dispatch(setCursorType("default"))}
       >

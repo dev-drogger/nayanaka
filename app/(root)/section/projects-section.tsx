@@ -1,7 +1,7 @@
 import { ProjectText } from "@/components/projects/project-text";
 import { ProjectsSlider } from "@/components/projects/projects-slider";
 import React from "react";
-import NewCarousel from "../../new-project/scroll-trigger-carousel";
+import Carousel from "@/components/projects/carousel";
 
 export default function Projects() {
   return (
@@ -11,7 +11,7 @@ export default function Projects() {
         className="h-[360vh] lg:h-[720vh] w-screen bg-gray-200  py-0 overflow-hidden"
       >
         <ProjectsSlider />
-        <NewCarousel />
+        <Carousel />
         <ProjectText />
       </section>
     </>

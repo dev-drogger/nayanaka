@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
+import type { RefObject } from "@react-three/fiber/dist/declarations/react-reconciler";
 
-import { useMemo, useRef, useCallback, memo } from "react";
-import { useAppSelector } from "@/hooks/redux-hooks";
+import { useMemo, useRef, memo } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -15,7 +14,6 @@ interface PathData {
   length?: number;
 }
 
-// Memoized path generation to prevent recalculation
 const generatePaths = (position: number, pathCount: number): PathData[] => {
   return Array.from({ length: pathCount }, (_, i) => ({
     id: i,
@@ -32,20 +30,15 @@ const generatePaths = (position: number, pathCount: number): PathData[] => {
 };
 
 function FloatingPaths({ position }: { position: number }) {
-  // const { isContentVisible } = useAppSelector((state) => state.contentVisible);
   const pathsRef = useRef<SVGPathElement[]>([]);
   const pathLengthsRef = useRef<Map<number, number>>(new Map());
   gsap.registerPlugin(useGSAP);
 
-  // Memoize paths - restore full 30 paths for visual continuity
   const paths = useMemo(() => generatePaths(position, 30), [position]);
 
-  // Stable animation setup with path length caching
   useGSAP(() => {
     pathsRef.current.forEach((path, i) => {
       if (!path) return;
-
-      // Cache path length to avoid repeated DOM queries
       let length = pathLengthsRef.current.get(i);
       if (!length) {
         length = path.getTotalLength();
@@ -109,16 +102,15 @@ function FloatingPaths({ position }: { position: number }) {
   );
 }
 
-// Memoize FloatingPaths to prevent re-renders from parent
 const MemoizedFloatingPaths = memo(FloatingPaths, (prev, next) => {
-  // Only re-render if position actually changes
   return prev.position === next.position;
 });
 
-export function BackgroundPaths({ children }: { children: React.ReactNode }) {
+export function BackgroundPaths({ ref }: { ref: RefObject }) {
   return (
     <div
       id="background-path"
+      ref={ref}
       className="absolute h-full scale-200 w-screen transform scale-y-[-1]"
     >
       <MemoizedFloatingPaths position={1} />

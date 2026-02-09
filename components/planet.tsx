@@ -1,26 +1,34 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Mesh, Group } from "three";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface PlanetProps {
   scale: number;
-  triggerRef: React.RefObject<HTMLDivElement>;
+  triggerRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export function Planet({ scale, triggerRef }: PlanetProps) {
-  const ringContainer = useRef(null);
-  const shapeContainer = useRef(null);
+  const ringContainer = useRef<Mesh>(null);
+  const shapeContainer = useRef<Group>(null);
   const { nodes, materials } = useGLTF("/models/Planet.glb");
-  const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+
+  const planetMesh = nodes.Ring as Mesh;
+  const scrollTriggerRef = useRef<ScrollTrigger | undefined>(undefined);
 
   useGSAP(() => {
-    if (!triggerRef?.current) return;
+    if (
+      !triggerRef?.current ||
+      !shapeContainer.current ||
+      !ringContainer.current
+    )
+      return;
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -53,20 +61,10 @@ export function Planet({ scale, triggerRef }: PlanetProps) {
     return () => {
       if (scrollTriggerRef.current) {
         scrollTriggerRef.current.kill();
-        scrollTriggerRef.current = null;
+        scrollTriggerRef.current = undefined;
       }
     };
   }, [triggerRef]);
-
-  // Clean up scroll trigger on unmount
-  useEffect(() => {
-    return () => {
-      if (scrollTriggerRef.current) {
-        scrollTriggerRef.current.kill();
-        scrollTriggerRef.current = null;
-      }
-    };
-  }, []);
 
   return (
     <group ref={shapeContainer} scale={scale} dispose={null}>
@@ -74,7 +72,7 @@ export function Planet({ scale, triggerRef }: PlanetProps) {
         ref={ringContainer}
         castShadow
         receiveShadow
-        geometry={nodes.Ring.geometry}
+        geometry={planetMesh.geometry}
         material={materials["Material.001"]}
         rotation={[-0.124, 0.123, -0.778]}
         scale={1.6}

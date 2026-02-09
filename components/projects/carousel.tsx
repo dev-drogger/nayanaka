@@ -4,11 +4,11 @@ import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import AnimatedImage from "./scroll-trigger-animated-image";
+import AnimatedImage from "./animated-image";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export default function NewCarousel() {
+export default function Carousel() {
   const imageData = [
     {
       url: "/pictures/DSC00128.webp",
@@ -81,9 +81,12 @@ export default function NewCarousel() {
 
   const imageContainerRef = useRef<HTMLDivElement[]>([]);
   const imageRef = useRef<HTMLDivElement[]>([]);
+  const imageTimeline = useRef<gsap.core.Timeline>(null);
 
   useGSAP(
     () => {
+      const triggers: ScrollTrigger[] = []; // Store triggers created in this component
+
       imageContainerRef.current.forEach((container, index) => {
         const image = imageRef.current[index];
         if (!image) return;
@@ -100,82 +103,55 @@ export default function NewCarousel() {
           force3D: true,
         });
 
-        ScrollTrigger.create({
-          trigger: container,
-          start: "top center",
-          end: "bottom top",
-          onEnter: () => {
-            gsap
-              .timeline()
-              .to(container, {
-                y: 0,
-                opacity: 1,
-                duration: 1.2,
-                ease: "circ.out",
-                force3D: true,
-              })
-              .to(
-                image,
-                {
-                  scale: 1,
-                  duration: 1.2,
-                  ease: "circ.out",
-                  force3D: true,
-                },
-                0,
-              );
-          },
-          onEnterBack: () => {
-            gsap
-              .timeline()
-              .to(container, {
-                y: 0,
-                opacity: 1,
-                duration: 1.2,
-                ease: "power2.out",
-                force3D: true,
-              })
-              .to(
-                image,
-                {
-                  scale: 1,
-                  duration: 1.2,
-                  ease: "power2.out",
-                  force3D: true,
-                },
-                0,
-              );
-          },
-          onLeaveBack: () => {
-            gsap
-              .timeline()
-              .to(container, {
-                y: 100,
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.in",
-                force3D: true,
-              })
-              .to(
-                image,
-                {
-                  scale: 1.5,
-                  duration: 0.8,
-                  ease: "power2.in",
-                  force3D: true,
-                },
-                0,
-              );
-          },
-        });
+        imageTimeline.current = gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: container,
+              start: "top center",
+              end: "bottom top",
+              toggleActions: "play none none reverse",
+            },
+          })
+          .fromTo(
+            container,
+            {
+              y: 100,
+              opacity: 0,
+            },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1.2,
+              ease: "circ.out",
+              force3D: true,
+            },
+          )
+          .fromTo(
+            image,
+            {
+              scale: 1.5,
+            },
+            {
+              scale: 1,
+              duration: 1.2,
+              ease: "circ.out",
+              force3D: true,
+            },
+            0,
+          );
+
+        // Store the ScrollTrigger instance
+        if (imageTimeline.current.scrollTrigger) {
+          triggers.push(imageTimeline.current.scrollTrigger);
+        }
       });
+
       ScrollTrigger.config({
         limitCallbacks: true,
-        syncInterval: 200, // Increased interval for better performance
+        syncInterval: 200,
         autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
       });
 
-      // Batch ScrollTrigger refresh
       const refreshTimer = requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           ScrollTrigger.refresh();
@@ -184,12 +160,7 @@ export default function NewCarousel() {
 
       return () => {
         cancelAnimationFrame(refreshTimer);
-        // Clean up all ScrollTriggers on unmount
-        ScrollTrigger.getAll().forEach((trigger) => {
-          if (trigger.vars.trigger) {
-            trigger.kill();
-          }
-        });
+        triggers.forEach((trigger) => trigger.kill());
       };
     },
     { dependencies: [], scope: imageContainerRef },

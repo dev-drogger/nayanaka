@@ -12,9 +12,8 @@ import { useEffect, useState } from "react";
 const MENU_ITEMS = [
   { name: "Home", href: "#hero" },
   { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
   { name: "Projects", href: "#projects" },
-  { name: "Pricing", href: "#pricing" },
+  { name: "Services", href: "#services" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -144,7 +143,7 @@ export default function Navigation() {
             {MENU_ITEMS.map((section, index) => (
               <motion.a
                 key={index}
-                href={`#${section.name}`}
+                href={`#${section.href}`}
                 className={`text-lg cursor-pointer font-bold uppercase text-white tracking-widest`}
                 onMouseEnter={handleCursorEnter}
                 onMouseLeave={handleCursorLeave}

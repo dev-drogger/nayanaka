@@ -52,7 +52,7 @@ export default function CustomCursor() {
     let rafId: number | null = null;
     const handleMouseMove = (e: MouseEvent) => {
       mousePosition.current = { x: e.clientX, y: e.clientY };
-      
+
       // Throttle RAF calls
       if (!rafId) {
         rafId = requestAnimationFrame((currentTime) => {
@@ -107,6 +107,7 @@ export default function CustomCursor() {
       window.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("mouseenter", handleMouseEnter);
     };
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Get cursor classes based on type

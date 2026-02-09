@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   },
   // Enable compression
   compress: true,
+  cssChunking: true,
   // Optimize production builds
   swcMinify: true,
   // Reduce bundle size

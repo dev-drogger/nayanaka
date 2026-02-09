@@ -19,32 +19,38 @@ gsap.registerPlugin(
 );
 
 const Services = () => {
-  const overlayRefs = useRef([]);
+  const overlayRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const plusRefs = useRef([]);
-
+  const plusRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const svgTimelineRef = useRef<gsap.core.Timeline | null>(null);
+  const plusTimelineRef = useRef<gsap.core.Timeline | null>(null);
   const nayanakaRef = useRef(null);
-  const textRefs = useRef([]);
+  const textRefs = useRef<(SVGElement | null)[]>([]);
   const titleRef = useRef(null);
   useGSAP(() => {
-    gsap
+    const triggers: ScrollTrigger[] = [];
+    const titleTimeline = gsap
       .timeline({ scrollTrigger: { trigger: titleRef.current } })
       .from(titleRef.current, {
         duration: 0.6,
         y: 20,
-        delay: 4,
+        delay: 0.5,
         autoAlpha: 0,
         stagger: 0.05,
       })
       .from("#desc", { autoAlpha: 0, duration: 0.8, ease: "power2.out" });
 
+    if (titleTimeline.scrollTrigger) {
+      triggers.push(titleTimeline.scrollTrigger);
+    }
+
     const initTimeline = gsap
       .timeline({
         scrollTrigger: {
-          trigger: "#services",
+          trigger: "#service-list",
         },
       })
-      .from("#services", {
+      .from("#service-list", {
         y: 10,
         autoAlpha: 0,
         delay: 0.5,
@@ -66,20 +72,23 @@ const Services = () => {
         },
         "<",
       );
+    if (initTimeline.scrollTrigger) {
+      triggers.push(initTimeline.scrollTrigger);
+    }
 
-    gsap.to("#work", {
+    gsap.to("#services-section", {
       borderBottomRightRadius: 70,
       borderBottomLeftRadius: 70,
       scrollTrigger: {
-        trigger: "#work",
+        trigger: "#services-section",
         start: "center top",
         end: "bottom-=75 top",
         scrub: 0.5,
       },
     });
 
-    const svgTimeline = gsap.timeline({ repeat: -1 });
-    svgTimeline
+    svgTimelineRef.current = gsap.timeline({ repeat: -1 });
+    svgTimelineRef.current
       .to("#na", {
         morphSVG: "#ya",
         duration: 2,
@@ -105,9 +114,11 @@ const Services = () => {
         yoyo: true,
       });
 
-    initTimeline.add(svgTimeline);
+    if (svgTimelineRef.current.scrollTrigger) {
+      triggers.push(svgTimelineRef.current.scrollTrigger);
+    }
 
-    gsap
+    plusTimelineRef.current = gsap
       .timeline({ repeat: -1, repeatDelay: 2 })
       .set(plusRefs.current, { rotate: 0 })
       .fromTo(
@@ -126,6 +137,18 @@ const Services = () => {
         duration: 0.15,
         stagger: 0.5,
       });
+
+    if (plusTimelineRef.current.scrollTrigger) {
+      triggers.push(plusTimelineRef.current.scrollTrigger);
+    }
+
+    initTimeline.add(svgTimelineRef.current).add(plusTimelineRef.current, "<");
+
+    return () => {
+      svgTimelineRef.current?.kill();
+      plusTimelineRef.current?.kill();
+      triggers.forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   useGSAP(() => {
@@ -152,8 +175,7 @@ const Services = () => {
       });
   });
 
-  // no neeed function just do tl start on mouseenter and leave
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = (index: number) => {
     if (window.innerWidth < 768) return;
 
     const el = overlayRefs.current[index];
@@ -173,7 +195,7 @@ const Services = () => {
     );
   };
 
-  const handleMouseLeave = (index) => {
+  const handleMouseLeave = (index: number) => {
     if (window.innerWidth < 768) return;
 
     const el = overlayRefs.current[index];
@@ -195,7 +217,7 @@ const Services = () => {
 
   return (
     <section
-      id="work"
+      id="services-section"
       className="h-screen bg-jet relative py-20 overflow-x-hidden grid grid-rows-12"
     >
       {!isMobile &&
@@ -207,7 +229,9 @@ const Services = () => {
         ].map((pos, i) => (
           <div
             key={i}
-            ref={(el) => (plusRefs.current[i] = el)}
+            ref={(el) => {
+              plusRefs.current[i] = el;
+            }}
             className={`absolute ${pos}`}
           >
             <Plus color="#fff" size={50} />
@@ -237,7 +261,7 @@ const Services = () => {
           {SERVICES.map((project, index) => (
             <div
               key={index}
-              id="services"
+              id="service-list"
               className="relative w-full flex flex-col gap-1  cursor-pointer group md:gap-8"
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
@@ -256,7 +280,9 @@ const Services = () => {
                   {project.title}
                 </h2>
                 <ArrowUpRight
-                  ref={(el) => (textRefs.current[index] = el)}
+                  ref={(el) => {
+                    textRefs.current[index] = el;
+                  }}
                   className="md:size-6 size-5"
                 />
               </div>
