@@ -37,36 +37,45 @@ export default function About() {
 
   const getH2Elements =
     useCallback((): NodeListOf<HTMLHeadingElement> | null => {
-      if (!textRef.current || !mobileTextRef.current) return null;
-      const elements = isMobileHook
-        ? mobileTextRef.current.querySelectorAll<HTMLDivElement>("h3")
-        : textRef.current.querySelectorAll<HTMLHeadingElement>("h2");
-      return elements.length > 0 ? elements : null;
+      if (isMobileHook) {
+        if (!mobileTextRef.current) return null;
+        const elements =
+          mobileTextRef.current.querySelectorAll<HTMLHeadingElement>("h3");
+        return elements.length ? elements : null;
+      }
+
+      if (!textRef.current) return null;
+      const elements =
+        textRef.current.querySelectorAll<HTMLHeadingElement>("h2");
+      return elements.length ? elements : null;
     }, [isMobileHook]);
-
   useGSAP(() => {
-    const h2Elements = getH2Elements();
-    if (!h2Elements) return;
-
-    gsap.set(h2Elements, {
-      y: 20,
-      opacity: 0,
-    });
-
-    gsap.set(backgroundRef.current, {
-      clipPath: "polygon(0 50%, 100% 50%, 100% 50%, 0 50%)",
-    });
-
     const mm = gsap.matchMedia();
 
     mm.add(
-      { isMobile: "(max-width: 768px", isDesktop: "(min-width: 769px)" },
+      { isMobile: "(max-width: 768px)", isDesktop: "(min-width: 769px)" },
       (context) => {
         //eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { isMobile, isDesktop } = context.conditions as {
           isMobile: boolean;
           isDesktop: boolean;
         };
+
+        const h2Elements = isMobile
+          ? mobileTextRef.current?.querySelectorAll<HTMLHeadingElement>("h3")
+          : textRef.current?.querySelectorAll<HTMLHeadingElement>("h2");
+
+        if (!h2Elements || !h2Elements.length) return;
+        if (!h2Elements) return;
+
+        gsap.set(h2Elements, {
+          y: 20,
+          opacity: 0,
+        });
+
+        gsap.set(backgroundRef.current, {
+          clipPath: "polygon(0 50%, 100% 50%, 100% 50%, 0 50%)",
+        });
         backgroundTimeline.current = gsap
           .timeline({
             scrollTrigger: {
@@ -84,7 +93,7 @@ export default function About() {
           .from(
             titleRef.current,
             {
-              scale: isMobile ? 1.5 : 3,
+              scale: isMobile ? 1.5 : 2.8,
               duration: 1,
             },
             "<",
@@ -302,12 +311,12 @@ export default function About() {
       </div>
       <div
         ref={mobileTextRef}
-        className="overflow-hidden md:hidden absolute md:relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-16 h-full py-56 flex-col flex justify-center items-start w-full"
+        className="overflow-hidden md:hidden absolute md:relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-12 md:px-16 h-full py-56 flex-col flex justify-center items-start w-full"
       >
         {textContent.map((text, index) => (
           <h3
             key={index}
-            className="uppercase font-medium md:text-justify text-white text-xs md:text-6xl leading-6 md:leading-20 overflow-hidden"
+            className="uppercase font-medium justify text-white text-xs leading-6 overflow-hidden"
           >
             {text}
           </h3>

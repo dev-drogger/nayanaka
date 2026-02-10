@@ -104,7 +104,7 @@ export default function Hero() {
     <section id="hero" ref={sectionRef} className="relative py-0 bg-jet z-2">
       <div
         ref={heroRef}
-        className="h-full z-2 flex-center relative w-screen bg-gray-200"
+        className="h-full z-2 flex-center relative w-screen bg-gray-200 overflow-hidden"
       >
         <BackgroundPaths ref={pathRef} />
         <div

@@ -111,7 +111,7 @@ export function BackgroundPaths({ ref }: { ref: RefObject }) {
     <div
       id="background-path"
       ref={ref}
-      className="absolute h-full scale-200 w-screen transform scale-y-[-1]"
+      className="absolute h-full w-[200vw] -bottom-20 md:w-screen scale-200 transform scale-y-[-1]"
     >
       <MemoizedFloatingPaths position={1} />
       <div className="lg:block">

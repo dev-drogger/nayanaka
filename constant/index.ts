@@ -11,19 +11,19 @@ export const SERVICES = [
     ],
   },
   {
-    title: "Digital Invitation (Coming Soon)",
+    title: "Digital Invitation",
     description:
       "We develop comprehensive strategies that align with your business goals and drive results.",
     services: ["Event Invitation", "Wedding Invitation", "Birthday Invitation"],
   },
   {
-    title: "Visual Storytelling (Coming Soon)",
+    title: "Visual Storytelling",
     description:
       "From concept to launch, we manage the entire production process to ensure quality and efficiency for all your visual needs.",
     services: ["Photo and Videography", "Company Profile", "Design"],
   },
   {
-    title: "Social Media (Coming Soon)",
+    title: "Social Media",
     description:
       "We create visually stunning social media content that elevate your brand and engage your audience.",
     services: [
