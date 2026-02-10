@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useMemo, useState, useEffect } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ABOUT_TEXT } from "@/constant";
@@ -35,20 +35,6 @@ export default function About() {
   const textContent = useMemo(() => ABOUT_TEXT, []);
   const scrollTriggerRef = useRef<ScrollTrigger | undefined>(undefined);
 
-  const getH2Elements =
-    useCallback((): NodeListOf<HTMLHeadingElement> | null => {
-      if (isMobileHook) {
-        if (!mobileTextRef.current) return null;
-        const elements =
-          mobileTextRef.current.querySelectorAll<HTMLHeadingElement>("h3");
-        return elements.length ? elements : null;
-      }
-
-      if (!textRef.current) return null;
-      const elements =
-        textRef.current.querySelectorAll<HTMLHeadingElement>("h2");
-      return elements.length ? elements : null;
-    }, [isMobileHook]);
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
