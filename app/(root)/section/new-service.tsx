@@ -251,8 +251,9 @@ const Services = () => {
 
         <div className="col-span-5 col-start-6 md:col-span-4 md:col-start-7 flex-center">
           <h2 id="desc" className="text-justify text-sm md:text-lg">
-            we combine our love and jjsna nnvai sjnvais insifse jbkajased cakn
-            bnjabnfcuiewb
+            We design and build distinctive online solutions that help
+            businesses and individuals grow, connect, and make a lasting
+            impression.
           </h2>
         </div>
       </div>
@@ -291,7 +292,7 @@ const Services = () => {
           ))}
         </div>
 
-    <div className="col-span-5 absolute md:relative bottom-32 left-1/2 md:left-0 md:translate-x-0 -translate-x-1/2 md:flex-center md:bottom-0">
+        <div className="col-span-5 absolute md:relative bottom-32 left-1/2 md:left-0 md:translate-x-0 -translate-x-1/2 md:flex-center md:bottom-0">
           <div className="relative">
             <svg
               viewBox="0 0 300 300"

@@ -17,13 +17,10 @@ interface PathData {
 const generatePaths = (position: number, pathCount: number): PathData[] => {
   return Array.from({ length: pathCount }, (_, i) => ({
     id: i,
-    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-      380 - i * 5 * position
-    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-      152 - i * 5 * position
-    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-      684 - i * 5 * position
-    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${380 - i * 5 * position
+      } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${152 - i * 5 * position
+      } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${684 - i * 5 * position
+      } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
     color: `rgba(15,23,42,${0.1 + i * 0.03})`,
     width: 1 + i * 0.03,
   }));
@@ -111,7 +108,7 @@ export function BackgroundPaths({ ref }: { ref: RefObject }) {
     <div
       id="background-path"
       ref={ref}
-      className="absolute h-full w-[200vw] -bottom-20 md:w-screen scale-200 transform scale-y-[-1]"
+      className="absolute h-full w-[200vw] -bottom-20 md:bottom-0 md:w-screen scale-200 transform scale-y-[-1]"
     >
       <MemoizedFloatingPaths position={1} />
       <div className="lg:block">

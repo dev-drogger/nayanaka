@@ -11,7 +11,7 @@ export const SERVICES = [
     ],
   },
   {
-    title: "Digital Invitation",
+    title: "Digital and Printed Invitation",
     description:
       "We develop comprehensive strategies that align with your business goals and drive results.",
     services: ["Event Invitation", "Wedding Invitation", "Birthday Invitation"],
@@ -23,7 +23,37 @@ export const SERVICES = [
     services: ["Photo and Videography", "Company Profile", "Design"],
   },
   {
-    title: "Social Media",
+    title: "Social Media Management",
+    description:
+      "We create visually stunning social media content that elevate your brand and engage your audience.",
+    services: [
+      "Content Creation",
+      "Social Media Management",
+      "Analytics and Monitoring",
+    ],
+  },
+  {
+    title: "Company Profile",
+    description:
+      "We create visually stunning social media content that elevate your brand and engage your audience.",
+    services: [
+      "Content Creation",
+      "Social Media Management",
+      "Analytics and Monitoring",
+    ],
+  },
+  {
+    title: "Graphic Design",
+    description:
+      "We create visually stunning social media content that elevate your brand and engage your audience.",
+    services: [
+      "Content Creation",
+      "Social Media Management",
+      "Analytics and Monitoring",
+    ],
+  },
+  {
+    title: "Branding",
     description:
       "We create visually stunning social media content that elevate your brand and engage your audience.",
     services: [
@@ -347,7 +377,7 @@ export const ABOUT_TEXT = [
   "strategists, united by a shared passion for",
   "creating exceptional digital experiences.",
   "We seamlessly blend creativity with",
-  "functionality, crafting websites that are",
+  "innovation, crafting projects that are",
   "not only visually captivating but also",
   "strategically designed to drive",
   "meaningful results.",

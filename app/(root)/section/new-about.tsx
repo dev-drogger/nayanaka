@@ -67,14 +67,15 @@ export default function About() {
             scrollTrigger: {
               trigger: sectionPinRef.current,
               start: "center center",
-              end: "center+=3500 center",
+              end: "center+=3750 center",
               scrub: 0.5,
               pin: true,
             },
           })
           .to(backgroundRef.current, {
             clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0 0%)",
-            duration: 1,
+            duration: 1.2,
+            delay: 0.4,
           })
           .from(
             titleRef.current,
@@ -192,7 +193,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionPinRef}
-      className="about h-screen overflow-x-hidden relative py-0"
+      className="about h-screen overflow-x-hidden relative py-0 bg-gray-200"
     >
       <AboutCurtain />
 

@@ -26,7 +26,6 @@ const AboutCurtain = () => {
         autoAlpha: 0,
         ease: "power2.out",
         duration: 1,
-        delay: 0.5,
       })
       .from(".nayanaka", {
         y: 20,
@@ -51,7 +50,7 @@ const AboutCurtain = () => {
       .from("#curtain-desc", {
         opacity: 0,
         ease: "circ.out",
-        duration: 2,
+        duration: 1,
       });
 
     return () => {
@@ -61,7 +60,7 @@ const AboutCurtain = () => {
     };
   });
   return (
-    <div id="curtain">
+    <div id="curtain" className="bg-gray-200">
       <div id="corner">
         <ChevronDown
           className={
