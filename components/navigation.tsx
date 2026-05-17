@@ -3,11 +3,9 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
-import { setMenuOpen } from "@/state/slices/navigationSlice";
-import { setCursorType } from "@/state/slices/cursorSlice";
+import { useUI } from "@/context/ui-context";
 import { circInOut } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, memo } from "react";
 
 const MENU_ITEMS = [
   { name: "Home", href: "#hero" },
@@ -17,35 +15,35 @@ const MENU_ITEMS = [
   { name: "Contact", href: "#contact" },
 ];
 
-export default function Navigation() {
-  const dispatch = useAppDispatch();
+function Navigation() {
+  const { setCursorType, menuOpen, setMenuOpen } = useUI();
   const [showNavbar, setShowNavbar] = useState(true);
-  const { menuOpen } = useAppSelector((state) => state.navigation);
 
-  const handleCursorEnter = () => {
-    dispatch(setCursorType("link"));
-  };
+  const handleCursorEnter = useCallback(() => {
+    setCursorType("link");
+  }, [setCursorType]);
 
-  const handleCursorLeave = () => {
-    dispatch(setCursorType("default"));
-  };
+  const handleCursorLeave = useCallback(() => {
+    setCursorType("default");
+  }, [setCursorType]);
 
-  const toggleMenu = () => {
-    dispatch(setMenuOpen(!menuOpen));
-  };
+  const toggleMenu = useCallback(() => {
+    setMenuOpen(!menuOpen);
+  }, [setMenuOpen, menuOpen]);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
+    
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       setShowNavbar(currentScrollY <= lastScrollY || currentScrollY < 10);
-
       lastScrollY = currentScrollY;
     };
+    
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
+    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const containerVariants = {
@@ -192,7 +190,7 @@ export default function Navigation() {
                     <Link
                       href={item.href}
                       className="text-7xl lg:text-9xl font-bold uppercase tracking-tighter hover:italic transition-all"
-                      onClick={() => dispatch(setMenuOpen(false))}
+                      onClick={() => setMenuOpen(false)}
                       onMouseEnter={handleCursorEnter}
                       onMouseLeave={handleCursorLeave}
                     >
@@ -208,3 +206,5 @@ export default function Navigation() {
     </>
   );
 }
+
+export default memo(Navigation);

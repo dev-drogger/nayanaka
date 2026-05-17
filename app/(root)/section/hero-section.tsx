@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { useAppDispatch } from "@/hooks/redux-hooks";
-import { setCursorType } from "@/state/slices/cursorSlice";
+import { useUI } from "@/context/ui-context";
 import { useRef } from "react";
 import { BackgroundPaths } from "@/components/background-paths";
 import gsap from "gsap";
@@ -20,7 +19,7 @@ export default function Hero() {
   const descRef = useRef(null);
   const heroTitle = useRef(null);
   const scrollTimeline = useRef<gsap.core.Timeline>(null);
-  const dispatch = useAppDispatch();
+  const { setCursorType } = useUI();
 
   useGSAP(() => {
     gsap.set("#hero", {
@@ -175,15 +174,17 @@ export default function Hero() {
             <div
               ref={videoRef}
               className="overflow-hidden w-[80%] h-[80%]"
-              onMouseEnter={() => dispatch(setCursorType("3d"))}
-              onMouseLeave={() => dispatch(setCursorType("default"))}
+              onMouseEnter={() => setCursorType("3d")}
+              onMouseLeave={() => setCursorType("default")}
             >
               <video
                 src="/heroes2.mp4"
+                poster="/hero-poster.jpg"
                 autoPlay
                 loop
                 muted
                 playsInline
+                loading="lazy"
                 className="w-full h-full object-cover z-1"
               />
             </div>
@@ -191,8 +192,8 @@ export default function Hero() {
             <div
               ref={descRef}
               className="absolute -bottom-2 z-6 right-0 bg-white text-black p-6 max-w-xs"
-              onMouseEnter={() => dispatch(setCursorType("text"))}
-              onMouseLeave={() => dispatch(setCursorType("default"))}
+              onMouseEnter={() => setCursorType("text")}
+              onMouseLeave={() => setCursorType("default")}
             >
               <p className="text-sm text-black">
                 Nayanaka is a creative agency founded in 2025, specializing in
@@ -202,8 +203,8 @@ export default function Hero() {
                 <Link
                   href="#about"
                   className="flex items-center gap-2 text-sm uppercase tracking-widest"
-                  onMouseEnter={() => dispatch(setCursorType("link"))}
-                  onMouseLeave={() => dispatch(setCursorType("text"))}
+                  onMouseEnter={() => setCursorType("link")}
+                  onMouseLeave={() => setCursorType("text")}
                 >
                   Learn more <ArrowRight className="h-4 w-4" />
                 </Link>

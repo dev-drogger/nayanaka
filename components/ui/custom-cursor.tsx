@@ -2,12 +2,12 @@
 
 import { useEffect, useRef } from "react";
 import { MousePointer } from "lucide-react";
-import { useAppSelector } from "@/hooks/redux-hooks";
+import { useUI } from "@/context/ui-context";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorTextRef = useRef<HTMLDivElement>(null);
-  const { type, mouseSpeed } = useAppSelector((state) => state.cursor);
+  const { cursorType: type } = useUI();
   const requestRef = useRef<number | null>(null);
   const previousTimeRef = useRef<number | null>(null);
   const mousePosition = useRef({ x: 0, y: 0 });
@@ -26,13 +26,8 @@ export default function CustomCursor() {
         // Use transform for hardware acceleration
         cursorRef.current.style.transform = `translate3d(${cursorPosition.current.x}px, ${cursorPosition.current.y}px, 0)`;
 
-        // Apply scale based on mouse speed
-        if (mouseSpeed > 15) {
-          cursorRef.current.style.transform += " scale(1.5)";
-          cursorRef.current.style.opacity = "0.5";
-        } else {
-          cursorRef.current.style.opacity = "1";
-        }
+        // Set opacity
+        cursorRef.current.style.opacity = "1";
       }
     }
 

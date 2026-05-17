@@ -15,7 +15,6 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@next/bundle-analyzer": "^16.1.6",
-    "@number-flow/react": "^0.5.8",
     "@radix-ui/react-slot": "^1.1.2",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
@@ -34,15 +33,11 @@
     "react-redux": "^9.2.0",
     "react-scroll": "^1.9.3",
     "react-use-measure": "^2.1.7",
-    "redux-persist": "^6.0.0",
     "tailwind-merge": "^3.0.2",
-    "three": "^0.182.0",
-    "tw-animate-css": "^1.2.4",
-    "valtio": "^2.1.5"
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

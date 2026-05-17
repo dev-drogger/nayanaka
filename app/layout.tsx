@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import ReduxProvider from "@/state/redux-provider";
+import { UIProvider } from "@/context/ui-context";
 import Navigation from "@/components/navigation";
 import Footer from "@/components/footer";
 
@@ -73,12 +74,14 @@ export default function RootLayout({
       <body
         className={`${satoshi.variable} ${amiamie.variable} ${amiamieRound.variable} ${grotesk.variable} antialiased min-h-screen`}
       >
-        <ReduxProvider>
-          <Navigation />
+        <UIProvider>
+          <ReduxProvider>
+            <Navigation />
 
-          <main>{children}</main>
-          <Footer />
-        </ReduxProvider>
+            <main>{children}</main>
+            <Footer />
+          </ReduxProvider>
+        </UIProvider>
       </body>
     </html>
   );
