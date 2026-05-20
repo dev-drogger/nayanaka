@@ -55,7 +55,7 @@ const AboutCurtain = () => {
 
     return () => {
       curtainTimeline.current?.kill();
-      curtainTimeline.current?.ScrollTrigger.kill();
+      curtainTimeline.current?.scrollTrigger?.kill();
       curtainTimeline.current = null;
     };
   });

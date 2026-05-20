@@ -21,7 +21,7 @@ export function Planet({ scale, triggerRef }: PlanetProps) {
 
   const planetMesh = nodes.Ring as Mesh;
   const scrollTriggerRef = useRef<ScrollTrigger | undefined>(undefined);
-
+  const timeline = useRef<gsap.core.Timeline>(null);
   useGSAP(() => {
     if (
       !triggerRef?.current ||
@@ -30,7 +30,7 @@ export function Planet({ scale, triggerRef }: PlanetProps) {
     )
       return;
 
-    const tl = gsap.timeline({
+    timeline.current = gsap.timeline({
       scrollTrigger: {
         trigger: triggerRef.current,
         start: "top center",
@@ -41,28 +41,32 @@ export function Planet({ scale, triggerRef }: PlanetProps) {
       },
     });
 
-    scrollTriggerRef.current = tl.scrollTrigger;
+    scrollTriggerRef.current = timeline.current.scrollTrigger;
 
-    tl.from(shapeContainer.current.position, {
-      y: 5,
-      duration: 1,
-    }).from(
-      ringContainer.current.rotation,
-      {
-        x: 0.8,
-        y: 0,
-        z: 0,
+    timeline.current
+      .from(shapeContainer.current.position, {
+        y: 5,
         duration: 1,
-        ease: "power1.inOut",
-      },
-      "<",
-    );
+      })
+      .from(
+        ringContainer.current.rotation,
+        {
+          x: 0.8,
+          y: 0,
+          z: 0,
+          duration: 1,
+          ease: "power1.inOut",
+        },
+        "<",
+      );
 
     return () => {
       if (scrollTriggerRef.current) {
         scrollTriggerRef.current.kill();
         scrollTriggerRef.current = undefined;
       }
+
+      if (timeline.current) timeline.current.kill();
     };
   }, [triggerRef]);
 

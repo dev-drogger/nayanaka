@@ -8,7 +8,7 @@ import Footer from "@/components/footer";
 const satoshi = localFont({
   src: "../public/fonts/satoshi.ttf",
   variable: "--font-satoshi",
-  display: "swap",
+  display: "block",
   preload: true,
   fallback: ["system-ui", "arial"],
 });
@@ -16,7 +16,6 @@ const grotesk = localFont({
   src: "../public/fonts/bdo-grotesk.ttf",
   variable: "--font-grotesk",
   display: "swap",
-  preload: false,
   fallback: ["system-ui", "arial"],
 });
 
@@ -35,7 +34,6 @@ export const amiamie = localFont({
   ],
   variable: "--font-amiamie",
   display: "swap",
-  preload: false,
   fallback: ["system-ui", "serif"],
 });
 

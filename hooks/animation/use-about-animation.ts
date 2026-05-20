@@ -1,27 +1,10 @@
-"use client";
-
-import { useRef, useMemo, useState, useEffect } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ABOUT_TEXT } from "@/constant";
-import { SpinningText } from "@/components/spinning-text";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { Canvas } from "@react-three/fiber";
-import { Planet } from "@/components/planet";
-import { Environment, Float, Lightformer } from "@react-three/drei";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import AboutCurtain from "@/components/about-curtain";
-
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-export default function About() {
-  const [dpr, setDpr] = useState<[number, number]>([1, 1]);
-  const isMobileHook = useMediaQuery("(max-width: 768px)");
-  useEffect(() => {
-    if (typeof window !== undefined)
-      setDpr([1, Math.min(window.devicePixelRatio, 2)]);
-  }, []);
-
+const useAboutAnimation = () => {
   const backgroundTimeline = useRef<gsap.core.Timeline>(null);
 
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -32,7 +15,6 @@ export default function About() {
   const textRef = useRef<HTMLDivElement>(null);
   const textEnterTimeline = useRef<gsap.core.Timeline>(null);
   const textExitTimeline = useRef<gsap.core.Timeline>(null);
-  const textContent = useMemo(() => ABOUT_TEXT, []);
   const scrollTriggerRef = useRef<ScrollTrigger | undefined>(undefined);
 
   useGSAP(() => {
@@ -41,7 +23,6 @@ export default function About() {
     mm.add(
       { isMobile: "(max-width: 768px)", isDesktop: "(min-width: 769px)" },
       (context) => {
-        //eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { isMobile, isDesktop } = context.conditions as {
           isMobile: boolean;
           isDesktop: boolean;
@@ -189,126 +170,14 @@ export default function About() {
     };
   }, []);
 
-  return (
-    <section
-      id="about"
-      ref={sectionPinRef}
-      className="about h-screen overflow-x-hidden relative py-0 bg-gray-200"
-    >
-      <AboutCurtain />
+  return {
+    backgroundRef,
+    sectionPinRef,
+    titleRef,
+    assetRef,
+    mobileTextRef,
+    textRef,
+  };
+};
 
-      <div
-        ref={backgroundRef}
-        className="about h-screen relative bg-jet flex-center overflow-hidden"
-      >
-        <h1
-          ref={titleRef}
-          className="text-7xl md:text-9xl font-medium absolute text-white font-secondary z-10"
-        >
-          about <span className="font-amie italic">us</span>
-        </h1>
-        <div ref={assetRef} className="flex-center">
-          <SpinningText
-            radius={5}
-            fontSize={isMobileHook ? 1.2 : 2}
-            className="font-medium leading-none text-white absolute top-8 z-0 left-4 "
-          >
-            {`about-us • about-us • about-us • `}
-          </SpinningText>
-          <SpinningText
-            radius={5}
-            fontSize={isMobileHook ? 1.2 : 2}
-            className="font-medium leading-none text-white absolute bottom-8 z-0 right-4 "
-          >
-            {`nayanaka • creative • studio • `}
-          </SpinningText>
-
-          <figure
-            className="absolute inset-0 -z-50"
-            style={{ width: "100vw", height: "100vh" }}
-          >
-            <Canvas
-              shadows
-              camera={{ position: [0, 0, -10], fov: 17.5, near: 1, far: 20 }}
-              gl={{
-                powerPreference: "high-performance",
-                preserveDrawingBuffer: true,
-                antialias: true,
-                stencil: false,
-                depth: true,
-              }}
-              dpr={dpr}
-              onCreated={({ gl }) => {
-                gl.domElement.addEventListener("webglcontextlost", (e) => {
-                  e.preventDefault();
-                  console.warn(
-                    "[R3F] WebGL context lost (tab switch, unmount, or GPU limit). Reload to restore.",
-                  );
-                });
-              }}
-            >
-              <ambientLight intensity={0.5} />
-              <Float speed={0.5}>
-                <Planet
-                  scale={isMobileHook ? 0.5 : 1}
-                  triggerRef={sectionPinRef}
-                />
-              </Float>
-              <Environment resolution={128} backgroundBlurriness={0.5}>
-                <group rotation={[-Math.PI / 3, 4, 1]}>
-                  <Lightformer
-                    form={"circle"}
-                    intensity={2}
-                    position={[0, 5, -9]}
-                    scale={10}
-                  />
-                  <Lightformer
-                    form={"circle"}
-                    intensity={2}
-                    position={[0, 3, 1]}
-                    scale={10}
-                  />
-                  <Lightformer
-                    form={"circle"}
-                    intensity={2}
-                    position={[-5, -1, -1]}
-                    scale={10}
-                  />
-                  <Lightformer
-                    form={"circle"}
-                    intensity={2}
-                    position={[10, 1, 0]}
-                    scale={16}
-                  />
-                </group>
-              </Environment>
-            </Canvas>
-          </figure>
-        </div>
-        <div ref={textRef} className="overflow-hidden hidden md:block ">
-          {textContent.map((text, index) => (
-            <h2
-              key={index}
-              className="uppercase font-medium text-justify text-white text-lg md:text-6xl leading-10 md:leading-20 overflow-hidden"
-            >
-              {text}
-            </h2>
-          ))}
-        </div>
-      </div>
-      <div
-        ref={mobileTextRef}
-        className="overflow-hidden md:hidden absolute md:relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-12 md:px-16 h-full py-56 flex-col flex justify-center items-start w-full"
-      >
-        {textContent.map((text, index) => (
-          <h3
-            key={index}
-            className="uppercase font-medium justify text-white text-xs leading-6 overflow-hidden"
-          >
-            {text}
-          </h3>
-        ))}
-      </div>
-    </section>
-  );
-}
+export default useAboutAnimation;

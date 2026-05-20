@@ -1,5 +1,6 @@
 "use client";
 
+import { memo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
@@ -17,18 +18,18 @@ const MENU_ITEMS = [
   { name: "Contact", href: "#contact" },
 ];
 
-export default function Navigation() {
+function Navigation() {
   const dispatch = useAppDispatch();
   const [showNavbar, setShowNavbar] = useState(true);
   const { menuOpen } = useAppSelector((state) => state.navigation);
 
-  const handleCursorEnter = () => {
+  const handleCursorEnter = useCallback(() => {
     dispatch(setCursorType("link"));
-  };
+  }, [dispatch]);
 
-  const handleCursorLeave = () => {
+  const handleCursorLeave = useCallback(() => {
     dispatch(setCursorType("default"));
-  };
+  }, [dispatch]);
 
   const toggleMenu = () => {
     dispatch(setMenuOpen(!menuOpen));
@@ -36,17 +37,24 @@ export default function Navigation() {
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
+    let rafId: number | null = null;
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      if (rafId) cancelAnimationFrame(rafId);
 
-      setShowNavbar(currentScrollY <= lastScrollY || currentScrollY < 10);
-
-      lastScrollY = currentScrollY;
+      rafId = requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY;
+        setShowNavbar(currentScrollY <= lastScrollY || currentScrollY < 10);
+        lastScrollY = currentScrollY;
+      });
     };
     window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
   const containerVariants = {
     hidden: {
@@ -208,3 +216,5 @@ export default function Navigation() {
     </>
   );
 }
+
+export default memo(Navigation);

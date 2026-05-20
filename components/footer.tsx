@@ -36,6 +36,14 @@ export default function Footer() {
         { opacity: 0 },
         { opacity: 1, duration: 0.5, ease: "power4.out" },
       );
+
+    return () => {
+      if (animationTimeline.current) {
+        animationTimeline.current.scrollTrigger?.kill();
+        animationTimeline.current.kill();
+        animationTimeline.current = null;
+      }
+    };
   }, []);
 
   const dispatch = useAppDispatch();

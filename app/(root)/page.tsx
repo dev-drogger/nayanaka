@@ -1,4 +1,3 @@
-import React from "react";
 import MainContent from "./section/main-content";
 
 const page = () => {

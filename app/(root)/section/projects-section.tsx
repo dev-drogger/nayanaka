@@ -1,6 +1,5 @@
 import { ProjectText } from "@/components/projects/project-text";
 import { ProjectsSlider } from "@/components/projects/projects-slider";
-import React from "react";
 import Carousel from "@/components/projects/carousel";
 
 export default function Projects() {
