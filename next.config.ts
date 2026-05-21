@@ -18,12 +18,42 @@ const nextConfig: NextConfig = {
   },
   compress: true,
   headers: async () => [
+    // Static assets (JS/CSS chunks) — content-hashed, safe to cache forever
     {
-      source: "/:path(.*)",
+      source: "/_next/static/:path*",
       headers: [
         {
           key: "Cache-Control",
           value: "public, max-age=31536000, immutable",
+        },
+      ],
+    },
+    // Media/font assets
+    {
+      source: "/fonts/:path*",
+      headers: [
+        {
+          key: "Cache-Control",
+          value: "public, max-age=31536000, immutable",
+        },
+      ],
+    },
+    {
+      source: "/:path*.(ico|png|jpg|jpeg|svg|webp|avif|woff|woff2)",
+      headers: [
+        {
+          key: "Cache-Control",
+          value: "public, max-age=31536000, immutable",
+        },
+      ],
+    },
+    // HTML pages — must revalidate so deploys propagate
+    {
+      source: "/:path*",
+      headers: [
+        {
+          key: "Cache-Control",
+          value: "public, max-age=0, must-revalidate",
         },
       ],
     },
