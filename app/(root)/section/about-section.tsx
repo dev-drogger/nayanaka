@@ -7,12 +7,13 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import AboutCurtain from "@/components/about-curtain";
 import useAboutAnimation from "@/hooks/animation/use-about-animation";
 import Planet3D from "@/components/3d-object";
+import { useAppSelector } from "@/hooks/redux-hooks";
 
 export default function About() {
   const [dpr, setDpr] = useState<[number, number]>([1, 1]);
   const isMobileHook = useMediaQuery("(max-width: 768px)");
   useEffect(() => {
-    if (typeof window !== undefined)
+    if (typeof window !== "undefined")
       (() => setDpr([1, Math.min(window.devicePixelRatio, 2)]))();
   }, []);
   const textContent = useMemo(() => ABOUT_TEXT, []);
@@ -24,7 +25,11 @@ export default function About() {
     mobileTextRef,
     textRef,
   } = useAboutAnimation();
+  const { webGLAttached } = useAppSelector((state) => state.webGL);
 
+  useEffect(() => {
+    console.log("web gl attached", webGLAttached)
+  }, [webGLAttached])
   return (
     <section
       id="about"
@@ -60,11 +65,13 @@ export default function About() {
             {`nayanaka • creative • studio • `}
           </SpinningText>
 
-          <Planet3D
-            dpr={dpr}
-            isMobileHook={isMobileHook}
-            sectionPinRef={sectionPinRef}
-          />
+          {webGLAttached && (
+            <Planet3D
+              dpr={dpr}
+              isMobileHook={isMobileHook}
+              sectionPinRef={sectionPinRef}
+            />
+          )}
         </div>
 
         <div ref={textRef} className="overflow-hidden hidden md:block ">

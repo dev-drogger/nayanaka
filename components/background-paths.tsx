@@ -1,10 +1,10 @@
+"use no memo";
+
 "use client";
 
-import type { RefObject } from "@react-three/fiber/dist/declarations/react-reconciler";
-
-import { useMemo, useRef, memo } from "react";
+import { useMemo, type RefObject, useRef, memo } from "react";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import gsap from "@/lib/gsap";
 
 interface PathData {
   id: number;
@@ -17,10 +17,13 @@ interface PathData {
 const generatePaths = (position: number, pathCount: number): PathData[] => {
   return Array.from({ length: pathCount }, (_, i) => ({
     id: i,
-    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${380 - i * 5 * position
-      } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${152 - i * 5 * position
-      } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${684 - i * 5 * position
-      } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
+      380 - i * 5 * position
+    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
+      152 - i * 5 * position
+    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
+      684 - i * 5 * position
+    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
     color: `rgba(15,23,42,${0.1 + i * 0.03})`,
     width: 1 + i * 0.03,
   }));
@@ -29,11 +32,22 @@ const generatePaths = (position: number, pathCount: number): PathData[] => {
 function FloatingPaths({ position }: { position: number }) {
   const pathsRef = useRef<SVGPathElement[]>([]);
   const pathLengthsRef = useRef<Map<number, number>>(new Map());
-  gsap.registerPlugin(useGSAP);
+  const timelineRef = useRef<gsap.core.Timeline>(null);
 
   const paths = useMemo(() => generatePaths(position, 30), [position]);
 
   useGSAP(() => {
+    timelineRef.current = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#background-path",
+        onLeave: () => {
+          timelineRef.current?.pause();
+        },
+        onEnterBack: () => {
+          timelineRef.current?.resume();
+        },
+      },
+    });
     pathsRef.current.forEach((path, i) => {
       if (!path) return;
       let length = pathLengthsRef.current.get(i);
@@ -103,7 +117,11 @@ const MemoizedFloatingPaths = memo(FloatingPaths, (prev, next) => {
   return prev.position === next.position;
 });
 
-export function BackgroundPaths({ ref }: { ref: RefObject }) {
+export function BackgroundPaths({
+  ref,
+}: {
+  ref: RefObject<HTMLDivElement | null>;
+}) {
   return (
     <div
       id="background-path"

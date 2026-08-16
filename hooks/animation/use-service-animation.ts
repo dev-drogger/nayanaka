@@ -1,10 +1,9 @@
+"use no memo";
+
 import { useRef } from "react";
-import gsap from "gsap";
+import gsap from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
-import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
-gsap.registerPlugin(useGSAP, ScrollTrigger, MorphSVGPlugin, DrawSVGPlugin);
 
 const useServiceAnimation = () => {
   const overlayRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -14,6 +13,7 @@ const useServiceAnimation = () => {
   const nayanakaRef = useRef(null);
   const textRefs = useRef<(SVGElement | null)[]>([]);
   const titleRef = useRef(null);
+
   useGSAP(() => {
     const triggers: ScrollTrigger[] = [];
     const titleTimeline = gsap
@@ -59,22 +59,34 @@ const useServiceAnimation = () => {
         },
         "<",
       );
+
     if (initTimeline.scrollTrigger) {
       triggers.push(initTimeline.scrollTrigger);
     }
 
-    gsap.to("#services-section", {
-      borderBottomRightRadius: 70,
-      borderBottomLeftRadius: 70,
-      scrollTrigger: {
-        trigger: "#services-section",
-        start: "center top",
-        end: "bottom-=75 top",
-        scrub: 0.5,
+    const borderSt = ScrollTrigger.create({
+      trigger: "#services-section",
+      start: "center top",
+      end: "bottom-=75 top",
+      scrub: 0.5,
+      onUpdate: (self) => {
+        gsap.set("#services-section", {
+          borderBottomRightRadius: 70 * self.progress,
+          borderBottomLeftRadius: 70 * self.progress,
+        });
       },
     });
+    triggers.push(borderSt);
 
-    svgTimelineRef.current = gsap.timeline({ repeat: -1 });
+    svgTimelineRef.current = gsap.timeline({
+      repeat: -1,
+      scrollTrigger: {
+        trigger: nayanakaRef.current,
+        start: "top bottom",
+        onEnterBack: () => svgTimelineRef.current?.pause(),
+        onLeave: () => svgTimelineRef.current?.resume(),
+      },
+    });
     svgTimelineRef.current
       .to("#na", {
         morphSVG: "#ya",
@@ -148,7 +160,6 @@ const useServiceAnimation = () => {
     });
 
     overlayTl
-
       .fromTo(
         textRefs.current,
         { color: "#2e2e2e" },
@@ -160,6 +171,10 @@ const useServiceAnimation = () => {
         ease: "power2.out",
         stagger: 0.2,
       });
+
+    return () => {
+      overlayTl.kill(); // was never cleaned up before
+    };
   });
 
   const handleMouseEnter = (index: number) => {

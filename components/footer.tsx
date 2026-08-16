@@ -1,3 +1,5 @@
+"use no memo";
+
 "use client";
 
 import { useAppDispatch } from "@/hooks/redux-hooks";
@@ -52,7 +54,7 @@ export default function Footer() {
     <footer
       ref={footerRef}
       id="contact"
-      className="relative w-full text-black bg-gray-200 h-[88vh]"
+      className="relative w-full text-black bg-gray-200 h-[90vh]"
     >
       <div className="container mx-auto px-4">
         <div

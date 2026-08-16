@@ -1,3 +1,5 @@
+"use no memo";
+
 "use client";
 
 import { useRef, type FC } from "react";
@@ -84,7 +86,7 @@ export const InfiniteTextMarquee: FC<InfiniteTextMarqueeProps> = ({
     color: textColor || undefined,
   };
 
-  const spanClass = `marquee-item block cursor-pointer font-bold tracking-tight py-4 m-0`;
+  const spanClass = `marquee-item block text-white cursor-pointer font-bold tracking-tight py-4 m-0`;
 
   return (
     <>
@@ -93,8 +95,8 @@ export const InfiniteTextMarquee: FC<InfiniteTextMarqueeProps> = ({
       )}
 
       <div
-        className={`relative overflow-hidden ${
-          isVertical ? "h-full w-fit" : "w-full"
+        className={`overflow-hidden bg-black ${
+          isVertical ? "h-full w-fit" : "w-full rotate-90"
         } ${className}`}
       >
         <div
@@ -105,12 +107,11 @@ export const InfiniteTextMarquee: FC<InfiniteTextMarqueeProps> = ({
             Array(20)
               .fill(text)
               .map((item, i) => (
-                // <Link href={link} key={i}>
-                //   <span className={spanClass} style={spanStyle}>
-                //     {item}
-                //   </span>
-                // </Link>
-                <div key={i} className="bg-black w-10 h-10" />
+                <Link href={link} key={i}>
+                  <span className={spanClass} style={spanStyle}>
+                    {item}
+                  </span>
+                </Link>
               ))
           ) : (
             <Link href={link}>

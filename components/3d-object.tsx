@@ -1,7 +1,8 @@
 import { Canvas } from "@react-three/fiber";
 import { Planet } from "@/components/planet";
 import { Environment, Float, Lightformer } from "@react-three/drei";
-import type { RefObject } from "react";
+import { type RefObject, useCallback } from "react";
+import type { WebGLRenderer } from "three";
 
 type PlanetProps = {
   dpr: [number, number];
@@ -10,6 +11,22 @@ type PlanetProps = {
 };
 
 const Planet3D = ({ dpr, isMobileHook, sectionPinRef }: PlanetProps) => {
+  const handleCreated = useCallback(({ gl }: { gl: WebGLRenderer }) => {
+    const canvas = gl.domElement;
+
+    const onContextLost = (e: Event) => {
+      e.preventDefault();
+      console.warn("[R3F] WebGL context lost.");
+    };
+
+    canvas.addEventListener("webglcontextlost", onContextLost);
+
+    // R3F exposes no direct cleanup here, so we return a teardown via a ref
+    return () => {
+      canvas.removeEventListener("webglcontextlost", onContextLost);
+    };
+  }, []);
+
   return (
     <figure
       className="absolute inset-0 -z-50"
@@ -26,14 +43,7 @@ const Planet3D = ({ dpr, isMobileHook, sectionPinRef }: PlanetProps) => {
           depth: true,
         }}
         dpr={dpr}
-        onCreated={({ gl }) => {
-          gl.domElement.addEventListener("webglcontextlost", (e) => {
-            e.preventDefault();
-            console.warn(
-              "[R3F] WebGL context lost (tab switch, unmount, or GPU limit). Reload to restore.",
-            );
-          });
-        }}
+        onCreated={handleCreated}
       >
         <ambientLight intensity={0.5} />
         <Float speed={0.5}>
@@ -42,25 +52,25 @@ const Planet3D = ({ dpr, isMobileHook, sectionPinRef }: PlanetProps) => {
         <Environment resolution={128} backgroundBlurriness={0.5}>
           <group rotation={[-Math.PI / 3, 4, 1]}>
             <Lightformer
-              form={"circle"}
+              form="circle"
               intensity={2}
               position={[0, 5, -9]}
               scale={10}
             />
             <Lightformer
-              form={"circle"}
+              form="circle"
               intensity={2}
               position={[0, 3, 1]}
               scale={10}
             />
             <Lightformer
-              form={"circle"}
+              form="circle"
               intensity={2}
               position={[-5, -1, -1]}
               scale={10}
             />
             <Lightformer
-              form={"circle"}
+              form="circle"
               intensity={2}
               position={[10, 1, 0]}
               scale={16}

@@ -1,8 +1,9 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useMotionValue, animate, motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useRef } from "react";
 import useMeasure from "react-use-measure";
+import gsap from "@/lib/gsap";
+import { useGSAP } from "@gsap/react";
 
 type InfiniteSliderProps = {
   children: React.ReactNode;
@@ -23,87 +24,83 @@ export function InfiniteSlider({
   reverse = false,
   className,
 }: InfiniteSliderProps) {
-  const [currentDuration, setCurrentDuration] = useState(duration);
-  const [ref, { width, height }] = useMeasure();
-  const translation = useMotionValue(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [key, setKey] = useState(0);
+  const [measureRef, { width, height }] = useMeasure();
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
-  useEffect(() => {
-    if (!width && !height) return; // Don't animate until measured
-
-    let controls;
+  useGSAP(() => {
     const size = direction === "horizontal" ? width : height;
-    const contentSize = size + gap;
-    const from = reverse ? -contentSize / 2 : 0;
-    const to = reverse ? 0 : -contentSize / 2;
+    const track = trackRef.current;
+    if (!size || !track) return;
 
-    if (isTransitioning) {
-      controls = animate(translation, [translation.get(), to], {
-        ease: "linear",
-        duration:
-          currentDuration * Math.abs((translation.get() - to) / contentSize),
-        onComplete: () => {
-          setIsTransitioning(false);
-          setKey((prevKey) => prevKey + 1);
-        },
-      });
-    } else {
-      controls = animate(translation, [from, to], {
-        ease: "linear",
-        duration: currentDuration,
-        repeat: Infinity,
-        repeatType: "loop",
-        repeatDelay: 0,
-        onRepeat: () => {
-          translation.set(from);
-        },
-      });
-    }
+    const axis = direction === "horizontal" ? "x" : "y";
+    const distance = (size + gap) / 2;
+    const wrap = gsap.utils.wrap(-distance, 0);
+    const timelineRef = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#slider",
+        onLeave: () => timelineRef.current?.pause(),
+        onEnterBack: () => timelineRef.current?.resume(),
+      },
+    });
 
-    return controls?.stop;
-  }, [
-    key,
-    translation,
-    currentDuration,
-    width,
-    height,
-    gap,
-    isTransitioning,
-    direction,
-    reverse,
-  ]);
+    const ctx = gsap.context(() => {
+      tweenRef.current = timelineRef.current?.fromTo(
+        track,
+        { [axis]: reverse ? -distance : 0 },
+        {
+          [axis]: reverse ? 0 : -distance,
+          duration,
+          ease: "none",
+          repeat: -1,
+          modifiers: {
+            [axis]: (value: string) => `${wrap(parseFloat(value))}px`,
+          },
+        },
+      );
+    });
 
-  const hoverProps = durationOnHover
-    ? {
-        onHoverStart: () => {
-          setIsTransitioning(true);
-          setCurrentDuration(durationOnHover);
-        },
-        onHoverEnd: () => {
-          setIsTransitioning(true);
-          setCurrentDuration(duration);
-        },
-      }
-    : {};
+    return () => ctx.revert();
+  }, [width, height, gap, duration, direction, reverse]);
+
+  const handleHoverStart = () => {
+    if (!durationOnHover || !tweenRef.current) return;
+    gsap.to(tweenRef.current, {
+      timeScale: duration / durationOnHover,
+      duration: 0.4,
+      ease: "power1.out",
+      overwrite: true,
+    });
+  };
+
+  const handleHoverEnd = () => {
+    if (!durationOnHover || !tweenRef.current) return;
+    gsap.to(tweenRef.current, {
+      timeScale: 1,
+      duration: 0.4,
+      ease: "power1.out",
+      overwrite: true,
+    });
+  };
 
   return (
-    <div className={cn("overflow-hidden", className)}>
-      <motion.div
+    <div id="slider" className={cn("overflow-hidden", className)}>
+      <div
+        ref={(node) => {
+          measureRef(node);
+          trackRef.current = node;
+        }}
         className="flex w-max"
         style={{
-          ...(direction === "horizontal"
-            ? { x: translation }
-            : { y: translation }),
           gap: `${gap}px`,
           flexDirection: direction === "horizontal" ? "row" : "column",
         }}
-        ref={ref}
-        {...hoverProps}
+        onMouseEnter={handleHoverStart}
+        onMouseLeave={handleHoverEnd}
       >
         {children}
         {children}
-      </motion.div>
+      </div>
     </div>
   );
 }

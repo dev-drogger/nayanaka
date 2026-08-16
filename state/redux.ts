@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cursorReducer from "./slices/cursorSlice";
-import navigationReducer from "./slices/navigationSlice";
+import webGLReducer from "./slices/web-gl-slice";
 import loadingReducer from "./slices/loadingSlice";
 
 export const store = configureStore({
   reducer: {
     cursor: cursorReducer,
-    navigation: navigationReducer,
+    webGL: webGLReducer,
     loading: loadingReducer,
   },
 });

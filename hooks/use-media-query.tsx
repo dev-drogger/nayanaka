@@ -1,33 +1,24 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 
-// Optimized media query hook with caching
 export function useMediaQuery(query: string) {
+  const mediaQueryRef = useRef<MediaQueryList | null>(null);
   const [matches, setMatches] = useState(false);
 
-  const mediaQuery = useMemo(() => {
-    if (typeof window !== "undefined") {
-      return window.matchMedia(query);
-    }
-    return null;
-  }, [query]);
-
   useEffect(() => {
-    if (!mediaQuery) return;
+    if (typeof window === "undefined") return;
 
-    const updateMatch = () => setMatches(mediaQuery.matches);
+    const mq = window.matchMedia(query);
+    mediaQueryRef.current = mq;
 
-    // Set initial value
-    updateMatch();
+    // sync initial state inside effect to avoid SSR mismatch
+    (() => setMatches(mq.matches))();
 
-    // Listen for changes
-    mediaQuery.addEventListener("change", updateMatch);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateMatch);
-    };
-  }, [mediaQuery]);
+    const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, [query]); // re-run only if the query string itself changes
 
   return matches;
 }

@@ -1,13 +1,12 @@
+"use no memo";
+
 "use client";
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useRef } from "react";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const AboutCurtain = () => {
   const curtainTimeline = useRef<gsap.core.Timeline>(null);
@@ -108,7 +107,7 @@ const AboutCurtain = () => {
       </div>
 
       <div className="separator bg-jet w-screen flex gap-8 whitespace-nowrap absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-x-hidden">
-        {Array.from({ length: isMobile ? 6 : 19 }).map((_, index) => (
+        {Array.from({ length: isMobile ? 6 : 22 }).map((_, index) => (
           <div key={index} className="flex flex-col items-center leading-none">
             <p className="text-xs m-0 p-0">なやなか</p>
             <p className="text-xs m-0 p-0 -translate-x-8">なやなか</p>

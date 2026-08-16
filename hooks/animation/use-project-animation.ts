@@ -1,35 +1,31 @@
-import { useRef } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+"use no memo";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "@/lib/gsap";
+
 const useProjectAnimation = () => {
   const imageContainerRef = useRef<HTMLDivElement[]>([]);
   const imageRef = useRef<HTMLDivElement[]>([]);
-  const imageTimeline = useRef<gsap.core.Timeline>(null);
+  const timelinesRef = useRef<gsap.core.Timeline[]>([]); // store ALL timelines
 
   useGSAP(
     () => {
-      const triggers: ScrollTrigger[] = []; // Store triggers created in this component
+      const triggers: ScrollTrigger[] = [];
+      timelinesRef.current = []; // reset on each run
 
       imageContainerRef.current.forEach((container, index) => {
         const image = imageRef.current[index];
         if (!image) return;
 
-        gsap.set(container, {
-          y: 100,
-          opacity: 0,
-          force3D: true,
-        });
-
+        gsap.set(container, { y: 100, opacity: 0, force3D: true });
         gsap.set(image, {
           scale: 1.5,
           transformOrigin: "center center",
           force3D: true,
         });
 
-        imageTimeline.current = gsap
+        const tl = gsap
           .timeline({
             scrollTrigger: {
               trigger: container,
@@ -40,10 +36,7 @@ const useProjectAnimation = () => {
           })
           .fromTo(
             container,
-            {
-              y: 100,
-              opacity: 0,
-            },
+            { y: 100, opacity: 0 },
             {
               y: 0,
               opacity: 1,
@@ -54,22 +47,14 @@ const useProjectAnimation = () => {
           )
           .fromTo(
             image,
-            {
-              scale: 1.5,
-            },
-            {
-              scale: 1,
-              duration: 1.2,
-              ease: "circ.out",
-              force3D: true,
-            },
+            { scale: 1.5 },
+            { scale: 1, duration: 1.2, ease: "circ.out", force3D: true },
             0,
           );
 
-        // Store the ScrollTrigger instance
-        if (imageTimeline.current.scrollTrigger) {
-          triggers.push(imageTimeline.current.scrollTrigger);
-        }
+        timelinesRef.current.push(tl); // store every timeline
+
+        if (tl.scrollTrigger) triggers.push(tl.scrollTrigger);
       });
 
       ScrollTrigger.config({
@@ -78,14 +63,13 @@ const useProjectAnimation = () => {
         autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
       });
 
-      const refreshTimer = requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          ScrollTrigger.refresh();
-        });
-      });
+      const refreshTimer = requestAnimationFrame(() =>
+        requestAnimationFrame(() => ScrollTrigger.refresh()),
+      );
 
       return () => {
         cancelAnimationFrame(refreshTimer);
+        timelinesRef.current.forEach((tl) => tl.kill()); // kill ALL timelines
         triggers.forEach((trigger) => trigger.kill());
       };
     },

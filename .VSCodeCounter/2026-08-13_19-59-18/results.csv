@@ -1,0 +1,57 @@
+"filename", "language", "JavaScript", "TypeScript", "JSON with Comments", "JSON", "TypeScript JSX", "PostCSS", "YAML", "XML", "Markdown", "comment", "blank", "total"
+"/Users/roso/Developer/new-nayanaka/.github/workflows/cd.yml", "YAML", 0, 0, 0, 0, 0, 0, 50, 0, 0, 6, 8, 64
+"/Users/roso/Developer/new-nayanaka/.github/workflows/ci.yml", "YAML", 0, 0, 0, 0, 0, 0, 33, 0, 0, 8, 11, 52
+"/Users/roso/Developer/new-nayanaka/README.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 14, 37
+"/Users/roso/Developer/new-nayanaka/app/(root)/page.tsx", "TypeScript JSX", 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 3, 8
+"/Users/roso/Developer/new-nayanaka/app/(root)/section/about-section.tsx", "TypeScript JSX", 0, 0, 0, 0, 89, 0, 0, 0, 0, 0, 8, 97
+"/Users/roso/Developer/new-nayanaka/app/(root)/section/hero-section.tsx", "TypeScript JSX", 0, 0, 0, 0, 82, 0, 0, 0, 0, 0, 6, 88
+"/Users/roso/Developer/new-nayanaka/app/(root)/section/main-content.tsx", "TypeScript JSX", 0, 0, 0, 0, 31, 0, 0, 0, 0, 2, 3, 36
+"/Users/roso/Developer/new-nayanaka/app/(root)/section/projects-section.tsx", "TypeScript JSX", 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 2, 19
+"/Users/roso/Developer/new-nayanaka/app/(root)/section/services-section.tsx", "TypeScript JSX", 0, 0, 0, 0, 95, 0, 0, 0, 0, 2, 11, 108
+"/Users/roso/Developer/new-nayanaka/app/globals.css", "PostCSS", 0, 0, 0, 0, 0, 149, 0, 0, 0, 0, 12, 161
+"/Users/roso/Developer/new-nayanaka/app/layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 77, 0, 0, 0, 0, 0, 7, 84
+"/Users/roso/Developer/new-nayanaka/components.json", "JSON", 0, 0, 0, 21, 0, 0, 0, 0, 0, 0, 0, 21
+"/Users/roso/Developer/new-nayanaka/components/3d-object.tsx", "TypeScript JSX", 0, 0, 0, 0, 77, 0, 0, 0, 0, 1, 8, 86
+"/Users/roso/Developer/new-nayanaka/components/about-curtain.tsx", "TypeScript JSX", 0, 0, 0, 0, 129, 0, 0, 0, 0, 0, 8, 137
+"/Users/roso/Developer/new-nayanaka/components/background-paths.tsx", "TypeScript JSX", 0, 0, 0, 0, 126, 0, 0, 0, 0, 0, 14, 140
+"/Users/roso/Developer/new-nayanaka/components/browser-check.tsx", "TypeScript JSX", 0, 0, 0, 0, 25, 0, 0, 0, 0, 5, 9, 39
+"/Users/roso/Developer/new-nayanaka/components/footer.tsx", "TypeScript JSX", 0, 0, 0, 0, 166, 0, 0, 0, 0, 0, 15, 181
+"/Users/roso/Developer/new-nayanaka/components/kanji.tsx", "TypeScript JSX", 0, 0, 0, 0, 43, 0, 0, 0, 0, 0, 3, 46
+"/Users/roso/Developer/new-nayanaka/components/loading.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 0, 0, 0, 0, 57, 5, 62
+"/Users/roso/Developer/new-nayanaka/components/marquee-text.tsx", "TypeScript JSX", 0, 0, 0, 0, 112, 0, 0, 0, 0, 1, 15, 128
+"/Users/roso/Developer/new-nayanaka/components/navigation.tsx", "TypeScript JSX", 0, 0, 0, 0, 71, 0, 0, 0, 0, 0, 14, 85
+"/Users/roso/Developer/new-nayanaka/components/planet.tsx", "TypeScript JSX", 0, 0, 0, 0, 75, 0, 0, 0, 0, 0, 13, 88
+"/Users/roso/Developer/new-nayanaka/components/projects/animated-image.tsx", "TypeScript JSX", 0, 0, 0, 0, 66, 0, 0, 0, 0, 0, 5, 71
+"/Users/roso/Developer/new-nayanaka/components/projects/carousel.tsx", "TypeScript JSX", 0, 0, 0, 0, 26, 0, 0, 0, 0, 0, 3, 29
+"/Users/roso/Developer/new-nayanaka/components/projects/project-text.tsx", "TypeScript JSX", 0, 0, 0, 0, 120, 0, 0, 0, 0, 1, 4, 125
+"/Users/roso/Developer/new-nayanaka/components/projects/projects-slider.tsx", "TypeScript JSX", 0, 0, 0, 0, 39, 0, 0, 0, 0, 2, 7, 48
+"/Users/roso/Developer/new-nayanaka/components/spinning-text.tsx", "TypeScript JSX", 0, 0, 0, 0, 72, 0, 0, 0, 0, 0, 8, 80
+"/Users/roso/Developer/new-nayanaka/components/ui/button.tsx", "TypeScript JSX", 0, 0, 0, 0, 54, 0, 0, 0, 0, 0, 6, 60
+"/Users/roso/Developer/new-nayanaka/components/ui/custom-cursor.tsx", "TypeScript JSX", 0, 0, 0, 0, 118, 0, 0, 0, 0, 14, 19, 151
+"/Users/roso/Developer/new-nayanaka/components/ui/infinite-slider.tsx", "TypeScript JSX", 0, 0, 0, 0, 97, 0, 0, 0, 0, 0, 10, 107
+"/Users/roso/Developer/new-nayanaka/components/ui/interactive-hover-button.tsx", "TypeScript JSX", 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 5, 38
+"/Users/roso/Developer/new-nayanaka/constant/index.ts", "TypeScript", 0, 442, 0, 0, 0, 0, 0, 0, 0, 1, 12, 455
+"/Users/roso/Developer/new-nayanaka/eslint.config.mjs", "JavaScript", 12, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 17
+"/Users/roso/Developer/new-nayanaka/hooks/animation/use-about-animation.ts", "TypeScript", 0, 152, 0, 0, 0, 0, 0, 0, 0, 8, 24, 184
+"/Users/roso/Developer/new-nayanaka/hooks/animation/use-hero-animation.ts", "TypeScript", 0, 138, 0, 0, 0, 0, 0, 0, 0, 6, 18, 162
+"/Users/roso/Developer/new-nayanaka/hooks/animation/use-project-animation.ts", "TypeScript", 0, 69, 0, 0, 0, 0, 0, 0, 0, 0, 14, 83
+"/Users/roso/Developer/new-nayanaka/hooks/animation/use-service-animation.ts", "TypeScript", 0, 206, 0, 0, 0, 0, 0, 0, 0, 0, 26, 232
+"/Users/roso/Developer/new-nayanaka/hooks/redux-hooks.ts", "TypeScript", 0, 8, 0, 0, 0, 0, 0, 0, 0, 2, 2, 12
+"/Users/roso/Developer/new-nayanaka/hooks/use-media-query.tsx", "TypeScript JSX", 0, 0, 0, 0, 16, 0, 0, 0, 0, 1, 8, 25
+"/Users/roso/Developer/new-nayanaka/hooks/use-mouse-tracking.ts", "TypeScript", 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 7, 29
+"/Users/roso/Developer/new-nayanaka/lib/gsap.ts", "TypeScript", 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 3, 17
+"/Users/roso/Developer/new-nayanaka/lib/utils.ts", "TypeScript", 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"/Users/roso/Developer/new-nayanaka/next.config.ts", "TypeScript", 0, 57, 0, 0, 0, 0, 0, 0, 0, 3, 4, 64
+"/Users/roso/Developer/new-nayanaka/package-lock.json", "JSON", 0, 0, 0, 7713, 0, 0, 0, 0, 0, 0, 1, 7714
+"/Users/roso/Developer/new-nayanaka/package.json", "JSON", 0, 0, 0, 54, 0, 0, 0, 0, 0, 0, 1, 55
+"/Users/roso/Developer/new-nayanaka/postcss.config.mjs", "JavaScript", 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6
+"/Users/roso/Developer/new-nayanaka/public/ka.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 4
+"/Users/roso/Developer/new-nayanaka/public/na.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 4
+"/Users/roso/Developer/new-nayanaka/public/ya.svg", "XML", 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 4
+"/Users/roso/Developer/new-nayanaka/state/redux-provider.tsx", "TypeScript JSX", 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 3, 10
+"/Users/roso/Developer/new-nayanaka/state/redux.ts", "TypeScript", 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 3, 16
+"/Users/roso/Developer/new-nayanaka/state/slices/cursorSlice.ts", "TypeScript", 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 5, 28
+"/Users/roso/Developer/new-nayanaka/state/slices/loadingSlice.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 5, 23
+"/Users/roso/Developer/new-nayanaka/state/slices/navigationSlice.ts", "TypeScript", 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 5, 28
+"/Users/roso/Developer/new-nayanaka/tsconfig.json", "JSON with Comments", 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 1, 42
+"Total", "-", 16, 1190, 41, 7788, 1868, 149, 83, 9, 23, 122, 408, 11697

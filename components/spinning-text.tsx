@@ -1,8 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, Transition, Variants } from "motion/react";
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, useRef } from "react";
+import gsap from "@/lib/gsap";
+import { useGSAP } from "@gsap/react";
 
 type SpinningTextProps = {
   children: string;
@@ -12,25 +13,7 @@ type SpinningTextProps = {
   reverse?: boolean;
   fontSize?: number;
   radius?: number;
-  transition?: Transition;
-  variants?: {
-    container?: Variants;
-    item?: Variants;
-  };
-};
-
-const BASE_TRANSITION = {
-  repeat: Infinity,
-  ease: "linear" as const,
-};
-
-const BASE_ITEM_VARIANTS = {
-  hidden: {
-    opacity: 1,
-  },
-  visible: {
-    opacity: 1,
-  },
+  ease?: string;
 };
 
 export function SpinningText({
@@ -41,44 +24,35 @@ export function SpinningText({
   reverse = false,
   fontSize = 1,
   radius = 5,
-  transition,
-  variants,
+  ease = "none",
 }: SpinningTextProps) {
   const letters = children.split("");
   const totalLetters = letters.length;
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const finalTransition = {
-    ...BASE_TRANSITION,
-    ...transition,
-    duration: (transition as { duration?: number })?.duration ?? duration,
-  };
+  useGSAP(() => {
+    const el = containerRef.current;
+    if (!el) return;
 
-  const containerVariants = {
-    visible: { rotate: reverse ? -360 : 360 },
-    ...variants?.container,
-  };
+    const ctx = gsap.context(() => {
+      gsap.set(el, { rotate: 0 });
+      gsap.to(el, {
+        rotate: reverse ? -360 : 360,
+        duration,
+        ease,
+        repeat: -1,
+      });
+    });
 
-  const itemVariants = {
-    ...BASE_ITEM_VARIANTS,
-    ...variants?.item,
-  };
+    return () => ctx.revert();
+  }, [duration, reverse, ease]);
 
   return (
-    <motion.div
-      className={cn("relative", className)}
-      style={{
-        ...style,
-      }}
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-      transition={finalTransition}
-    >
+    <div ref={containerRef} className={cn("relative", className)} style={style}>
       {letters.map((letter, index) => (
-        <motion.span
+        <span
           aria-hidden="true"
           key={`${index}-${letter}`}
-          variants={itemVariants}
           className="absolute left-1/2 top-1/2 inline-block"
           style={
             {
@@ -97,9 +71,9 @@ export function SpinningText({
           }
         >
           {letter}
-        </motion.span>
+        </span>
       ))}
       <span className="sr-only">{children}</span>
-    </motion.div>
+    </div>
   );
 }

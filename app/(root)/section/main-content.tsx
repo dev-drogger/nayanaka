@@ -12,21 +12,21 @@ export default function MainContent() {
   return (
     <>
       <BrowserCheck />
-      <CustomCursor />
+      {/* <CustomCursor /> */}
       <ReactLenis
         root
         options={{
           duration: 2,
-          lerp: 0.01,
+          lerp: 0.06,
           smoothWheel: true,
-          wheelMultiplier: 0.4,
+          wheelMultiplier: 0.7,
         }}
         className="relative w-screen min-h-screen overflow-x-auto"
       >
         <>
           <Hero />
           <About />
-          <Projects />
+          {/* <Projects /> */}
           <Services />
         </>
       </ReactLenis>

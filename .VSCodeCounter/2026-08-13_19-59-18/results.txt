@@ -1,0 +1,108 @@
+Date : 2026-08-13 19:59:18
+Directory : /Users/roso/Developer/new-nayanaka
+Total : 55 files,  11167 codes, 122 comments, 408 blanks, all 11697 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          3 |      7,788 |          0 |          2 |      7,790 |
+| TypeScript JSX     |         28 |      1,868 |         86 |        222 |      2,176 |
+| TypeScript         |         14 |      1,190 |         20 |        130 |      1,340 |
+| PostCSS            |          1 |        149 |          0 |         12 |        161 |
+| YAML               |          2 |         83 |         14 |         19 |        116 |
+| JSON with Comments |          1 |         41 |          0 |          1 |         42 |
+| Markdown           |          1 |         23 |          0 |         14 |         37 |
+| JavaScript         |          2 |         16 |          2 |          5 |         23 |
+| XML                |          3 |          9 |          0 |          3 |         12 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                          | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                             |         55 |     11,167 |        122 |        408 |     11,697 |
+| . (Files)                                                                     |          8 |      7,925 |          5 |         26 |      7,956 |
+| .github                                                                       |          2 |         83 |         14 |         19 |        116 |
+| .github/workflows                                                             |          2 |         83 |         14 |         19 |        116 |
+| app                                                                           |          8 |        545 |          4 |         52 |        601 |
+| app (Files)                                                                   |          2 |        226 |          0 |         19 |        245 |
+| app/(root)                                                                    |          6 |        319 |          4 |         33 |        356 |
+| app/(root) (Files)                                                            |          1 |          5 |          0 |          3 |          8 |
+| app/(root)/section                                                            |          5 |        314 |          4 |         30 |        348 |
+| components                                                                    |         19 |      1,449 |         81 |        171 |      1,701 |
+| components (Files)                                                            |         11 |        896 |         64 |        112 |      1,072 |
+| components/projects                                                           |          4 |        251 |          3 |         19 |        273 |
+| components/ui                                                                 |          4 |        302 |         14 |         40 |        356 |
+| constant                                                                      |          1 |        442 |          1 |         12 |        455 |
+| hooks                                                                         |          7 |        611 |         17 |         99 |        727 |
+| hooks (Files)                                                                 |          3 |         46 |          3 |         17 |         66 |
+| hooks/animation                                                               |          4 |        565 |         14 |         82 |        661 |
+| lib                                                                           |          2 |         19 |          0 |          5 |         24 |
+| public                                                                        |          3 |          9 |          0 |          3 |         12 |
+| state                                                                         |          5 |         84 |          0 |         21 |        105 |
+| state (Files)                                                                 |          2 |         20 |          0 |          6 |         26 |
+| state/slices                                                                  |          3 |         64 |          0 |         15 |         79 |
++-------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                      | language           | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| /Users/roso/Developer/new-nayanaka/.github/workflows/cd.yml                   | YAML               |         50 |          6 |          8 |         64 |
+| /Users/roso/Developer/new-nayanaka/.github/workflows/ci.yml                   | YAML               |         33 |          8 |         11 |         52 |
+| /Users/roso/Developer/new-nayanaka/README.md                                  | Markdown           |         23 |          0 |         14 |         37 |
+| /Users/roso/Developer/new-nayanaka/app/(root)/page.tsx                        | TypeScript JSX     |          5 |          0 |          3 |          8 |
+| /Users/roso/Developer/new-nayanaka/app/(root)/section/about-section.tsx       | TypeScript JSX     |         89 |          0 |          8 |         97 |
+| /Users/roso/Developer/new-nayanaka/app/(root)/section/hero-section.tsx        | TypeScript JSX     |         82 |          0 |          6 |         88 |
+| /Users/roso/Developer/new-nayanaka/app/(root)/section/main-content.tsx        | TypeScript JSX     |         31 |          2 |          3 |         36 |
+| /Users/roso/Developer/new-nayanaka/app/(root)/section/projects-section.tsx    | TypeScript JSX     |         17 |          0 |          2 |         19 |
+| /Users/roso/Developer/new-nayanaka/app/(root)/section/services-section.tsx    | TypeScript JSX     |         95 |          2 |         11 |        108 |
+| /Users/roso/Developer/new-nayanaka/app/globals.css                            | PostCSS            |        149 |          0 |         12 |        161 |
+| /Users/roso/Developer/new-nayanaka/app/layout.tsx                             | TypeScript JSX     |         77 |          0 |          7 |         84 |
+| /Users/roso/Developer/new-nayanaka/components.json                            | JSON               |         21 |          0 |          0 |         21 |
+| /Users/roso/Developer/new-nayanaka/components/3d-object.tsx                   | TypeScript JSX     |         77 |          1 |          8 |         86 |
+| /Users/roso/Developer/new-nayanaka/components/about-curtain.tsx               | TypeScript JSX     |        129 |          0 |          8 |        137 |
+| /Users/roso/Developer/new-nayanaka/components/background-paths.tsx            | TypeScript JSX     |        126 |          0 |         14 |        140 |
+| /Users/roso/Developer/new-nayanaka/components/browser-check.tsx               | TypeScript JSX     |         25 |          5 |          9 |         39 |
+| /Users/roso/Developer/new-nayanaka/components/footer.tsx                      | TypeScript JSX     |        166 |          0 |         15 |        181 |
+| /Users/roso/Developer/new-nayanaka/components/kanji.tsx                       | TypeScript JSX     |         43 |          0 |          3 |         46 |
+| /Users/roso/Developer/new-nayanaka/components/loading.tsx                     | TypeScript JSX     |          0 |         57 |          5 |         62 |
+| /Users/roso/Developer/new-nayanaka/components/marquee-text.tsx                | TypeScript JSX     |        112 |          1 |         15 |        128 |
+| /Users/roso/Developer/new-nayanaka/components/navigation.tsx                  | TypeScript JSX     |         71 |          0 |         14 |         85 |
+| /Users/roso/Developer/new-nayanaka/components/planet.tsx                      | TypeScript JSX     |         75 |          0 |         13 |         88 |
+| /Users/roso/Developer/new-nayanaka/components/projects/animated-image.tsx     | TypeScript JSX     |         66 |          0 |          5 |         71 |
+| /Users/roso/Developer/new-nayanaka/components/projects/carousel.tsx           | TypeScript JSX     |         26 |          0 |          3 |         29 |
+| /Users/roso/Developer/new-nayanaka/components/projects/project-text.tsx       | TypeScript JSX     |        120 |          1 |          4 |        125 |
+| /Users/roso/Developer/new-nayanaka/components/projects/projects-slider.tsx    | TypeScript JSX     |         39 |          2 |          7 |         48 |
+| /Users/roso/Developer/new-nayanaka/components/spinning-text.tsx               | TypeScript JSX     |         72 |          0 |          8 |         80 |
+| /Users/roso/Developer/new-nayanaka/components/ui/button.tsx                   | TypeScript JSX     |         54 |          0 |          6 |         60 |
+| /Users/roso/Developer/new-nayanaka/components/ui/custom-cursor.tsx            | TypeScript JSX     |        118 |         14 |         19 |        151 |
+| /Users/roso/Developer/new-nayanaka/components/ui/infinite-slider.tsx          | TypeScript JSX     |         97 |          0 |         10 |        107 |
+| /Users/roso/Developer/new-nayanaka/components/ui/interactive-hover-button.tsx | TypeScript JSX     |         33 |          0 |          5 |         38 |
+| /Users/roso/Developer/new-nayanaka/constant/index.ts                          | TypeScript         |        442 |          1 |         12 |        455 |
+| /Users/roso/Developer/new-nayanaka/eslint.config.mjs                          | JavaScript         |         12 |          2 |          3 |         17 |
+| /Users/roso/Developer/new-nayanaka/hooks/animation/use-about-animation.ts     | TypeScript         |        152 |          8 |         24 |        184 |
+| /Users/roso/Developer/new-nayanaka/hooks/animation/use-hero-animation.ts      | TypeScript         |        138 |          6 |         18 |        162 |
+| /Users/roso/Developer/new-nayanaka/hooks/animation/use-project-animation.ts   | TypeScript         |         69 |          0 |         14 |         83 |
+| /Users/roso/Developer/new-nayanaka/hooks/animation/use-service-animation.ts   | TypeScript         |        206 |          0 |         26 |        232 |
+| /Users/roso/Developer/new-nayanaka/hooks/redux-hooks.ts                       | TypeScript         |          8 |          2 |          2 |         12 |
+| /Users/roso/Developer/new-nayanaka/hooks/use-media-query.tsx                  | TypeScript JSX     |         16 |          1 |          8 |         25 |
+| /Users/roso/Developer/new-nayanaka/hooks/use-mouse-tracking.ts                | TypeScript         |         22 |          0 |          7 |         29 |
+| /Users/roso/Developer/new-nayanaka/lib/gsap.ts                                | TypeScript         |         14 |          0 |          3 |         17 |
+| /Users/roso/Developer/new-nayanaka/lib/utils.ts                               | TypeScript         |          5 |          0 |          2 |          7 |
+| /Users/roso/Developer/new-nayanaka/next.config.ts                             | TypeScript         |         57 |          3 |          4 |         64 |
+| /Users/roso/Developer/new-nayanaka/package-lock.json                          | JSON               |      7,713 |          0 |          1 |      7,714 |
+| /Users/roso/Developer/new-nayanaka/package.json                               | JSON               |         54 |          0 |          1 |         55 |
+| /Users/roso/Developer/new-nayanaka/postcss.config.mjs                         | JavaScript         |          4 |          0 |          2 |          6 |
+| /Users/roso/Developer/new-nayanaka/public/ka.svg                              | XML                |          3 |          0 |          1 |          4 |
+| /Users/roso/Developer/new-nayanaka/public/na.svg                              | XML                |          3 |          0 |          1 |          4 |
+| /Users/roso/Developer/new-nayanaka/public/ya.svg                              | XML                |          3 |          0 |          1 |          4 |
+| /Users/roso/Developer/new-nayanaka/state/redux-provider.tsx                   | TypeScript JSX     |          7 |          0 |          3 |         10 |
+| /Users/roso/Developer/new-nayanaka/state/redux.ts                             | TypeScript         |         13 |          0 |          3 |         16 |
+| /Users/roso/Developer/new-nayanaka/state/slices/cursorSlice.ts                | TypeScript         |         23 |          0 |          5 |         28 |
+| /Users/roso/Developer/new-nayanaka/state/slices/loadingSlice.ts               | TypeScript         |         18 |          0 |          5 |         23 |
+| /Users/roso/Developer/new-nayanaka/state/slices/navigationSlice.ts            | TypeScript         |         23 |          0 |          5 |         28 |
+| /Users/roso/Developer/new-nayanaka/tsconfig.json                              | JSON with Comments |         41 |          0 |          1 |         42 |
+| Total                                                                         |                    |     11,167 |        122 |        408 |     11,697 |
++-------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

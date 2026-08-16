@@ -1,13 +1,12 @@
+"use no memo";
+
 "use client";
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "@/lib/gsap";
 import { Mesh, Group } from "three";
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface PlanetProps {
   scale: number;

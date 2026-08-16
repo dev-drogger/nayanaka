@@ -1,8 +1,10 @@
+"use no memo";
+
 import { useRef } from "react";
-import gsap from "gsap";
+import gsap from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+import { useAppDispatch } from "../redux-hooks";
+import { attachWebGL } from "@/state/slices/web-gl-slice";
 
 const useAboutAnimation = () => {
   const backgroundTimeline = useRef<gsap.core.Timeline>(null);
@@ -16,6 +18,8 @@ const useAboutAnimation = () => {
   const textEnterTimeline = useRef<gsap.core.Timeline>(null);
   const textExitTimeline = useRef<gsap.core.Timeline>(null);
   const scrollTriggerRef = useRef<ScrollTrigger | undefined>(undefined);
+
+  const dispatch = useAppDispatch();
 
   useGSAP(() => {
     const mm = gsap.matchMedia();
@@ -51,12 +55,24 @@ const useAboutAnimation = () => {
               end: "center+=3750 center",
               scrub: 0.5,
               pin: true,
+              onEnter: () => {
+                dispatch(attachWebGL(true));
+              },
+              onLeave: () => {
+                dispatch(attachWebGL(false));
+              },
+              onEnterBack: () => {
+                dispatch(attachWebGL(true));
+              },
+              onLeaveBack: () => {
+                dispatch(attachWebGL(false));
+              },
             },
           })
           .to(backgroundRef.current, {
             clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0 0%)",
-            duration: 1.2,
-            delay: 0.4,
+            duration: 2,
+            delay: 0.1,
           })
           .from(
             titleRef.current,
@@ -98,7 +114,7 @@ const useAboutAnimation = () => {
               duration: 1,
               immediateRender: false,
             },
-            index * 0.3,
+            index * 0.2,
           );
         });
 
@@ -124,7 +140,7 @@ const useAboutAnimation = () => {
               duration: 1,
               immediateRender: false,
             },
-            reverseIndex * 0.3,
+            reverseIndex * 0.2,
           );
         });
 
@@ -139,7 +155,7 @@ const useAboutAnimation = () => {
           {
             clipPath: "polygon(0 0%, 100% 0%, 100% 0%, 0 0%)",
             immediateRender: false,
-            duration: 1.5,
+            duration: 2,
           },
           "<+=1.5",
         );
