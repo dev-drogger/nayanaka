@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import gsap from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 
 const useHeroAnimation = () => {
@@ -30,14 +29,17 @@ const useHeroAnimation = () => {
     });
 
     entranceTimelineRef.current = gsap
-      .timeline({ autoRemoveChildren: true })
+      .timeline()
       .fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 1 })
-      .to(letterBoxRef.current, {
-        clipPath: "polygon(0 85%, 100% 85%, 100% 15%, 0 15%)",
-        duration: 2,
-        ease: "power4.out",
-        immediateRender: true,
-      })
+      .to(
+        letterBoxRef.current,
+        {
+          clipPath: "polygon(0 85%, 100% 85%, 100% 15%, 0 15%)",
+          duration: 2,
+          ease: "power4.out",
+          immediateRender: true,
+        },
+      )
       .fromTo(
         splitRef.current.lines,
         { y: 20, autoAlpha: 0 },
@@ -74,10 +76,6 @@ const useHeroAnimation = () => {
         scrub: 0.5,
         pin: true,
         fastScrollEnd: true,
-        onLeave: () => {
-          splitRef.current?.revert();
-          splitRef.current = null;
-        },
       },
     });
 
@@ -91,14 +89,18 @@ const useHeroAnimation = () => {
           duration: 1,
         },
       )
-      .to(splitRef.current.chars, {
-        y: -75,
-        opacity: 0,
-        immediateRender: false,
-        force3D: true,
-        stagger: 0.05,
-        duration: 2,
-      })
+      .to(
+        splitRef.current.chars,
+        {
+          y: -75,
+          opacity: 0,
+          immediateRender: false,
+          force3D: true,
+          stagger: 0.05,
+          duration: 2,
+        },
+        "<1.9",
+      )
       .fromTo(
         videoRef.current,
         { clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0 0%)" },
@@ -107,7 +109,6 @@ const useHeroAnimation = () => {
           immediateRender: false,
           duration: 2,
         },
-        "<1.5",
       )
       .fromTo(
         descRef.current,
