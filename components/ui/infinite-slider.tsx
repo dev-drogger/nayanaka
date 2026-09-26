@@ -26,7 +26,7 @@ export function InfiniteSlider({
 }: InfiniteSliderProps) {
   const [measureRef, { width, height }] = useMeasure();
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const tweenRef = useRef<gsap.core.Tween | null>(null);
+  const tweenRef = useRef<any>(null);
 
   useGSAP(() => {
     const size = direction === "horizontal" ? width : height;
