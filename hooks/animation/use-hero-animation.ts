@@ -1,5 +1,3 @@
-"use no memo";
-
 import { useRef } from "react";
 import gsap from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
@@ -11,7 +9,6 @@ const useHeroAnimation = () => {
   const videoRef = useRef(null);
   const descRef = useRef(null);
   const heroTitle = useRef(null);
-  const letterBoxRef = useRef(null);
 
   // separate concerns into separate refs
   const entranceTimelineRef = useRef<gsap.core.Timeline | null>(null);
@@ -19,7 +16,8 @@ const useHeroAnimation = () => {
   const splitRef = useRef<SplitText | null>(null); // moved out of local scope
 
   useGSAP(() => {
-    gsap.set([videoRef.current, descRef.current, letterBoxRef.current], {
+    console.log("im rendered")
+    gsap.set([videoRef.current, descRef.current], {
       clipPath: "polygon(0 50%, 100% 50%, 100% 50%, 0 50%)",
     });
 
@@ -30,16 +28,7 @@ const useHeroAnimation = () => {
 
     entranceTimelineRef.current = gsap
       .timeline()
-      .fromTo(sectionRef.current, { opacity: 0 }, { opacity: 1, duration: 1 })
-      .to(
-        letterBoxRef.current,
-        {
-          clipPath: "polygon(0 85%, 100% 85%, 100% 15%, 0 15%)",
-          duration: 2,
-          ease: "power4.out",
-          immediateRender: true,
-        },
-      )
+      .to(sectionRef.current, { opacity: 1, duration: 1, ease: "power4.out" })
       .fromTo(
         splitRef.current.lines,
         { y: 20, autoAlpha: 0 },
@@ -80,16 +69,7 @@ const useHeroAnimation = () => {
     });
 
     pinTimelineRef.current
-      ?.fromTo(
-        letterBoxRef.current,
-        { clipPath: "polygon(0 85%, 100% 85%, 100% 15%, 0 15%)" },
-        {
-          clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0 0%)",
-          immediateRender: false,
-          duration: 1,
-        },
-      )
-      .to(
+      ?.to(
         splitRef.current.chars,
         {
           y: -75,
@@ -136,7 +116,7 @@ const useHeroAnimation = () => {
     };
   }, []);
 
-  return { sectionRef, pathRef, videoRef, descRef, heroTitle, letterBoxRef };
+  return { sectionRef, pathRef, videoRef, descRef, heroTitle };
 };
 
 export default useHeroAnimation;

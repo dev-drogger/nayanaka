@@ -8,7 +8,7 @@ import { BackgroundPaths } from "@/components/background-paths";
 import useHeroAnimation from "@/hooks/animation/use-hero-animation";
 
 export default function Hero() {
-  const { sectionRef, pathRef, videoRef, descRef, heroTitle, letterBoxRef } =
+  const { sectionRef, pathRef, videoRef, descRef, heroTitle} =
     useHeroAnimation();
   const dispatch = useAppDispatch();
 
@@ -21,9 +21,7 @@ export default function Hero() {
     >
       <div
         id="hero-overlay"
-        ref={letterBoxRef}
-        style={{ clipPath: "polygon(0 50%, 100% 50%, 100% 50%, 0 50%)" }}
-        className="hero-clip size-full bg-jet z-20"
+        className="size-full bg-jet z-20"
       >
         <div className="h-full z-2 flex-center relative w-screen bg-gray-200 overflow-hidden">
           <BackgroundPaths ref={pathRef} />

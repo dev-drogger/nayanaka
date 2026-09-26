@@ -39,13 +39,13 @@ export function InfiniteSlider({
     const timelineRef = gsap.timeline({
       scrollTrigger: {
         trigger: "#slider",
-        onLeave: () => timelineRef.current?.pause(),
-        onEnterBack: () => timelineRef.current?.resume(),
+        onLeave: () => timelineRef.pause(),
+        onEnterBack: () => timelineRef.resume(),
       },
     });
 
     const ctx = gsap.context(() => {
-      tweenRef.current = timelineRef.current?.fromTo(
+      tweenRef.current = timelineRef.fromTo(
         track,
         { [axis]: reverse ? -distance : 0 },
         {
